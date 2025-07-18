@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/q1Fragment">
+    <fragment
+        android:id="@+id/q1Fragment"
+        android:name="com.example.temiv1.Q1Fragment"
+        android:label="fragment_q1"
+        tools:layout="@layout/fragment_q1" >
+        <action
+            android:id="@+id/action_q1Fragment_to_q2Fragment"
+            app:destination="@id/q2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q2Fragment"
+        android:name="com.example.temiv1.Q2Fragment"
+        android:label="fragment_q2"
+        tools:layout="@layout/fragment_q2" >
+        <action
+            android:id="@+id/action_q2Fragment_to_q3Fragment"
+            app:destination="@id/q3Fragment" />
+        <action
+            android:id="@+id/action_q2Fragment_to_q4Fragment"
+            app:destination="@id/q4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q3Fragment"
+        android:name="com.example.temiv1.Q3Fragment"
+        android:label="fragment_q3"
+        tools:layout="@layout/fragment_q3" >
+        <action
+            android:id="@+id/action_q3Fragment_to_q6Fragment"
+            app:destination="@id/q6Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q4Fragment"
+        android:name="com.example.temiv1.Q4Fragment"
+        android:label="fragment_q4"
+        tools:layout="@layout/fragment_q4" >
+        <action
+            android:id="@+id/action_q4Fragment_to_q5Fragment"
+            app:destination="@id/q5Fragment" />
+        <action
+            android:id="@+id/action_q4Fragment_to_q6Fragment"
+            app:destination="@id/q6Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q5Fragment"
+        android:name="com.example.temiv1.Q5Fragment"
+        android:label="fragment_q5"
+        tools:layout="@layout/fragment_q5" >
+        <action
+            android:id="@+id/action_q5Fragment_to_q6Fragment"
+            app:destination="@id/q6Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q6Fragment"
+        android:name="com.example.temiv1.Q6Fragment"
+        android:label="fragment_q6"
+        tools:layout="@layout/fragment_q6" >
+        <action
+            android:id="@+id/action_q6Fragment_to_q7Fragment"
+            app:destination="@id/q7Fragment" />
+        <action
+            android:id="@+id/action_q6Fragment_to_q8Fragment"
+            app:destination="@id/q8Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q7Fragment"
+        android:name="com.example.temiv1.Q7Fragment"
+        android:label="fragment_q7"
+        tools:layout="@layout/fragment_q7" >
+        <action
+            android:id="@+id/action_q7Fragment_to_q10Fragment"
+            app:destination="@id/q10Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q8Fragment"
+        android:name="com.example.temiv1.Q8Fragment"
+        android:label="fragment_q8"
+        tools:layout="@layout/fragment_q8" >
+        <action
+            android:id="@+id/action_q8Fragment_to_q9Fragment"
+            app:destination="@id/q9Fragment" />
+        <action
+            android:id="@+id/action_q8Fragment_to_q10Fragment"
+            app:destination="@id/q10Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q9Fragment"
+        android:name="com.example.temiv1.Q9Fragment"
+        android:label="fragment_q9"
+        tools:layout="@layout/fragment_q9" >
+        <action
+            android:id="@+id/action_q9Fragment_to_q10Fragment"
+            app:destination="@id/q10Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q10Fragment"
+        android:name="com.example.temiv1.Q10Fragment"
+        android:label="fragment_q10"
+        tools:layout="@layout/fragment_q10" >
+        <action
+            android:id="@+id/action_q10Fragment_to_q11Fragment"
+            app:destination="@id/q11Fragment" />
+        <action
+            android:id="@+id/action_q10Fragment_to_q12Fragment"
+            app:destination="@id/q12Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q11Fragment"
+        android:name="com.example.temiv1.Q11Fragment"
+        android:label="fragment_q11"
+        tools:layout="@layout/fragment_q11" >
+        <action
+            android:id="@+id/action_q11Fragment_to_q14Fragment"
+            app:destination="@id/q14Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q12Fragment"
+        android:name="com.example.temiv1.Q12Fragment"
+        android:label="fragment_q12"
+        tools:layout="@layout/fragment_q12" >
+        <action
+            android:id="@+id/action_q12Fragment_to_q13Fragment"
+            app:destination="@id/q13Fragment" />
+        <action
+            android:id="@+id/action_q12Fragment_to_q14Fragment"
+            app:destination="@id/q14Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q13Fragment"
+        android:name="com.example.temiv1.Q13Fragment"
+        android:label="fragment_q13"
+        tools:layout="@layout/fragment_q13" >
+        <action
+            android:id="@+id/action_q13Fragment_to_q14Fragment"
+            app:destination="@id/q14Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/q14Fragment"
+        android:name="com.example.temiv1.Q14Fragment"
+        android:label="fragment_q14"
+        tools:layout="@layout/fragment_q14" />
+</navigation>

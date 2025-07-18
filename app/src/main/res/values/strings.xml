@@ -2,4 +2,22 @@
     <string name="app_name">TemiV1</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_my_name_is_temi_and_i_ll_be_finding_fun_dances_for_you_today_before_we_start_lets_make_sure_the_settings_are_right_for_you_can_you_hear_me">Hello my name is Temi and I\'ll be finding fun dances for you today. Before we start lets make sure the settings are right for you. Can you hear me?</string>
+    <string name="great_now_i_will_ask_you_some_questions_to_understand_your_movement_capabilities_so_that_i_can_recommend_and_play_a_dance_for_you_to_follow_on_the_tablet_if_at_any_point_you_want_to_stop_the_process_either_press_the_quot_x_quot_button_on_the_top_right_of_the_screen_or_say_quot_hey_temi_stop_quot_can_you_confirm_you_are_happy_to_proceed">Great! Now I will ask you some questions to understand your movement capabilities so that I can recommend and play a dance for you to follow on the tablet. If at any point you want to stop the process either press the \"X\" button on the top right of the screen or say \"Hey Temi, stop.\" Can you confirm you are happy to proceed?</string>
+    <string name="would_you_like_the_screen_brighter">Would you like the screen brighter?</string>
+    <string name="hello_my_name_is_temi_and_i_ll_be_finding_fun_dances_for_you_today_before_we_start_lets_make_sure_the_settings_are_right_for_you_can_you_hear_me_or_see_the_screen">Hello my name is Temi and I’ll be finding fun dances for you today. Before we start lets make sure the settings are right for you. Can you hear me or see the screen?</string>
+    <string name="is_that_bright_enough">Is that bright enough?</string>
+    <string name="would_you_like_the_screen_darker">Would you like the screen darker?</string>
+    <string name="is_that_dark_enough">Is that dark enough?</string>
+    <string name="would_you_like_the_volume_louder">Would you like the volume louder?</string>
+    <string name="is_that_loud_enough">Is that loud enough?</string>
+    <string name="would_you_like_the_volume_quieter">Would you like the volume quieter?</string>
+    <string name="is_that_quiet_enough">Is that quiet enough?</string>
+    <string name="back">Back</string>
+    <string name="is_the_text_the_right_size_for_you">Is the text the right size for you?</string>
+    <string name="would_you_like_the_text_bigger">Would you like the text bigger?</string>
+    <string name="is_the_text_big_enough">Is the text big enough?</string>
+    <string name="would_you_like_the_text_smaller">Would you like the text smaller?</string>
+    <string name="is_the_text_small_enough">Is the text small enough?</string>
 </resources>

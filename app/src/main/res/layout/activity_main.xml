@@ -7,27 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/yesButton"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
-        android:layout_height="176dp"
-        android:layout_marginStart="567dp"
-        android:layout_marginEnd="309dp"
-        android:text="@string/yes"
-        android:textSize="96sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/noButton"
-        app:layout_constraintEnd_toStartOf="@+id/noButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/noButton"
-        android:layout_width="0dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="344dp"
-        android:layout_marginEnd="483dp"
-        android:text="@string/no"
-        android:textSize="96sp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/yesButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:navGraph="@navigation/navigation"
+        app:defaultNavHost="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
