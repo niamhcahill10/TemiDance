@@ -138,10 +138,17 @@
         <action
             android:id="@+id/action_q13Fragment_to_q14Fragment"
             app:destination="@id/q14Fragment" />
+        <action
+            android:id="@+id/action_q13Fragment_to_danceMoveSelection2"
+            app:destination="@id/danceMoveSelection2" />
     </fragment>
     <fragment
         android:id="@+id/q14Fragment"
         android:name="com.example.temiv1.Q14Fragment"
         android:label="fragment_q14"
         tools:layout="@layout/fragment_q14" />
+    <fragment
+        android:id="@+id/danceMoveSelection2"
+        android:name="com.example.temiv1.DanceMoveSelection"
+        android:label="DanceMoveSelection" />
 </navigation>

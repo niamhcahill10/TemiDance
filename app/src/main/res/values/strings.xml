@@ -20,4 +20,9 @@
     <string name="is_the_text_big_enough">Is the text big enough?</string>
     <string name="would_you_like_the_text_smaller">Would you like the text smaller?</string>
     <string name="is_the_text_small_enough">Is the text small enough?</string>
+    <string name="dance_move">Dance Move</string>
+    <string name="choose_your_dance_moves">Choose Your Dance Moves</string>
+    <string name="btn_continue">Continue</string>
+    <string name="dance_move_name">Dance Move Name</string>
+    <string name="dance_move_image_desc">Image of dance move</string>
 </resources>

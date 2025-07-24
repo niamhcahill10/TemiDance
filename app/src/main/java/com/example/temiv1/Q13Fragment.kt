@@ -53,7 +53,7 @@ class Q13Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q13Fragment_to_q14Fragment)
+        findNavController().navigate(R.id.action_q13Fragment_to_danceMoveSelection2)
     }
 
     private fun onNoSelected() {
