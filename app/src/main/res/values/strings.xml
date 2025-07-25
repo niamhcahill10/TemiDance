@@ -25,4 +25,6 @@
     <string name="btn_continue">Continue</string>
     <string name="dance_move_name">Dance Move Name</string>
     <string name="dance_move_image_desc">Image of dance move</string>
+    <string name="dance_video_loading">Dance video loading...</string>
+    <string name="your_dance_video_will_play_below">Your dance video will play below</string>
 </resources>

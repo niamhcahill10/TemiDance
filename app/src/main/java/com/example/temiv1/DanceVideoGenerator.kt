@@ -6,6 +6,7 @@ import android.net.Uri
 import com.example.temiv1.DanceMove
 import androidx.core.net.toUri
 
+// Generate a dance for the user given their selected moves
 object DanceVideoGenerator {
 
     // function takes list of dance move objects and maps them by id and clip length, this is returned as key value pairs, the associate function transforms the list into a map
@@ -25,7 +26,8 @@ object DanceVideoGenerator {
         return durationStr?.toLongOrNull() ?: 5000L
     }
 
-    fun buildDanceVideo(
+    // function to build a list if dance moves to be performed, each dance move can be performed multiple times but not back to back, the length of the video must not exceed the music video selected (target duration)
+    fun buildDanceMovesPlaylist(
         selectedMoves: List<DanceMove>,
         moveDurations: Map<Int, Long>,
         targetDurationMillis: Long
@@ -37,24 +39,27 @@ object DanceVideoGenerator {
         var totalDuration = 0L
         val random = java.util.Random()
 
+        // keep adding moves until the playlist is the same length as the song selected
         while(totalDuration < targetDurationMillis) {
             val lastMove = playlist.lastOrNull()
 
+            // ensure next move is a different move if more than one is selected
             val choices = if (lastMove != null && selectedMoves.size > 1) {
                 selectedMoves.filter { it != lastMove }
             } else {
                 selectedMoves
             }
 
+            // get least used move to ensure moves are repeated as close to an equal number of times as possible given duration constraints
             val minUsage = choices.minOf { usageCount.getValue(it) }
             val balancedChoices = choices.filter { usageCount.getValue(it) == minUsage }
 
-            val nextMove = balancedChoices[random.nextInt(balancedChoices.size)]
-            val clipDuration = moveDurations[nextMove.videoResId] ?: 5000L
+            val nextMove = balancedChoices[random.nextInt(balancedChoices.size)] // randomly select from list of least repeated dance moves
+            val clipDuration = moveDurations[nextMove.videoResId] ?: 5000L // get clip duration, assume 5 seconds if not able to obtain - maybe should be updated to an error
 
-            playlist.add(nextMove)
-            usageCount[nextMove] = usageCount.getValue(nextMove) + 1
-            totalDuration += clipDuration
+            playlist.add(nextMove) // add moves to the playlist
+            usageCount[nextMove] = usageCount.getValue(nextMove) + 1 // update the number of times the move is used
+            totalDuration += clipDuration // update the clip duration
 
         }
 

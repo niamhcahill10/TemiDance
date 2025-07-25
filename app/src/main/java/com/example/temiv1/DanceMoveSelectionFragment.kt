@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 class DanceMoveSelection : BaseFragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DanceMoveAdapter
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     private val allMoves = listOf(
         DanceMove("Arm Raises", R.drawable.arm_raises_x4, DifficultyLevel.EASY, R.raw.mp_arm_raises_x4),
@@ -60,7 +62,24 @@ class DanceMoveSelection : BaseFragment() {
                 // Navigation to SongSelectionFragment would go here
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
                 Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")
+                findNavController().navigate(R.id.action_danceMoveSelection2_to_videoPlaying)
             }
+
+            sessionViewModel.selectedMoves.value = selectedMoves
+
+            val moveDurations = DanceVideoGenerator.getClipDurations(requireContext(), selectedMoves)
+
+            val movesPlaylist = DanceVideoGenerator.buildDanceMovesPlaylist(
+                selectedMoves = selectedMoves,
+                moveDurations = moveDurations,
+                targetDurationMillis = 2 * 60 * 1000L
+            )
+
+            sessionViewModel.movesPlaylist.value = movesPlaylist
+
+            Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.name }}")
+            val counts = movesPlaylist.groupingBy { it.name }.eachCount()
+            Log.d("DanceVideo", "Move usage counts: $counts")
         }
 
     }

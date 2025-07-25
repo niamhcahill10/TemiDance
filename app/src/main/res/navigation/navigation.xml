@@ -150,5 +150,13 @@
     <fragment
         android:id="@+id/danceMoveSelection2"
         android:name="com.example.temiv1.DanceMoveSelection"
-        android:label="DanceMoveSelection" />
+        android:label="DanceMoveSelection" >
+        <action
+            android:id="@+id/action_danceMoveSelection2_to_videoPlaying"
+            app:destination="@id/videoPlaying" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoPlaying"
+        android:name="com.example.temiv1.VideoPlaying"
+        android:label="VideoPlaying" />
 </navigation>
