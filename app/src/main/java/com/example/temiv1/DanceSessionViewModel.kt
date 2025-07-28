@@ -9,5 +9,7 @@ class DanceSessionViewModel : ViewModel() {
     // live data can be updated at any point across fragments
     val selectedMoves = MutableLiveData<List<DanceMove>>()
     val movesPlaylist = MutableLiveData<List<DanceMove>>()
+    val allMoves = MutableLiveData<List<DanceMove>>()
+    val selectedSong = MutableLiveData<Song>()
 
 }

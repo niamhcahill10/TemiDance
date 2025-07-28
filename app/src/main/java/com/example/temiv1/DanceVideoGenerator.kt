@@ -26,11 +26,22 @@ object DanceVideoGenerator {
         return durationStr?.toLongOrNull() ?: 5000L
     }
 
+    fun getAudioDurationFromRaw(context: Context, resId: Int): Long {
+        val retriever = MediaMetadataRetriever()
+        val uri = "android.resource://${context.packageName}/$resId".toUri()
+        retriever.setDataSource(context, uri)
+        val durationStr = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+        retriever.release()
+        return durationStr?.toLongOrNull() ?: 60000L // fallback 60s
+    }
+
     // function to build a list if dance moves to be performed, each dance move can be performed multiple times but not back to back, the length of the video must not exceed the music video selected (target duration)
     fun buildDanceMovesPlaylist(
         selectedMoves: List<DanceMove>,
         moveDurations: Map<Int, Long>,
-        targetDurationMillis: Long
+        targetDurationMillis: Long,
+        restMove4Beats: DanceMove,
+        restMove6Beats: DanceMove
     ): List<DanceMove> {
         if (selectedMoves.isEmpty()) return emptyList()
 
@@ -39,9 +50,13 @@ object DanceVideoGenerator {
         var totalDuration = 0L
         val random = java.util.Random()
 
+        val rest6Duration = moveDurations[restMove6Beats.videoResId] ?: 3000L
+        playlist.add(restMove6Beats)
+        totalDuration += rest6Duration
+
         // keep adding moves until the playlist is the same length as the song selected
         while(totalDuration < targetDurationMillis) {
-            val lastMove = playlist.lastOrNull()
+            val lastMove = playlist.lastOrNull { it !in listOf(restMove4Beats, restMove6Beats) }
 
             // ensure next move is a different move if more than one is selected
             val choices = if (lastMove != null && selectedMoves.size > 1) {
@@ -60,6 +75,12 @@ object DanceVideoGenerator {
             playlist.add(nextMove) // add moves to the playlist
             usageCount[nextMove] = usageCount.getValue(nextMove) + 1 // update the number of times the move is used
             totalDuration += clipDuration // update the clip duration
+
+            val rest4Duration = moveDurations[restMove4Beats.videoResId] ?: 2000L
+            if (totalDuration + rest4Duration <= targetDurationMillis) {
+                playlist.add(restMove4Beats)
+                totalDuration += rest4Duration
+            }
 
         }
 

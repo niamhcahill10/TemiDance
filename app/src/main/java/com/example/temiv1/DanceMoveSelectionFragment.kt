@@ -21,12 +21,16 @@ class DanceMoveSelection : BaseFragment() {
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     private val allMoves = listOf(
-        DanceMove("Arm Raises", R.drawable.arm_raises_x4, DifficultyLevel.EASY, R.raw.mp_arm_raises_x4),
-        DanceMove("Arm Rolls Side to Side", R.drawable.arm_rolls_side_to_side_x4, DifficultyLevel.EASY, R.raw.mp_arm_rolls_side_to_side_x4),
-        DanceMove("Arm Swings", R.drawable.arm_swings_x4, DifficultyLevel.MEDIUM, R.raw.mp_arm_swings_x4),
-        DanceMove("Forward Arm Extensions", R.drawable.forward_arm_extensions_x4, DifficultyLevel.HARD, R.raw.mp_forward_arm_extensions_x4),
-        DanceMove("Side Steps", R.drawable.side_steps_x4, DifficultyLevel.EASY, R.raw.mp_side_steps_x4),
-        DanceMove("Single Marches", R.drawable.single_marches_x4, DifficultyLevel.EASY, R.raw.mp_single_marches_x4),
+        DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.EASY, R.raw.easy100bpm_rest_move_x4),
+        DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.EASY, R.raw.easy100bpm_rest_move_x6),
+        DanceMove("Arm Raises", R.drawable.arm_raises, DifficultyLevel.EASY, R.raw.easy100bpm_arm_raises_x8),
+        DanceMove("Arm Rolls Side to Side", R.drawable.arm_rolls_side_to_side, DifficultyLevel.EASY, R.raw.easy100bpm_arm_rolls_side_to_side_x8),
+        DanceMove("Arm Swings", R.drawable.arm_swings, DifficultyLevel.EASY, R.raw.easy100bpm_arm_swings_x8),
+        DanceMove("Forward Arm Extensions", R.drawable.fwd_arm_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_arm_extensions_x8),
+        DanceMove("Box Steps", R.drawable.box_steps, DifficultyLevel.EASY, R.raw.easy100bpm_box_steps_x8),
+        DanceMove("Forward Leg Extensions", R.drawable.fwd_leg_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_leg_extensions_x8),
+        DanceMove("Side Steps", R.drawable.side_steps, DifficultyLevel.EASY, R.raw.easy100bpm_side_steps_x8),
+        DanceMove("Single Marches", R.drawable.single_marches, DifficultyLevel.EASY, R.raw.easy100bpm_single_marches_x8),
     )
 
     override fun onCreateView(
@@ -39,6 +43,8 @@ class DanceMoveSelection : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sessionViewModel.allMoves.value = allMoves
+
         recyclerView = view.findViewById(R.id.recycler_moves)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
@@ -48,7 +54,7 @@ class DanceMoveSelection : BaseFragment() {
             robot?.speak(requestSelection)
         }
 
-        val filteredMoves = allMoves.filter { it.level == DifficultyLevel.EASY }
+        val filteredMoves = allMoves.filter { it.level == DifficultyLevel.EASY && it.name != "Rest Move x4" && it.name != "Rest Move x6"}
         adapter = DanceMoveAdapter(filteredMoves)
         recyclerView.adapter = adapter
 
@@ -62,24 +68,10 @@ class DanceMoveSelection : BaseFragment() {
                 // Navigation to SongSelectionFragment would go here
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
                 Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")
-                findNavController().navigate(R.id.action_danceMoveSelection2_to_videoPlaying)
+                findNavController().navigate(R.id.action_danceMoveSelection2_to_songSelectionFragment)
             }
 
             sessionViewModel.selectedMoves.value = selectedMoves
-
-            val moveDurations = DanceVideoGenerator.getClipDurations(requireContext(), selectedMoves)
-
-            val movesPlaylist = DanceVideoGenerator.buildDanceMovesPlaylist(
-                selectedMoves = selectedMoves,
-                moveDurations = moveDurations,
-                targetDurationMillis = 2 * 60 * 1000L
-            )
-
-            sessionViewModel.movesPlaylist.value = movesPlaylist
-
-            Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.name }}")
-            val counts = movesPlaylist.groupingBy { it.name }.eachCount()
-            Log.d("DanceVideo", "Move usage counts: $counts")
         }
 
     }

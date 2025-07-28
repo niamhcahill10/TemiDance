@@ -27,4 +27,7 @@
     <string name="dance_move_image_desc">Image of dance move</string>
     <string name="dance_video_loading">Dance video loading...</string>
     <string name="your_dance_video_will_play_below">Your dance video will play below</string>
+    <string name="select_your_song">Select Your Song</string>
+    <string name="genre">Genre</string>
+    <string name="image_of_song_note">Image of Song Note</string>
 </resources>

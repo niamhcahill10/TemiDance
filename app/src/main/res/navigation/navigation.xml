@@ -152,11 +152,19 @@
         android:name="com.example.temiv1.DanceMoveSelection"
         android:label="DanceMoveSelection" >
         <action
-            android:id="@+id/action_danceMoveSelection2_to_videoPlaying"
-            app:destination="@id/videoPlaying" />
+            android:id="@+id/action_danceMoveSelection2_to_songSelectionFragment"
+            app:destination="@id/songSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/videoPlaying"
         android:name="com.example.temiv1.VideoPlaying"
         android:label="VideoPlaying" />
+    <fragment
+        android:id="@+id/songSelectionFragment"
+        android:name="com.example.temiv1.SongSelectionFragment"
+        android:label="SongSelectionFragment" >
+        <action
+            android:id="@+id/action_songSelectionFragment_to_videoPlaying"
+            app:destination="@id/videoPlaying" />
+    </fragment>
 </navigation>
