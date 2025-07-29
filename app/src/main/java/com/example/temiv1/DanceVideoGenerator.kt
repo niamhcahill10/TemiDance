@@ -40,8 +40,10 @@ object DanceVideoGenerator {
         selectedMoves: List<DanceMove>,
         moveDurations: Map<Int, Long>,
         targetDurationMillis: Long,
-        restMove4Beats: DanceMove,
-        restMove6Beats: DanceMove,
+        restMove4BeatsArms: DanceMove,
+        restMove6BeatsArms: DanceMove,
+        restMove4BeatsLegs: DanceMove,
+        restMove6BeatsLegs: DanceMove,
     ): List<DanceMove> {
         if (selectedMoves.isEmpty()) return emptyList()
 
@@ -50,13 +52,20 @@ object DanceVideoGenerator {
         var totalDuration = 0L
         val random = java.util.Random()
 
-        val rest6Duration = moveDurations[restMove6Beats.videoResId] ?: 3000L
-        playlist.add(restMove6Beats)
-        totalDuration += rest6Duration
+        val firstMove = selectedMoves.random()
+        val firstMoveDuration = moveDurations[firstMove.videoResId] ?: 5000L
+
+        val firstRestMove = if (firstMove.type == MoveType.ARM) restMove6BeatsArms else restMove6BeatsLegs
+        val firstRestDuration = moveDurations[firstRestMove.videoResId] ?: 3000L
+        playlist.add(firstRestMove)
+        totalDuration += firstRestDuration
+
+        playlist.add(firstMove)
+        totalDuration += firstMoveDuration
 
         // keep adding moves until the playlist is the same length as the song selected
-        while(totalDuration < targetDurationMillis) {
-            val lastMove = playlist.lastOrNull { it !in listOf(restMove4Beats, restMove6Beats) }
+        while(totalDuration < targetDurationMillis - 14_000L) {
+            val lastMove = playlist.lastOrNull { !it.name.contains("rest", ignoreCase = true) }
 
             // ensure next move is a different move if more than one is selected
             val choices = if (lastMove != null && selectedMoves.size > 1) {
@@ -70,17 +79,18 @@ object DanceVideoGenerator {
             val balancedChoices = choices.filter { usageCount.getValue(it) == minUsage }
 
             val nextMove = balancedChoices[random.nextInt(balancedChoices.size)] // randomly select from list of least repeated dance moves
-            val clipDuration = moveDurations[nextMove.videoResId] ?: 5000L // get clip duration, assume 5 seconds if not able to obtain - maybe should be updated to an error
+            val nextMoveDuration = moveDurations[nextMove.videoResId] ?: 5000L // get clip duration, assume 5 seconds if not able to obtain - maybe should be updated to an error
+
+            val nextRestMove = if (nextMove.type == MoveType.ARM) restMove4BeatsArms else restMove4BeatsLegs
+            val nextRestDuration = moveDurations[nextRestMove.videoResId] ?: 2000L
+
+            playlist.add(nextRestMove)
+            totalDuration += nextRestDuration
 
             playlist.add(nextMove) // add moves to the playlist
-            usageCount[nextMove] = usageCount.getValue(nextMove) + 1 // update the number of times the move is used
-            totalDuration += clipDuration // update the clip duration
-
-            val rest4Duration = moveDurations[restMove4Beats.videoResId] ?: 2000L
-            if (totalDuration + rest4Duration <= targetDurationMillis) {
-                playlist.add(restMove4Beats)
-                totalDuration += rest4Duration
-            }
+            usageCount[nextMove] =
+                usageCount.getValue(nextMove) + 1 // update the number of times the move is used
+            totalDuration += nextMoveDuration // update the clip duration
 
         }
 

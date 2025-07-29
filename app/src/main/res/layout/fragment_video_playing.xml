@@ -25,6 +25,7 @@
         android:padding="16dp"
         android:textColor="@android:color/black"
         android:textSize="32sp"
+        android:textStyle="bold"
         android:gravity="center"
         android:textAlignment="center"
         android:visibility="invisible"

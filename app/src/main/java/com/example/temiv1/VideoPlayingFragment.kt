@@ -79,9 +79,13 @@ class VideoPlaying : BaseFragment() {
                 .drop(1)
                 .firstOrNull { !it.name.contains("rest", ignoreCase = true) }
 
-            val nextMoveName = nextMove?.name ?: "Next move coming..."
-            upNextTextOverlay.text = getString(R.string.next_move_label, nextMoveName)
-            upNextTextOverlay.visibility = View.VISIBLE
+            if (nextMove != null) {
+                val nextMoveName = nextMove.name
+                upNextTextOverlay.text = getString(R.string.next_move_label, nextMoveName)
+                upNextTextOverlay.visibility = View.VISIBLE
+            } else {
+                upNextTextOverlay.visibility = View.INVISIBLE
+            }
 
         }
 
