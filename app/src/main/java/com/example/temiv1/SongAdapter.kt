@@ -3,7 +3,7 @@ package com.example.temiv1
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
+import android.widget.RadioButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +14,7 @@ class SongAdapter(private val songs: List<Song>) :
     private var selectedSong: Song? = null
 
     inner class SongViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val checkBox: CheckBox = view.findViewById(R.id.cb_song)
-        val genreText: TextView = view.findViewById(R.id.genre)
-//        val icon: ImageView = view.findViewById(R.id.iv_song)
+        val radioButton: RadioButton = view.findViewById(R.id.rb_song)
     }
 
     // Creates empty view
@@ -26,19 +24,37 @@ class SongAdapter(private val songs: List<Song>) :
         return SongViewHolder(view)
     }
 
-    // Called to fill the view with items, called again for scrolling if new photo needs to appear in the view in place of a previous
+    // required to compile bind view initially when no payloads are present
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        val song = songs[position]
-        holder.checkBox.text = null
-        holder.genreText.text = song.genre
-        holder.checkBox.isChecked = (song == selectedSong)
+        onBindViewHolder(holder, position, emptyList())
+    }
 
-        holder.checkBox.setOnCheckedChangeListener(null) // Avoid recycled listeners
-        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+    private fun bindSelection(holder: SongViewHolder, song: Song, position: Int) {
+        holder.radioButton.setOnCheckedChangeListener(null)
+        holder.radioButton.isChecked = (song == selectedSong)
+        holder.radioButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked && song != selectedSong) {
+                val previousSelectedPosition = songs.indexOf(selectedSong)
                 selectedSong = song
+                notifyItemChanged(previousSelectedPosition, "selection_changed")
+                notifyItemChanged(position, "selection_changed")
             }
         }
+    }
+
+    override fun onBindViewHolder(holder: SongViewHolder, position: Int, payloads: List<Any>) {
+        val song = songs[position]
+
+        if (payloads.contains("selection_changed")) {
+            bindSelection(holder, song, position)
+            return
+        }
+
+        holder.radioButton.text = song.genre
+        bindSelection(holder, song, position)
+
+        val imageView: ImageView = holder.itemView.findViewById(R.id.iv_song)
+        imageView.setImageResource(R.drawable.ic_music_note)
     }
 
     override fun getItemCount(): Int = songs.size
