@@ -23,14 +23,14 @@ class DanceMoveSelection : BaseFragment() {
     private val allMoves = listOf(
         DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.EASY, R.raw.easy100bpm_rest_move_x4),
         DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.EASY, R.raw.easy100bpm_rest_move_x6),
-        DanceMove("Arm Raises", R.drawable.arm_raises, DifficultyLevel.EASY, R.raw.easy100bpm_arm_raises_x8),
-        DanceMove("Arm Rolls Side to Side", R.drawable.arm_rolls_side_to_side, DifficultyLevel.EASY, R.raw.easy100bpm_arm_rolls_side_to_side_x8),
-        DanceMove("Arm Swings", R.drawable.arm_swings, DifficultyLevel.EASY, R.raw.easy100bpm_arm_swings_x8),
-        DanceMove("Forward Arm Extensions", R.drawable.fwd_arm_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_arm_extensions_x8),
-        DanceMove("Box Steps", R.drawable.box_steps, DifficultyLevel.EASY, R.raw.easy100bpm_box_steps_x8),
-        DanceMove("Forward Leg Extensions", R.drawable.fwd_leg_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_leg_extensions_x8),
-        DanceMove("Side Steps", R.drawable.side_steps, DifficultyLevel.EASY, R.raw.easy100bpm_side_steps_x8),
-        DanceMove("Single Marches", R.drawable.single_marches, DifficultyLevel.EASY, R.raw.easy100bpm_single_marches_x8),
+        DanceMove("Arm Raises x8", R.drawable.arm_raises, DifficultyLevel.EASY, R.raw.easy100bpm_arm_raises_x8),
+        DanceMove("Arm Rolls Side to Side x8", R.drawable.arm_rolls_side_to_side, DifficultyLevel.EASY, R.raw.easy100bpm_arm_rolls_side_to_side_x8),
+        DanceMove("Arm Swings x8", R.drawable.arm_swings, DifficultyLevel.EASY, R.raw.easy100bpm_arm_swings_x8),
+        DanceMove("Forward Arm Extensions x8", R.drawable.fwd_arm_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_arm_extensions_x8),
+        DanceMove("Box Steps x8", R.drawable.box_steps, DifficultyLevel.EASY, R.raw.easy100bpm_box_steps_x8),
+        DanceMove("Forward Leg Extensions x8", R.drawable.fwd_leg_extensions, DifficultyLevel.EASY, R.raw.easy100bpm_fwd_leg_extensions_x8),
+        DanceMove("Side Steps x8", R.drawable.side_steps, DifficultyLevel.EASY, R.raw.easy100bpm_side_steps_x8),
+        DanceMove("Single Marches x8", R.drawable.single_marches, DifficultyLevel.EASY, R.raw.easy100bpm_single_marches_x8),
     )
 
     override fun onCreateView(

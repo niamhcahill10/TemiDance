@@ -30,4 +30,5 @@
     <string name="select_your_song">Select Your Song</string>
     <string name="genre">Genre</string>
     <string name="image_of_song_note">Image of Song Note</string>
+    <string name="next_move_label">Next Move: \n%1$s</string>
 </resources>

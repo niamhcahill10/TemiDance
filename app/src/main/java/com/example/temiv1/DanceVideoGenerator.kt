@@ -41,7 +41,7 @@ object DanceVideoGenerator {
         moveDurations: Map<Int, Long>,
         targetDurationMillis: Long,
         restMove4Beats: DanceMove,
-        restMove6Beats: DanceMove
+        restMove6Beats: DanceMove,
     ): List<DanceMove> {
         if (selectedMoves.isEmpty()) return emptyList()
 
