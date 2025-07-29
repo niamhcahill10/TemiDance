@@ -22,7 +22,7 @@ class SongSelectionFragment : BaseFragment() {
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     private val allSongs = listOf(
-        Song("Salsa", DifficultyLevel.EASY, bpm = 100, genre = "Salsa", R.raw.salsa100bpm),
+        Song("Jazz", DifficultyLevel.EASY, bpm = 100, genre = "Jazz", R.raw.jazz100bpm),
         Song("Electronic", DifficultyLevel.EASY, bpm = 100, genre = "Electronic", R.raw.electronic100bpm)
     )
 
@@ -61,33 +61,32 @@ class SongSelectionFragment : BaseFragment() {
             }
 
             sessionViewModel.selectedSong.value = selectedSong
+
+            val songDuration = selectedSong?.let {
+                DanceVideoGenerator.getAudioDurationFromRaw(requireContext(), it.audioResId)
+            } ?: (2 * 60 * 1000L)
+
+            val selectedMoves = sessionViewModel.selectedMoves.value ?: emptyList()
+            val allMoves = sessionViewModel.allMoves.value ?: emptyList()
+
+            val moveDurations = DanceVideoGenerator.getClipDurations(requireContext(), selectedMoves)
+
+            val restMove4Beats = allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_x4 }!! // non-null assertion
+            val restMove6Beats = allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_x6 }!!
+
+            val movesPlaylist = DanceVideoGenerator.buildDanceMovesPlaylist(
+                selectedMoves = selectedMoves,
+                moveDurations = moveDurations,
+                targetDurationMillis = songDuration,
+                restMove4Beats = restMove4Beats,
+                restMove6Beats = restMove6Beats
+            )
+
+            sessionViewModel.movesPlaylist.value = movesPlaylist
+
+            Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.name }}")
+            val counts = movesPlaylist.groupingBy { it.name }.eachCount()
+            Log.d("DanceVideo", "Move usage counts: $counts")
         }
-
-        val selectedSong = sessionViewModel.selectedSong.value ?: null
-        val songDuration = selectedSong?.let {
-            DanceVideoGenerator.getAudioDurationFromRaw(requireContext(), it.audioResId)
-        } ?: (2 * 60 * 1000L)
-
-        val selectedMoves = sessionViewModel.selectedMoves.value ?: emptyList()
-        val allMoves = sessionViewModel.allMoves.value ?: emptyList()
-
-        val moveDurations = DanceVideoGenerator.getClipDurations(requireContext(), selectedMoves)
-
-        val restMove4Beats = allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_x4 }!! // non-null assertion
-        val restMove6Beats = allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_x6 }!!
-
-        val movesPlaylist = DanceVideoGenerator.buildDanceMovesPlaylist(
-            selectedMoves = selectedMoves,
-            moveDurations = moveDurations,
-            targetDurationMillis = songDuration,
-            restMove4Beats = restMove4Beats,
-            restMove6Beats = restMove6Beats
-        )
-
-        sessionViewModel.movesPlaylist.value = movesPlaylist
-
-        Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.name }}")
-        val counts = movesPlaylist.groupingBy { it.name }.eachCount()
-        Log.d("DanceVideo", "Move usage counts: $counts")
     }
 }

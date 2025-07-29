@@ -17,6 +17,9 @@ class VideoPlaying : BaseFragment() {
 
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
+    private var videoPlayer: ExoPlayer? = null
+    private var audioPlayer: ExoPlayer? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,23 +31,44 @@ class VideoPlaying : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val movesPlaylist = sessionViewModel.movesPlaylist.value ?: emptyList()
+        val selectedSong = sessionViewModel.selectedSong.value
+
         Log.d("VideoPlaying", "Upcoming moves: ${movesPlaylist.map { it.name }}")
+        Log.d("VideoPlaying", "Selected song: ${selectedSong?.genre}}")
 
         val playerView = view.findViewById<PlayerView>(R.id.playerView)
         val context = requireContext()
 
-        val player = ExoPlayer.Builder(context).build()
-        playerView.player = player
+        // Video player
+        videoPlayer = ExoPlayer.Builder(context).build().also { player ->
+            playerView.player = player // should appear in playerView
 
-        val mediaItems = movesPlaylist.map { move ->
-            val uri = "android.resource://${context.packageName}/${move.videoResId}".toUri()
-            MediaItem.fromUri(uri)
+            val mediaItems = movesPlaylist.map { move ->
+                val uri = "android.resource://${context.packageName}/${move.videoResId}".toUri()
+                MediaItem.fromUri(uri)
+            }
+
+            player.setMediaItems(mediaItems)
+            player.prepare()
+
         }
 
-        player.setMediaItems(mediaItems)
-        player.prepare()
-        player.playWhenReady = true
+        // Audio player
+        if (selectedSong != null) {
+            audioPlayer = ExoPlayer.Builder(context).build().also { player ->
+                val uri = "android.resource://${context.packageName}/${selectedSong.audioResId}".toUri()
+                val mediaItem = MediaItem.fromUri(uri)
+
+                player.setMediaItem(mediaItem)
+                player.prepare()
+            }
+        }
+
+        videoPlayer?.playWhenReady = true
+        audioPlayer?.playWhenReady = true
+
+        }
+
+
 
     }
-
-}
