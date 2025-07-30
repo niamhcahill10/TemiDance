@@ -31,4 +31,24 @@
     <string name="genre">Genre</string>
     <string name="image_of_song_note">Image of Song Note</string>
     <string name="next_move_label">Next Move: \n%1$s</string>
+    <string name="how_physically_challenging_did_you_find_that_dance">How physically challenging did you find that dance?</string>
+    <string name="_1_not_at_all_challenging">1 - Not at all challenging</string>
+    <string name="_2_a_little_challenging">2 - A little challenging</string>
+    <string name="_3_somewhat_challenging">3 - Somewhat challenging</string>
+    <string name="_4_very_challenging">4 - Very challenging</string>
+    <string name="_5_extremely_challenging">5 - Extremely challenging</string>
+    <string name="how_well_were_you_able_to_follow_the_moves_during_the_dance">How well were you able to follow the moves during the dance?</string>
+    <string name="_1_not_at_all">1 - Not at all</string>
+    <string name="_1_none_of_the_moves">1 - None of the moves</string>
+    <string name="_2_a_few_of_the_moves">2 - A few of the moves</string>
+    <string name="_3_some_of_the_moves">3 - Some of the moves</string>
+    <string name="_4_most_of_the_moves">4 - Most of the moves</string>
+    <string name="_5_all_of_the_moves">5 - All of the moves</string>
+    <string name="the_next_level_involves_a_faster_pace_increasing_from_100bpm_to_110bpm_and_a_higher_number_of_reps_increasing_from_8_to_12_for_each_move_would_you_like_to_give_the_next_level_a_try">The next level involves a faster pace increasing from 100BPM to 110BPM and a higher number of reps increasing from 8 to 12 for each move. Would you like to give the next level a try?</string>
+    <string name="the_next_level_is_slightly_faster_and_has_more_reps_per_move_12_would_you_like_to_try_it">The next level is slightly faster and has more reps per move (12). Would you like to try it?</string>
+    <string name="the_next_level_is_slightly_faster_and_has_12_reps_per_move_would_you_like_to_try_it">The next level is slightly faster and has 12 reps per move. Would you like to try it?</string>
+    <string name="would_you_like_to_change_your_level">Would you like to change your level?</string>
+    <string name="go_up_a_level">Go up a level</string>
+    <string name="stay_at_the_same_level">Stay at the same level</string>
+    <string name="go_down_a_level">Go down a level</string>
 </resources>

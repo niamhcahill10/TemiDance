@@ -14,6 +14,7 @@ import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.PlayerView
 import androidx.core.net.toUri
 import androidx.media3.common.Player
+import androidx.navigation.fragment.findNavController
 
 class VideoPlaying : BaseFragment() {
 
@@ -97,6 +98,15 @@ class VideoPlaying : BaseFragment() {
 
                 player.setMediaItem(mediaItem)
                 player.prepare()
+
+                player.addListener(object : Player.Listener {
+                    override fun onPlaybackStateChanged(playbackState: Int) {
+                        if (playbackState == Player.STATE_ENDED) {
+                            findNavController().navigate(R.id.action_videoPlaying_to_feedbackQ1Fragment)
+                        }
+                    }
+                })
+
             }
         }
 
@@ -105,6 +115,11 @@ class VideoPlaying : BaseFragment() {
 
         }
 
+    override fun releasePlayer() {
+        videoPlayer?.release()
+        videoPlayer = null
 
-
+        audioPlayer?.release()
+        audioPlayer = null
     }
+}

@@ -81,8 +81,13 @@ open class BaseFragment : Fragment(), OnRobotReadyListener, Robot.AsrListener {
         }
     }
 
+    open fun releasePlayer() {
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        releasePlayer()
         fragmentScope.coroutineContext.cancelChildren() // Cancels child jobs safely
     }
 

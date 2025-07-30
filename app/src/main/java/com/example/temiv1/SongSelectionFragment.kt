@@ -52,7 +52,8 @@ class SongSelectionFragment : BaseFragment() {
             robot?.speak(requestSelection)
         }
 
-        val filteredSongs = allSongs.filter { it.level == DifficultyLevel.EASY }
+        val currentLevel = sessionViewModel.currentLevel.value
+        val filteredSongs = allSongs.filter { it.level == currentLevel }
         adapter = SongAdapter(filteredSongs)
         recyclerView.adapter = adapter
 

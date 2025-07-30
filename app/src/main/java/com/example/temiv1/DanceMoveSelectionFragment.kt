@@ -25,6 +25,14 @@ class DanceMoveSelection : BaseFragment() {
         DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.EASY, MoveType.ARM, R.raw.easy100bpm_rest_move_arms_x6),
         DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_rest_move_legs_x4),
         DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_rest_move_legs_x6),
+        DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.MEDIUM, MoveType.ARM, R.raw.medium110bpm_rest_move_arms_x4),
+        DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.MEDIUM, MoveType.ARM, R.raw.medium110bpm_rest_move_arms_x6),
+        DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_rest_move_legs_x4),
+        DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_rest_move_legs_x6),
+        DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.HARD, MoveType.ARM, R.raw.hard120bpm_rest_move_arms_x4),
+        DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.HARD, MoveType.ARM, R.raw.hard120bpm_rest_move_arms_x6),
+        DanceMove("Rest Move x4", R.drawable.rest, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_rest_move_legs_x4),
+        DanceMove("Rest Move x6", R.drawable.rest, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_rest_move_legs_x6),
         DanceMove("Arm Raises x8", R.drawable.arm_raises, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_arm_raises_x8),
         DanceMove("Arm Rolls Side to Side x8", R.drawable.arm_rolls_side_to_side, DifficultyLevel.EASY, MoveType.ARM, R.raw.easy100bpm_arm_rolls_side_to_side_x8),
         DanceMove("Arm Swings x8", R.drawable.arm_swings, DifficultyLevel.EASY, MoveType.ARM, R.raw.easy100bpm_arm_swings_x8),
@@ -33,6 +41,22 @@ class DanceMoveSelection : BaseFragment() {
         DanceMove("Forward Leg Extensions x8", R.drawable.fwd_leg_extensions, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_fwd_leg_extensions_x8),
         DanceMove("Side Steps x8", R.drawable.side_steps, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_side_steps_x8),
         DanceMove("Single Marches x8", R.drawable.single_marches, DifficultyLevel.EASY, MoveType.LEG, R.raw.easy100bpm_single_marches_x8),
+        DanceMove("Arm Raises x12", R.drawable.arm_raises, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_arm_raises_x12),
+        DanceMove("Arm Rolls Side to Side x12", R.drawable.arm_rolls_side_to_side, DifficultyLevel.MEDIUM, MoveType.ARM, R.raw.medium110bpm_arm_rolls_side_to_side_x12),
+        DanceMove("Arm Swings x12", R.drawable.arm_swings, DifficultyLevel.MEDIUM, MoveType.ARM, R.raw.medium110bpm_arm_swings_12),
+        DanceMove("Forward Arm Extensions x12", R.drawable.fwd_arm_extensions, DifficultyLevel.MEDIUM, MoveType.ARM, R.raw.medium110bpm_fwd_arm_extensions_12),
+        DanceMove("Box Steps x12", R.drawable.box_steps, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_box_steps_x12),
+        DanceMove("Forward Leg Extensions x12", R.drawable.fwd_leg_extensions, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_fwd_leg_extensions_x12),
+        DanceMove("Side Steps x12", R.drawable.side_steps, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_side_steps_x12),
+        DanceMove("Single Marches x12", R.drawable.single_marches, DifficultyLevel.MEDIUM, MoveType.LEG, R.raw.medium110bpm_single_marches_x12),
+        DanceMove("Arm Raises x16", R.drawable.arm_raises, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_arm_raises_x16),
+        DanceMove("Arm Rolls Side to Side x16", R.drawable.arm_rolls_side_to_side, DifficultyLevel.HARD, MoveType.ARM, R.raw.hard120bpm_arm_rolls_side_to_side_x16),
+        DanceMove("Arm Swings x16", R.drawable.arm_swings, DifficultyLevel.HARD, MoveType.ARM, R.raw.hard120bpm_arm_swings_x16),
+        DanceMove("Forward Arm Extensions x16", R.drawable.fwd_arm_extensions, DifficultyLevel.HARD, MoveType.ARM, R.raw.hard120bpm_fwd_arm_extensions_x16),
+        DanceMove("Box Steps x16", R.drawable.box_steps, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_box_steps_x16),
+        DanceMove("Forward Leg Extensions x16", R.drawable.fwd_leg_extensions, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_fwd_leg_extensions),
+        DanceMove("Side Steps x16", R.drawable.side_steps, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_side_steps_x16),
+        DanceMove("Single Marches x16", R.drawable.single_marches, DifficultyLevel.HARD, MoveType.LEG, R.raw.hard120bpm_single_marches_x16),
     )
 
     override fun onCreateView(
@@ -56,7 +80,9 @@ class DanceMoveSelection : BaseFragment() {
             robot?.speak(requestSelection)
         }
 
-        val filteredMoves = allMoves.filter { it.level == DifficultyLevel.EASY && it.name != "Rest Move x4" && it.name != "Rest Move x6"}
+        val currentLevel = sessionViewModel.currentLevel.value
+
+        val filteredMoves = allMoves.filter { it.level == currentLevel && it.name != "Rest Move x4" && it.name != "Rest Move x6"}
         adapter = DanceMoveAdapter(filteredMoves)
         recyclerView.adapter = adapter
 

@@ -158,7 +158,11 @@
     <fragment
         android:id="@+id/videoPlaying"
         android:name="com.example.temiv1.VideoPlaying"
-        android:label="VideoPlaying" />
+        android:label="VideoPlaying" >
+        <action
+            android:id="@+id/action_videoPlaying_to_feedbackQ1Fragment"
+            app:destination="@id/feedbackQ1Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/songSelectionFragment"
         android:name="com.example.temiv1.SongSelectionFragment"
@@ -166,5 +170,29 @@
         <action
             android:id="@+id/action_songSelectionFragment_to_videoPlaying"
             app:destination="@id/videoPlaying" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedbackQ1Fragment"
+        android:name="com.example.temiv1.FeedbackQ1Fragment"
+        android:label="FeedbackQ1Fragment" >
+        <action
+            android:id="@+id/action_feedbackQ1Fragment_to_feedbackQ2Fragment"
+            app:destination="@id/feedbackQ2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedbackQ2Fragment"
+        android:name="com.example.temiv1.FeedbackQ2Fragment"
+        android:label="FeedbackQ2Fragment" >
+        <action
+            android:id="@+id/action_feedbackQ2Fragment_to_progressionFragment"
+            app:destination="@id/progressionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/progressionFragment"
+        android:name="com.example.temiv1.ProgressionFragment"
+        android:label="ProgressionFragment" >
+        <action
+            android:id="@+id/action_progressionFragment_to_danceMoveSelection2"
+            app:destination="@id/danceMoveSelection2" />
     </fragment>
 </navigation>
