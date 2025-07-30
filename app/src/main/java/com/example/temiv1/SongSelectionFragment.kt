@@ -25,8 +25,13 @@ class SongSelectionFragment : BaseFragment() {
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     private val allSongs = listOf(
+        Song("Electronic", DifficultyLevel.EASY, bpm = 100, genre = "Electronic", R.raw.electronic100bpm),
         Song("Jazz", DifficultyLevel.EASY, bpm = 100, genre = "Jazz", R.raw.jazz100bpm),
-        Song("Electronic", DifficultyLevel.EASY, bpm = 100, genre = "Electronic", R.raw.electronic100bpm)
+        Song("Jazz", DifficultyLevel.MEDIUM, bpm = 110, genre = "Jazz", R.raw.jazz110bpm),
+        Song("Salsa", DifficultyLevel.MEDIUM, bpm = 110, genre = "Salsa", R.raw.salsa110bpm),
+        Song("Pop", DifficultyLevel.HARD, bpm = 120, genre = "Pop", R.raw.pop120bpm),
+        Song("Salsa", DifficultyLevel.HARD, bpm = 120, genre = "Salsa", R.raw.salsa120bpm)
+
     )
 
     override fun onCreateView(
