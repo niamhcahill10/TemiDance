@@ -6,7 +6,7 @@
     app:startDestination="@id/q1Fragment">
     <fragment
         android:id="@+id/q1Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q1Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q1Fragment"
         android:label="fragment_q1"
         tools:layout="@layout/fragment_q1" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/q3Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q3Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q3Fragment"
         android:label="fragment_q3"
         tools:layout="@layout/fragment_q3" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/q4Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q4Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q4Fragment"
         android:label="fragment_q4"
         tools:layout="@layout/fragment_q4" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/q5Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q5Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q5Fragment"
         android:label="fragment_q5"
         tools:layout="@layout/fragment_q5" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/q6Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q6Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q6Fragment"
         android:label="fragment_q6"
         tools:layout="@layout/fragment_q6" >
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/q7Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q7Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q7Fragment"
         android:label="fragment_q7"
         tools:layout="@layout/fragment_q7" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/q8Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q8Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q8Fragment"
         android:label="fragment_q8"
         tools:layout="@layout/fragment_q8" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/q9Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q9Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q9Fragment"
         android:label="fragment_q9"
         tools:layout="@layout/fragment_q9" >
         <action
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/q10Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q10Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q10Fragment"
         android:label="fragment_q10"
         tools:layout="@layout/fragment_q10" >
         <action
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/q11Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q11Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q11Fragment"
         android:label="fragment_q11"
         tools:layout="@layout/fragment_q11" >
         <action
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/q12Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q12Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q12Fragment"
         android:label="fragment_q12"
         tools:layout="@layout/fragment_q12" >
         <action
@@ -132,7 +132,7 @@
     </fragment>
     <fragment
         android:id="@+id/q13Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q13Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q13Fragment"
         android:label="fragment_q13"
         tools:layout="@layout/fragment_q13" >
         <action
@@ -144,12 +144,12 @@
     </fragment>
     <fragment
         android:id="@+id/q14Fragment"
-        android:name="com.example.temiv1.fragments.pa_questions.Q14Fragment"
+        android:name="com.example.temiv1.ui.fragments.pa_questions.Q14Fragment"
         android:label="fragment_q14"
         tools:layout="@layout/fragment_q14" />
     <fragment
         android:id="@+id/danceMoveSelection2"
-        android:name="com.example.temiv1.fragments.dance_session.DanceMoveSelection"
+        android:name="com.example.temiv1.ui.fragments.dance_session.DanceMoveSelection"
         android:label="DanceMoveSelection" >
         <action
             android:id="@+id/action_danceMoveSelection2_to_songSelectionFragment"
@@ -157,7 +157,7 @@
     </fragment>
     <fragment
         android:id="@+id/videoPlaying"
-        android:name="com.example.temiv1.fragments.dance_session.VideoPlaying"
+        android:name="com.example.temiv1.ui.fragments.dance_session.VideoPlaying"
         android:label="VideoPlaying" >
         <action
             android:id="@+id/action_videoPlaying_to_feedbackQ1Fragment"
@@ -165,7 +165,7 @@
     </fragment>
     <fragment
         android:id="@+id/songSelectionFragment"
-        android:name="com.example.temiv1.fragments.dance_session.SongSelectionFragment"
+        android:name="com.example.temiv1.ui.fragments.dance_session.SongSelectionFragment"
         android:label="SongSelectionFragment" >
         <action
             android:id="@+id/action_songSelectionFragment_to_videoPlaying"
@@ -173,7 +173,7 @@
     </fragment>
     <fragment
         android:id="@+id/feedbackQ1Fragment"
-        android:name="com.example.temiv1.fragments.feedback.FeedbackQ1Fragment"
+        android:name="com.example.temiv1.ui.fragments.feedback.FeedbackQ1Fragment"
         android:label="FeedbackQ1Fragment" >
         <action
             android:id="@+id/action_feedbackQ1Fragment_to_feedbackQ2Fragment"
@@ -181,7 +181,7 @@
     </fragment>
     <fragment
         android:id="@+id/feedbackQ2Fragment"
-        android:name="com.example.temiv1.fragments.feedback.FeedbackQ2Fragment"
+        android:name="com.example.temiv1.ui.fragments.feedback.FeedbackQ2Fragment"
         android:label="FeedbackQ2Fragment" >
         <action
             android:id="@+id/action_feedbackQ2Fragment_to_progressionFragment"
@@ -189,7 +189,7 @@
     </fragment>
     <fragment
         android:id="@+id/progressionFragment"
-        android:name="com.example.temiv1.fragments.feedback.ProgressionFragment"
+        android:name="com.example.temiv1.ui.fragments.feedback.ProgressionFragment"
         android:label="ProgressionFragment" >
         <action
             android:id="@+id/action_progressionFragment_to_danceMoveSelection2"
