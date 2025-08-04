@@ -1,8 +1,7 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
-import android.content.Context
-import android.media.AudioManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,12 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q9Fragment : BaseFragment() {
+class SetupQ3Fragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q9, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q3, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,8 +27,8 @@ class Q9Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q9 = TtsRequest.create("Is that quiet enough?", false)
-            robot?.askQuestion(q9)
+            val q3 = TtsRequest.create("Is that bright enough?", false)
+            robot?.askQuestion(q3)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,24 +48,28 @@ class Q9Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q9Fragment_to_q10Fragment)
+        findNavController().navigate(R.id.action_q3Fragment_to_q6Fragment)
     }
 
     private fun onNoSelected() {
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val contentResolver = requireContext().contentResolver
 
-        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-
-        val newVolume = (currentVolume - 1).coerceAtLeast(0)
-
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+        val currentBrightness = Settings.System.getInt(
+            contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS,
+            125 // fallback default if not set
         )
 
-        val q9 = TtsRequest.create("Is that quiet enough?", false)
-        robot?.askQuestion(q9)
+        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
+
+        Settings.System.putInt(
+            contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS,
+            newBrightness
+        )
+
+        val q3 = TtsRequest.create("Is that bright enough?", false)
+        robot?.askQuestion(q3)
     }
 
     override fun handleAsr(command: String) {

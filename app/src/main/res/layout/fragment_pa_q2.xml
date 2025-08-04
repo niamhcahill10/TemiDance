@@ -5,17 +5,20 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.pa_questions.Q1Fragment"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="-35dp">
+    tools:context=".ui.fragments.pa_questions.PaQ2Fragment">
+
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/q1"
+        android:id="@+id/q2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_large"
-        android:layout_marginEnd="@dimen/spacing_large"
-        android:text="@string/hello_my_name_is_temi_and_i_ll_be_finding_fun_dances_for_you_today_before_we_start_lets_make_sure_the_settings_are_right_for_you_can_you_hear_me_or_see_the_screen"
+        android:text="@string/are_you_able_to_sit_up_in_bed_from_a_lying_position"
         android:textAlignment="center"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,10 +26,11 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_large" />
 
     <include
-        android:id="@+id/include"
         layout="@layout/buttons_yes_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +38,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/q1" />
+        app:layout_constraintTop_toBottomOf="@id/q2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

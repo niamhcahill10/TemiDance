@@ -1,7 +1,8 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
+import android.content.Context
+import android.media.AudioManager
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,12 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q4Fragment : BaseFragment() {
+class SetupQ7Fragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q4, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q7, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,8 +28,8 @@ class Q4Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q4 = TtsRequest.create("Would you like the screen darker?", false)
-            robot?.askQuestion(q4)
+            val q7 = TtsRequest.create("Is that loud enough?", false)
+            robot?.askQuestion(q7)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -37,7 +38,7 @@ class Q4Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
@@ -45,29 +46,28 @@ class Q4Fragment : BaseFragment() {
         backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-        }
+    }
 
     private fun onYesSelected() {
-        val contentResolver = requireContext().contentResolver
-
-        val currentBrightness = Settings.System.getInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
-        )
-
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
-
-        Settings.System.putInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness)
-
-        findNavController().navigate(R.id.action_q4Fragment_to_q5Fragment)
+        findNavController().navigate(R.id.action_q7Fragment_to_q10Fragment)
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q4Fragment_to_q6Fragment)
+        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+
+        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
+
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            newVolume,
+            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+        )
+
+        val q7 = TtsRequest.create("Is that loud enough?", false)
+        robot?.askQuestion(q7)
     }
 
     override fun handleAsr(command: String) {
@@ -78,4 +78,4 @@ class Q4Fragment : BaseFragment() {
             else -> robot?.askQuestion(TtsRequest.create("Please say yes or no.", false))
         }
     }
-    }
+}

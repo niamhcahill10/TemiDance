@@ -1,4 +1,4 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
 import android.content.Context
 import android.content.Intent
@@ -19,13 +19,13 @@ import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
 
 
-class Q1Fragment : BaseFragment() {
+class SetupQ1Fragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q1, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q1, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

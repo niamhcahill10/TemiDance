@@ -1,12 +1,12 @@
 package com.example.temiv1.ui.fragments.pa_questions
 
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
@@ -14,21 +14,26 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q5Fragment : BaseFragment() {
+class PaQ1Fragment : BaseFragment() {
+    private lateinit var textView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q5, container, false)
+        return inflater.inflate(R.layout.fragment_pa_q1, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.q1)
+        textView.textSize = globalTextSizeSp
+
         fragmentScope.launch {
             delay(1000)
-            val q5 = TtsRequest.create("Is that dark enough?", false)
-            robot?.askQuestion(q5)
+            val q12 = TtsRequest.create("Are you able to lift your arms above shoulder height?", false)
+            robot?.askQuestion(q12)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -37,7 +42,7 @@ class Q5Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
@@ -48,27 +53,11 @@ class Q5Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q5Fragment_to_q6Fragment)
+        findNavController().navigate(R.id.action_paQ1Fragment_to_paQ2Fragment)
     }
 
     private fun onNoSelected() {
-        val contentResolver = requireContext().contentResolver
-
-        val currentBrightness = Settings.System.getInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
-        )
-
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
-
-        Settings.System.putInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness)
-
-        val q5 = TtsRequest.create("Is that dark enough?", false)
-        robot?.askQuestion(q5)
+        findNavController().navigate(R.id.action_paQ1Fragment_to_endSessionFragment)
     }
 
     override fun handleAsr(command: String) {

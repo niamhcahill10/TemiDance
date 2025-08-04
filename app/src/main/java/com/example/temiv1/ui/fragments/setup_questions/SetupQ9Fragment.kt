@@ -1,4 +1,4 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
 import android.content.Context
 import android.media.AudioManager
@@ -15,12 +15,12 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q7Fragment : BaseFragment() {
+class SetupQ9Fragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q7, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q9, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,8 +28,8 @@ class Q7Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q7 = TtsRequest.create("Is that loud enough?", false)
-            robot?.askQuestion(q7)
+            val q9 = TtsRequest.create("Is that quiet enough?", false)
+            robot?.askQuestion(q9)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,16 +49,15 @@ class Q7Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q7Fragment_to_q10Fragment)
+        findNavController().navigate(R.id.action_q9Fragment_to_q10Fragment)
     }
 
     private fun onNoSelected() {
         val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
+        val newVolume = (currentVolume - 1).coerceAtLeast(0)
 
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
@@ -66,8 +65,8 @@ class Q7Fragment : BaseFragment() {
             0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
         )
 
-        val q7 = TtsRequest.create("Is that loud enough?", false)
-        robot?.askQuestion(q7)
+        val q9 = TtsRequest.create("Is that quiet enough?", false)
+        robot?.askQuestion(q9)
     }
 
     override fun handleAsr(command: String) {

@@ -1,39 +1,37 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import com.example.temiv1.R
-import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import android.widget.TextView
+import com.example.temiv1.R
+import com.example.temiv1.base.BaseFragment
 
-class Q13Fragment : BaseFragment() {
+class SetupQ10Fragment : BaseFragment() {
     private lateinit var textView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q13, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q10, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView = view.findViewById(R.id.q13)
-        textView.textSize = globalTextSizeSp
+        textView = view.findViewById(R.id.q10)
 
         fragmentScope.launch {
             delay(1000)
-            val q13 = TtsRequest.create("Is the text small enough?", false)
-            robot?.askQuestion(q13)
+            val q10 = TtsRequest.create("Would you like the text bigger?", false)
+            robot?.askQuestion(q10)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -42,25 +40,31 @@ class Q13Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener{
+        noButton.setOnClickListener {
             onNoSelected()
         }
 
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        val backButton: ImageButton = view.findViewById(R.id.backButton)
+//        backButton.setOnClickListener {
+//            onBackSelected()
+//        }
+
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q13Fragment_to_danceMoveSelection2)
+
+        updateTextSize(8f)
+        textView.textSize = globalTextSizeSp
+        findNavController().navigate(R.id.action_q10Fragment_to_q11Fragment)
     }
 
     private fun onNoSelected() {
-        updateTextSize(-8f)
-        textView.textSize = globalTextSizeSp
-        robot?.askQuestion("Is the text small enough?")
+        findNavController().navigate(R.id.action_q10Fragment_to_q12Fragment)
     }
+
+//    private fun onBackSelected() {
+//        findNavController().popBackStack()
+//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

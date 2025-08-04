@@ -1,13 +1,12 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
-import android.content.Context
-import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
@@ -15,21 +14,26 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q8Fragment : BaseFragment() {
+class SetupQ13Fragment : BaseFragment() {
+    private lateinit var textView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q8, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q13, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.q13)
+        textView.textSize = globalTextSizeSp
+
         fragmentScope.launch {
             delay(1000)
-            val q8 = TtsRequest.create("Would you like the volume quieter?", false)
-            robot?.askQuestion(q8)
+            val q13 = TtsRequest.create("Is the text small enough?", false)
+            robot?.askQuestion(q13)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,22 +53,13 @@ class Q8Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-
-        val newVolume = (currentVolume - 1).coerceAtLeast(0)
-
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
-        )
-        findNavController().navigate(R.id.action_q8Fragment_to_q9Fragment)
+        findNavController().navigate(R.id.action_q13Fragment_to_q14Fragment)
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q8Fragment_to_q10Fragment)
+        updateTextSize(-8f)
+        textView.textSize = globalTextSizeSp
+        robot?.askQuestion("Is the text small enough?")
     }
 
     override fun handleAsr(command: String) {

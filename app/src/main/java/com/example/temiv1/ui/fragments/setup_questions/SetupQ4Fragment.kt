@@ -1,4 +1,4 @@
-package com.example.temiv1.ui.fragments.pa_questions
+package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
 import android.provider.Settings
@@ -14,12 +14,12 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Q3Fragment : BaseFragment() {
+class SetupQ4Fragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q3, container, false)
+        return inflater.inflate(R.layout.fragment_setup_q4, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class Q3Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q3 = TtsRequest.create("Is that bright enough?", false)
-            robot?.askQuestion(q3)
+            val q4 = TtsRequest.create("Would you like the screen darker?", false)
+            robot?.askQuestion(q4)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -37,7 +37,7 @@ class Q3Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener{
+        noButton.setOnClickListener {
             onNoSelected()
         }
 
@@ -45,13 +45,9 @@ class Q3Fragment : BaseFragment() {
         backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
+        }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q3Fragment_to_q6Fragment)
-    }
-
-    private fun onNoSelected() {
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -60,16 +56,18 @@ class Q3Fragment : BaseFragment() {
             125 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
+        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
 
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness
-        )
+            newBrightness)
 
-        val q3 = TtsRequest.create("Is that bright enough?", false)
-        robot?.askQuestion(q3)
+        findNavController().navigate(R.id.action_q4Fragment_to_q5Fragment)
+    }
+
+    private fun onNoSelected() {
+        findNavController().navigate(R.id.action_q4Fragment_to_q6Fragment)
     }
 
     override fun handleAsr(command: String) {
@@ -80,4 +78,4 @@ class Q3Fragment : BaseFragment() {
             else -> robot?.askQuestion(TtsRequest.create("Please say yes or no.", false))
         }
     }
-}
+    }

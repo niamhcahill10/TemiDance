@@ -5,29 +5,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.example.temiv1.R
+import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import android.provider.Settings
-import com.example.temiv1.R
-import com.example.temiv1.base.BaseFragment
 
-class Q2Fragment : BaseFragment() {
+class PaQ3Fragment : BaseFragment() {
+    private lateinit var textView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_q2, container, false)
+        return inflater.inflate(R.layout.fragment_pa_q3, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.q3)
+        textView.textSize = globalTextSizeSp
+
         fragmentScope.launch {
             delay(1000)
-            val q2 = TtsRequest.create("Would you like the screen brighter?", false)
-            robot?.askQuestion(q2)
+            val q3 = TtsRequest.create("Are you able to twist your torso side to side?", false)
+            robot?.askQuestion(q3)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -36,43 +42,23 @@ class Q2Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
-
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun onYesSelected() {
-        val contentResolver = requireContext().contentResolver
-
-        val currentBrightness = Settings.System.getInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
-        )
-
-        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
-
-        Settings.System.putInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness
-        )
-        findNavController().navigate(R.id.action_q2Fragment_to_q3Fragment)
+        findNavController().navigate(R.id.action_paQ3Fragment_to_paQ4Fragment)
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q2Fragment_to_q4Fragment)
+        findNavController().navigate(R.id.action_paQ3Fragment_to_endSessionFragment)
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
