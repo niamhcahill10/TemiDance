@@ -44,6 +44,7 @@ class ProgressionFragment : BaseFragment() {
         val radioRegress: RadioButton = view.findViewById(R.id.radioRegress)
         val radioGroup: RadioGroup = view.findViewById(R.id.progressionOptions)
         val continueButton: Button = view.findViewById(R.id.continueButton)
+        val endSessionButton: Button = view.findViewById(R.id.endSessionButton)
 
         val currentLevel = sessionViewModel.currentLevel.value ?: DifficultyLevel.EASY
 
@@ -102,6 +103,20 @@ class ProgressionFragment : BaseFragment() {
             Toast.makeText(requireContext(), "Continue clicked", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_progressionFragment_to_danceMoveSelection2)
 
+        }
+
+        endSessionButton.setOnClickListener {
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("End Session")
+                .setMessage("Are you sure you want to end your session?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    findNavController().navigate(R.id.action_progressionFragment_to_endSessionFragment)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 }

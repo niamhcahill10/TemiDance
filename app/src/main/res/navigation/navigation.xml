@@ -174,6 +174,9 @@
         <action
             android:id="@+id/action_songSelectionFragment_to_videoPlaying"
             app:destination="@id/videoPlaying" />
+        <action
+            android:id="@+id/action_songSelectionFragment_to_feedbackQ1Fragment"
+            app:destination="@id/feedbackQ1Fragment" />
     </fragment>
     <fragment
         android:id="@+id/feedbackQ1Fragment"
@@ -198,6 +201,9 @@
         <action
             android:id="@+id/action_progressionFragment_to_danceMoveSelection2"
             app:destination="@id/danceMoveSelection2" />
+        <action
+            android:id="@+id/action_progressionFragment_to_endSessionFragment"
+            app:destination="@id/endSessionFragment" />
     </fragment>
     <fragment
         android:id="@+id/paQ1Fragment"

@@ -51,7 +51,7 @@
     <string name="go_up_a_level">Go up a level</string>
     <string name="stay_at_the_same_level">Stay at the same level</string>
     <string name="go_down_a_level">Go down a level</string>
-    <string name="are_you_able_to_lift_your_arms_above_shoulder_height">Are you able to lift your arms above shoulder height?</string>
+    <string name="are_you_able_to_lift_your_arms_above_shoulder_height">Are you able to lift your hands above shoulder height?</string>
     <string name="thank_you_for_interacting_with_me_today_the_session_has_now_ended_enjoy_the_rest_of_your_day">Thank you for interacting with me today. \nThe session has now ended. \nEnjoy the rest of your day!</string>
     <string name="are_you_able_to_sit_up_in_bed_from_a_lying_position">Are you able to sit-up in bed from a lying position?</string>
     <string name="are_you_able_to_twist_your_torso_side_to_side">Are you able to twist your torso side to side?</string>
@@ -91,4 +91,6 @@
     <string name="_4_3_4_times">4 - 3-4 times</string>
     <string name="_5_5_or_more_times">5 - 5 or more times</string>
     <string name="how_many_times_a_week_do_you_participate_in_moderate_exercise_gardening_moving_a_table_pushing_a_vacuum_cleaner_bowling_golf">How many times a week do you participate in moderate exercise? (gardening, moving a table, pushing a vacuum cleaner, bowling, golf)</string>
+    <string name="end_session">End Session</string>
+    <string name="skip">Skip</string>
 </resources>
