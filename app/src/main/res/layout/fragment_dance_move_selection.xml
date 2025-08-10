@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/titleSelection"
         android:layout_width="wrap_content"
@@ -17,6 +24,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/clearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_all"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/titleSelection"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/selectClearSwitch"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="12dp" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/selectClearSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:showText="false"
+        android:checked="false"
+        app:thumbTint="@color/purple_greyed"
+        app:layout_constraintTop_toBottomOf="@id/titleSelection"
+        app:layout_constraintStart_toEndOf="@id/clearLabel"
+        android:layout_marginStart="12dp"
+        app:layout_constraintEnd_toStartOf="@id/selectLabel"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:id="@+id/selectLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_all"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/titleSelection"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/selectClearSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_moves"
         android:layout_width="wrap_content"
@@ -28,13 +74,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleSelection" />
+        app:layout_constraintTop_toBottomOf="@id/selectClearSwitch" />
 
     <Button
         android:id="@+id/continueButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="65dp"
+        android:backgroundTint="@color/purple_text"
         android:text="@string/btn_continue"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"

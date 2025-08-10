@@ -9,6 +9,13 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-35dp">
 
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/q1"
         android:layout_width="0dp"

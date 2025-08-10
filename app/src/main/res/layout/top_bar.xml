@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_medium">
@@ -10,14 +10,33 @@
         android:id="@+id/backButton"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_marginTop="24dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/baseline_arrow_circle_left_24"
         android:contentDescription="@string/back"
         android:padding="8dp"
-        android:layout_marginTop="24dp"
         android:scaleType="fitCenter"
+        android:src="@drawable/baseline_arrow_circle_left_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/baloo_chettan"
+        android:text="@string/dance_with_temi"
+        android:textColor="@color/purple_text"
+        android:textSize="46sp"
+        app:drawableEndCompat="@drawable/outline_music_note_24"
+        app:drawableStartCompat="@drawable/outline_music_note_24"
+        app:drawableTint="@color/purple_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toEndOf="@+id/backButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

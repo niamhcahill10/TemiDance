@@ -43,4 +43,15 @@ class DanceMoveAdapter(private val moves: List<DanceMove>) :
     override fun getItemCount(): Int = moves.size
 
     fun getSelectedMoves(): List<DanceMove> = selectedMoves.toList()
+
+    fun selectAll() {
+        selectedMoves.clear()
+        selectedMoves.addAll(moves)
+        notifyDataSetChanged()
+    }
+
+    fun clearSelection() {
+        selectedMoves.clear()
+        notifyDataSetChanged()
+    }
 }

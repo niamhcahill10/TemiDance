@@ -93,4 +93,7 @@
     <string name="how_many_times_a_week_do_you_participate_in_moderate_exercise_gardening_moving_a_table_pushing_a_vacuum_cleaner_bowling_golf">How many times a week do you participate in moderate exercise? (gardening, moving a table, pushing a vacuum cleaner, bowling, golf)</string>
     <string name="end_session">End Session</string>
     <string name="skip">Skip</string>
+    <string name="dance_with_temi">Dance with Temi</string>
+    <string name="select_all">Select All</string>
+    <string name="clear_all">Clear All</string>
 </resources>

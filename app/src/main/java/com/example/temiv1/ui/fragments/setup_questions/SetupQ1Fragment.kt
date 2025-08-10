@@ -14,6 +14,7 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.provider.Settings
+import android.widget.ImageButton
 import androidx.core.net.toUri
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
@@ -30,6 +31,9 @@ class SetupQ1Fragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.visibility = View.INVISIBLE
 
         fragmentScope.launch {
             delay(1000)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -201,7 +202,18 @@ class DanceMoveSelection : BaseFragment() {
         adapter = DanceMoveAdapter(filteredMoves)
         recyclerView.adapter = adapter
 
+
         val continueButton: Button = view.findViewById(R.id.continueButton)
+        val toggle: SwitchCompat = view.findViewById(R.id.selectClearSwitch)
+
+        toggle.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                adapter.selectAll()
+            } else {
+                adapter.clearSelection()
+            }
+        }
+
         continueButton.setOnClickListener {
             val selectedMoves = adapter.getSelectedMoves()
             if (selectedMoves.isEmpty()) {
