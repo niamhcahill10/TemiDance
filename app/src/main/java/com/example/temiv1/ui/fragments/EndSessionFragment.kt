@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class EndSessionFragment : BaseFragment() {
     private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +31,7 @@ class EndSessionFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.endText)
-        textView.textSize = globalTextSizeSp
+        textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)

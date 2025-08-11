@@ -14,5 +14,6 @@ class DanceSessionViewModel : ViewModel() {
     val movesPlaylist = MutableLiveData<List<DanceMove>>()
     val allMoves = MutableLiveData<List<DanceMove>>()
     val selectedSong = MutableLiveData<Song>()
+    var textSizeSp = 38f
 
 }

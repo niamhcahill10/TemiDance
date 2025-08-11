@@ -10,11 +10,14 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
 
 class SetupQ10Fragment : BaseFragment() {
     private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +30,8 @@ class SetupQ10Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.q10)
+        sessionViewModel.textSizeSp = 38f
+        textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
@@ -52,9 +57,7 @@ class SetupQ10Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-
-        updateTextSize(8f)
-        textView.textSize = globalTextSizeSp
+        sessionViewModel.textSizeSp += 2f
         findNavController().navigate(R.id.action_q10Fragment_to_q11Fragment)
     }
 

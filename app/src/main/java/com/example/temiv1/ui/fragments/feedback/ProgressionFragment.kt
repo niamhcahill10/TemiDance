@@ -12,6 +12,7 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.viewmodel.DanceSessionViewModel
@@ -21,6 +22,7 @@ import com.example.temiv1.dance.data.DifficultyLevel
 
 class ProgressionFragment : BaseFragment() {
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
+    private lateinit var textView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,9 @@ class ProgressionFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        textView = view.findViewById(R.id.progression)
+        textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
@@ -43,6 +48,13 @@ class ProgressionFragment : BaseFragment() {
         val radioMaintain: RadioButton = view.findViewById(R.id.radioMaintain)
         val radioRegress: RadioButton = view.findViewById(R.id.radioRegress)
         val radioGroup: RadioGroup = view.findViewById(R.id.progressionOptions)
+        for (i in 0 until radioGroup.childCount) {
+            val child = radioGroup.getChildAt(i)
+            if (child is RadioButton) {
+                child.textSize = sessionViewModel.textSizeSp
+            }
+        }
+
         val continueButton: Button = view.findViewById(R.id.continueButton)
         val endSessionButton: Button = view.findViewById(R.id.endSessionButton)
 

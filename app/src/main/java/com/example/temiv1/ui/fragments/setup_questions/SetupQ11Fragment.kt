@@ -10,11 +10,16 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
+import kotlin.math.min
 
 class SetupQ11Fragment : BaseFragment() {
     private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +32,7 @@ class SetupQ11Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.q11)
-        textView.textSize = globalTextSizeSp
+        textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
@@ -57,9 +62,14 @@ class SetupQ11Fragment : BaseFragment() {
     }
 
     private fun onNoSelected() {
-        updateTextSize(8f)
-        textView.textSize = globalTextSizeSp
-        robot?.askQuestion("Is the text big enough?")
+        sessionViewModel.textSizeSp = min(sessionViewModel.textSizeSp + 2f, 44f)
+        textView.textSize = sessionViewModel.textSizeSp
+        if (sessionViewModel.textSizeSp < 44f) {
+            robot?.askQuestion("Is the text big enough?")
+        } else {
+            Toast.makeText(requireContext(), "Maximum text size reached", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_q11Fragment_to_q14Fragment)
+        }
 
     }
 

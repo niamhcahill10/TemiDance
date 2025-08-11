@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class SongSelectionFragment : BaseFragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SongAdapter
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
+    private lateinit var textView: TextView
 
     private val allSongs = listOf(
         Song("Electronic", DifficultyLevel.EASY, bpm = 100, genre = "Electronic",
@@ -49,6 +51,9 @@ class SongSelectionFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        textView = view.findViewById(R.id.songSelectionTitle)
+        textView.textSize = sessionViewModel.textSizeSp
 
         recyclerView = view.findViewById(R.id.recycler_songs)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)

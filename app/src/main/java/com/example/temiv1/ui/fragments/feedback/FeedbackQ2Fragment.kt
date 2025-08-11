@@ -5,16 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import androidx.navigation.fragment.findNavController
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
 
 class FeedbackQ2Fragment : BaseFragment() {
+    private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +32,9 @@ class FeedbackQ2Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.textView)
+        textView.textSize = sessionViewModel.textSizeSp
+
         fragmentScope.launch {
             delay(1000)
             val q1feedback =
@@ -34,6 +44,13 @@ class FeedbackQ2Fragment : BaseFragment() {
 
         val continueButton: Button = view.findViewById(R.id.continueButton)
         val radioGroup: RadioGroup = view.findViewById(R.id.radioGroup)
+        for (i in 0 until radioGroup.childCount) {
+            val child = radioGroup.getChildAt(i)
+            if (child is RadioButton) {
+                child.textSize = sessionViewModel.textSizeSp
+            }
+        }
+
         continueButton.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
             if (selectedId != -1) {

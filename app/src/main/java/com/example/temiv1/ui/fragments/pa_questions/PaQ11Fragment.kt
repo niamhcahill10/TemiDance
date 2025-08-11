@@ -10,15 +10,18 @@ import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PaQ11Fragment : BaseFragment() {
     private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,11 +33,14 @@ class PaQ11Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.q11)
+        textView.textSize = sessionViewModel.textSizeSp
+
         val radioGroup: RadioGroup = view.findViewById(R.id.radioGroup)
         for (i in 0 until radioGroup.childCount) {
             val child = radioGroup.getChildAt(i)
             if (child is RadioButton) {
-                child.textSize = globalTextSizeSp
+                child.textSize = sessionViewModel.textSizeSp
             }
         }
 

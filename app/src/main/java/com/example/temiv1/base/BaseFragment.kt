@@ -17,9 +17,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
 
 open class BaseFragment : Fragment(), OnRobotReadyListener, Robot.AsrListener {
-    companion object {
-        var globalTextSizeSp: Float = 38f
-    }
 
     protected var robot: Robot? = null
 
@@ -90,10 +87,6 @@ open class BaseFragment : Fragment(), OnRobotReadyListener, Robot.AsrListener {
         super.onDestroyView()
         releasePlayer()
         fragmentScope.coroutineContext.cancelChildren() // Cancels child jobs safely
-    }
-
-    open fun updateTextSize(newSize: Float) {
-        globalTextSizeSp += newSize
     }
 
 }

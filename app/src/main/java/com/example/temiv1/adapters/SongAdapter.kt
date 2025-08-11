@@ -1,5 +1,6 @@
 package com.example.temiv1.adapters
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class SongAdapter(private val songs: List<Song>) :
         }
 
         holder.radioButton.text = song.genre
+        holder.radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22f)
         bindSelection(holder, song, position)
 
         val imageView: ImageView = holder.itemView.findViewById(R.id.iv_song)
