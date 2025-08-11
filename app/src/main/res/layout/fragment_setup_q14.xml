@@ -16,10 +16,12 @@
 
     <TextView
         android:id="@+id/q14"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
         android:text="@string/great_now_i_will_ask_you_some_questions_to_understand_your_movement_capabilities_so_that_i_can_recommend_and_play_a_dance_for_you_to_follow_on_the_tablet_if_at_any_point_you_want_to_stop_the_process_either_press_the_quot_x_quot_button_on_the_top_right_of_the_screen_or_say_quot_hey_temi_stop_quot_can_you_confirm_you_are_happy_to_proceed"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

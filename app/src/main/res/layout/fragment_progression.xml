@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/would_you_like_to_change_your_level"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toTopOf="@+id/progressionOptions"
         app:layout_constraintEnd_toEndOf="parent"
