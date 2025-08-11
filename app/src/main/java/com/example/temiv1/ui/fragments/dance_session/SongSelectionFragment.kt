@@ -116,12 +116,12 @@ class SongSelectionFragment : BaseFragment() {
                     "Selected ${selectedSong.name} song",
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.action_songSelectionFragment_to_videoPlaying)
+                findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistance)
             }
             }
 
         skipButton.setOnClickListener {
-            findNavController().navigate(R.id.action_songSelectionFragment_to_feedbackQ1Fragment)
+            findNavController().navigate(R.id.action_songSelectionFragment_to_readjustDistanceFragment)
         }
         }
 }

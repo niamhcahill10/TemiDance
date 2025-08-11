@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/q1Fragment">
+    app:startDestination="@id/startAppFragment">
     <fragment
         android:id="@+id/q1Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ1Fragment"
@@ -164,19 +164,19 @@
         android:name="com.example.temiv1.ui.fragments.dance_session.VideoPlaying"
         android:label="VideoPlaying" >
         <action
-            android:id="@+id/action_videoPlaying_to_feedbackQ1Fragment"
-            app:destination="@id/feedbackQ1Fragment" />
+            android:id="@+id/action_videoPlaying_to_readjustDistanceFragment"
+            app:destination="@id/readjustDistanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/songSelectionFragment"
         android:name="com.example.temiv1.ui.fragments.dance_session.SongSelectionFragment"
         android:label="SongSelectionFragment" >
         <action
-            android:id="@+id/action_songSelectionFragment_to_videoPlaying"
-            app:destination="@id/videoPlaying" />
+            android:id="@+id/action_songSelectionFragment_to_adjustDistance"
+            app:destination="@id/adjustDistance" />
         <action
-            android:id="@+id/action_songSelectionFragment_to_feedbackQ1Fragment"
-            app:destination="@id/feedbackQ1Fragment" />
+            android:id="@+id/action_songSelectionFragment_to_readjustDistanceFragment"
+            app:destination="@id/readjustDistanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedbackQ1Fragment"
@@ -339,5 +339,29 @@
         <action
             android:id="@+id/action_paQ14Fragment_to_danceMoveSelection2"
             app:destination="@id/danceMoveSelection2" />
+    </fragment>
+    <fragment
+        android:id="@+id/adjustDistance"
+        android:name="com.example.temiv1.ui.fragments.dance_session.AdjustDistance"
+        android:label="AdjustDistance" >
+        <action
+            android:id="@+id/action_adjustDistance_to_videoPlaying2"
+            app:destination="@id/videoPlaying" />
+    </fragment>
+    <fragment
+        android:id="@+id/startAppFragment"
+        android:name="com.example.temiv1.ui.fragments.setup_questions.StartAppFragment"
+        android:label="StartAppFragment" >
+        <action
+            android:id="@+id/action_startAppFragment_to_q1Fragment"
+            app:destination="@id/q1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readjustDistanceFragment"
+        android:name="com.example.temiv1.ui.fragments.feedback.ReadjustDistanceFragment"
+        android:label="ReadjustDistanceFragment" >
+        <action
+            android:id="@+id/action_readjustDistanceFragment_to_feedbackQ1Fragment"
+            app:destination="@id/feedbackQ1Fragment" />
     </fragment>
 </navigation>

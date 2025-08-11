@@ -96,4 +96,8 @@
     <string name="dance_with_temi">Dance with Temi</string>
     <string name="select_all">Select All</string>
     <string name="clear_all">Clear All</string>
+    <string name="before_the_dance_begins_make_sure_you_are_happy_with_the_distance_of_the_robot_and_then_press_play">Before the dance begins lets make sure you are happy with the distance of the robot. The researcher will move the robot for you, measure this distance, and then press play.</string>
+    <string name="play_video">Play Video</string>
+    <string name="let_s_dance">Let\'s Dance!</string>
+    <string name="now_lets_re_adjust_the_distance_of_the_robot_so_that_you_can_answer_the_feedback_questions_the_researcher_will_move_the_robot_measure_the_distance_and_then_click_continue">Now lets re-adjust the distance of the robot so that you can answer the feedback questions. The researcher will move the robot, measure the distance, and then click continue.</string>
 </resources>

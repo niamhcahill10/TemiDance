@@ -103,7 +103,7 @@ class VideoPlaying : BaseFragment() {
                 player.addListener(object : Player.Listener {
                     override fun onPlaybackStateChanged(playbackState: Int) {
                         if (playbackState == Player.STATE_ENDED) {
-                            findNavController().navigate(R.id.action_videoPlaying_to_feedbackQ1Fragment)
+                            findNavController().navigate(R.id.action_videoPlaying_to_readjustDistanceFragment)
                         }
                     }
                 })
