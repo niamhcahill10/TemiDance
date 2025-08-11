@@ -35,7 +35,7 @@ class PaQ3Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q3 = TtsRequest.create("Are you able to twist your torso side to side?", false)
+            val q3 = TtsRequest.create("Are you able to twist your torso to both sides and look over your shoulder without any pain or discomfort?", false)
             robot?.askQuestion(q3)
         }
 

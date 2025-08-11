@@ -34,7 +34,7 @@ class SetupQ1Fragment : BaseFragment() {
         fragmentScope.launch {
             delay(1000)
             val q1 = TtsRequest.create(
-                "Hello my name is Temi and I'll be finding fun dances for you today. Before we start lets make sure the settings are right for you. Can you hear me or see the screen?",
+                "Welcome! This app will go through some physical capabilities questions and generate dance videos for you to follow based on the moves you select. First lets make sure the settings are right for you. Can you hear the audio or see the screen?",
                 false
             )
             robot?.askQuestion(q1)
