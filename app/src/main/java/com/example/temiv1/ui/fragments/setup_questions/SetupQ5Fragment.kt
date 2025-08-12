@@ -1,7 +1,8 @@
 package com.example.temiv1.ui.fragments.setup_questions
 
+import android.content.Context
+import android.media.AudioManager
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +28,8 @@ class SetupQ5Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q5 = TtsRequest.create("Is that dark enough?", false)
-            robot?.askQuestion(q5)
+            val q6 = TtsRequest.create("Would you like the volume louder?", false)
+            robot?.askQuestion(q6)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -37,7 +38,7 @@ class SetupQ5Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
@@ -48,27 +49,24 @@ class SetupQ5Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q5Fragment_to_q6Fragment)
+        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+
+        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
+
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            newVolume,
+            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+        )
+
+        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ6Fragment)
     }
 
     private fun onNoSelected() {
-        val contentResolver = requireContext().contentResolver
-
-        val currentBrightness = Settings.System.getInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
-        )
-
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
-
-        Settings.System.putInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness)
-
-        val q5 = TtsRequest.create("Is that dark enough?", false)
-        robot?.askQuestion(q5)
+        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ7Fragment)
     }
 
     override fun handleAsr(command: String) {

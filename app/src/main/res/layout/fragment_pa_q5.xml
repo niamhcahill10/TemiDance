@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/how_difficult_is_it_for_you_to_climb_one_flight_of_stairs_about_10_12_steps"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"

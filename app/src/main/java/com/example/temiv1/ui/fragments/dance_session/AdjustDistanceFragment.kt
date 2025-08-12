@@ -41,7 +41,7 @@ class AdjustDistance : BaseFragment() {
         val playButton: Button = view.findViewById(R.id.playButton)
 
         playButton.setOnClickListener {
-            findNavController().navigate(R.id.action_adjustDistance_to_videoPlaying2)
+            findNavController().navigate(R.id.action_adjustDistanceFragment_to_videoPlayingFragment)
         }
 
     }

@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import com.robotemi.sdk.TtsRequest
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
-import kotlin.math.min
+import com.robotemi.sdk.TtsRequest
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SetupQ11Fragment : BaseFragment() {
     private lateinit var textView: TextView
@@ -31,13 +30,14 @@ class SetupQ11Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView = view.findViewById(R.id.q11)
+        textView = view.findViewById(R.id.q12)
+        sessionViewModel.textSizeSp = 38f
         textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
-            val q11 = TtsRequest.create("Is the text big enough?", false)
-            robot?.askQuestion(q11)
+            val q12 = TtsRequest.create("Would you like the text smaller?", false)
+            robot?.askQuestion(q12)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -46,36 +46,24 @@ class SetupQ11Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
-
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q11Fragment_to_q14Fragment)
+        sessionViewModel.textSizeSp -= 2f
+        findNavController().navigate(R.id.action_setupQ11Fragment_to_setupQ12Fragment)
     }
 
     private fun onNoSelected() {
-        sessionViewModel.textSizeSp = min(sessionViewModel.textSizeSp + 2f, 44f)
-        textView.textSize = sessionViewModel.textSizeSp
-        if (sessionViewModel.textSizeSp < 44f) {
-            robot?.askQuestion("Is the text big enough?")
-        } else {
-            Toast.makeText(requireContext(), "Maximum text size reached", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_q11Fragment_to_q14Fragment)
-        }
-
+        findNavController().navigate(R.id.action_setupQ11Fragment_to_setupQ13Fragment)
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

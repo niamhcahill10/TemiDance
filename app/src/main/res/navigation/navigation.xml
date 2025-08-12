@@ -3,185 +3,177 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
+    android:label="danceMoveSelectionFragment"
     app:startDestination="@id/startAppFragment">
     <fragment
-        android:id="@+id/q1Fragment"
+        android:id="@+id/setupQ1Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ1Fragment"
-        android:label="fragment_q1"
-        tools:layout="@layout/fragment_setup_q1" >
+        android:label="setupQ1Fragment"
+        tools:layout="@layout/fragment_setup_q1">
         <action
-            android:id="@+id/action_q1Fragment_to_q2Fragment"
-            app:destination="@id/q2Fragment" />
+            android:id="@+id/action_setupQ1Fragment_to_setupQ2Fragment"
+            app:destination="@id/setupQ2Fragment" />
+        <action
+            android:id="@+id/action_setupQ1Fragment_to_setupQ3Fragment"
+            app:destination="@id/setupQ3Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q2Fragment"
+        android:id="@+id/setupQ2Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ2Fragment"
-        android:label="fragment_q2"
-        tools:layout="@layout/fragment_setup_q2" >
+        android:label="setupQ2Fragment"
+        tools:layout="@layout/fragment_setup_q2">
         <action
-            android:id="@+id/action_q2Fragment_to_q3Fragment"
-            app:destination="@id/q3Fragment" />
-        <action
-            android:id="@+id/action_q2Fragment_to_q4Fragment"
-            app:destination="@id/q4Fragment" />
+            android:id="@+id/action_setupQ2Fragment_to_setupQ5Fragment"
+            app:destination="@id/setupQ5Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q3Fragment"
+        android:id="@+id/setupQ3Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ3Fragment"
-        android:label="fragment_q3"
-        tools:layout="@layout/fragment_setup_q3" >
+        android:label="setupQ3Fragment"
+        tools:layout="@layout/fragment_setup_q3">
         <action
-            android:id="@+id/action_q3Fragment_to_q6Fragment"
-            app:destination="@id/q6Fragment" />
+            android:id="@+id/action_setupQ3Fragment_to_setupQ4Fragment"
+            app:destination="@id/setupQ4Fragment" />
+        <action
+            android:id="@+id/action_setupQ3Fragment_to_setupQ5Fragment"
+            app:destination="@id/setupQ5Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q4Fragment"
+        android:id="@+id/setupQ4Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ4Fragment"
-        android:label="fragment_q4"
-        tools:layout="@layout/fragment_setup_q4" >
+        android:label="setupQ4Fragment"
+        tools:layout="@layout/fragment_setup_q4">
         <action
-            android:id="@+id/action_q4Fragment_to_q5Fragment"
-            app:destination="@id/q5Fragment" />
-        <action
-            android:id="@+id/action_q4Fragment_to_q6Fragment"
-            app:destination="@id/q6Fragment" />
+            android:id="@+id/action_setupQ4Fragment_to_setupQ5Fragment"
+            app:destination="@id/setupQ5Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q5Fragment"
+        android:id="@+id/setupQ5Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ5Fragment"
-        android:label="fragment_q5"
-        tools:layout="@layout/fragment_setup_q5" >
+        android:label="setupQ5Fragment"
+        tools:layout="@layout/fragment_setup_q5">
         <action
-            android:id="@+id/action_q5Fragment_to_q6Fragment"
-            app:destination="@id/q6Fragment" />
+            android:id="@+id/action_setupQ5Fragment_to_setupQ6Fragment"
+            app:destination="@id/setupQ6Fragment" />
+        <action
+            android:id="@+id/action_setupQ5Fragment_to_setupQ7Fragment"
+            app:destination="@id/setupQ7Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q6Fragment"
+        android:id="@+id/setupQ6Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ6Fragment"
-        android:label="fragment_q6"
-        tools:layout="@layout/fragment_setup_q6" >
+        android:label="setupQ6Fragment"
+        tools:layout="@layout/fragment_setup_q6">
         <action
-            android:id="@+id/action_q6Fragment_to_q7Fragment"
-            app:destination="@id/q7Fragment" />
-        <action
-            android:id="@+id/action_q6Fragment_to_q8Fragment"
-            app:destination="@id/q8Fragment" />
+            android:id="@+id/action_setupQ6Fragment_to_setupQ9Fragment"
+            app:destination="@id/setupQ9Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q7Fragment"
+        android:id="@+id/setupQ7Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ7Fragment"
-        android:label="fragment_q7"
-        tools:layout="@layout/fragment_setup_q7" >
+        android:label="setupQ7Fragment"
+        tools:layout="@layout/fragment_setup_q7">
         <action
-            android:id="@+id/action_q7Fragment_to_q10Fragment"
-            app:destination="@id/q10Fragment" />
+            android:id="@+id/action_setupQ7Fragment_to_setupQ9Fragment"
+            app:destination="@id/setupQ9Fragment" />
+        <action
+            android:id="@+id/action_setupQ7Fragment_to_setupQ8Fragment"
+            app:destination="@id/setupQ8Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q8Fragment"
+        android:id="@+id/setupQ8Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ8Fragment"
-        android:label="fragment_q8"
-        tools:layout="@layout/fragment_setup_q8" >
+        android:label="setupQ8Fragment"
+        tools:layout="@layout/fragment_setup_q8">
         <action
-            android:id="@+id/action_q8Fragment_to_q9Fragment"
-            app:destination="@id/q9Fragment" />
-        <action
-            android:id="@+id/action_q8Fragment_to_q10Fragment"
-            app:destination="@id/q10Fragment" />
+            android:id="@+id/action_setupQ8Fragment_to_setupQ9Fragment"
+            app:destination="@id/setupQ9Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q9Fragment"
+        android:id="@+id/setupQ9Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ9Fragment"
-        android:label="fragment_q9"
-        tools:layout="@layout/fragment_setup_q9" >
+        android:label="setupQ9Fragment"
+        tools:layout="@layout/fragment_setup_q9">
         <action
-            android:id="@+id/action_q9Fragment_to_q10Fragment"
-            app:destination="@id/q10Fragment" />
+            android:id="@+id/action_setupQ9Fragment_to_setupQ10Fragment"
+            app:destination="@id/setupQ10Fragment" />
+        <action
+            android:id="@+id/action_setupQ9Fragment_to_setupQ11Fragment"
+            app:destination="@id/setupQ11Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q10Fragment"
+        android:id="@+id/setupQ10Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ10Fragment"
-        android:label="fragment_q10"
-        tools:layout="@layout/fragment_setup_q10" >
+        android:label="setupQ10Fragment"
+        tools:layout="@layout/fragment_setup_q10">
         <action
-            android:id="@+id/action_q10Fragment_to_q11Fragment"
-            app:destination="@id/q11Fragment" />
-        <action
-            android:id="@+id/action_q10Fragment_to_q12Fragment"
-            app:destination="@id/q12Fragment" />
+            android:id="@+id/action_setupQ10Fragment_to_setupQ13Fragment"
+            app:destination="@id/setupQ13Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q11Fragment"
+        android:id="@+id/setupQ11Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ11Fragment"
-        android:label="fragment_q11"
-        tools:layout="@layout/fragment_setup_q11" >
+        android:label="setupQ11Fragment"
+        tools:layout="@layout/fragment_setup_q11">
         <action
-            android:id="@+id/action_q11Fragment_to_q14Fragment"
-            app:destination="@id/q14Fragment" />
+            android:id="@+id/action_setupQ11Fragment_to_setupQ13Fragment"
+            app:destination="@id/setupQ13Fragment" />
+        <action
+            android:id="@+id/action_setupQ11Fragment_to_setupQ12Fragment"
+            app:destination="@id/setupQ12Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q12Fragment"
+        android:id="@+id/setupQ12Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ12Fragment"
-        android:label="fragment_q12"
-        tools:layout="@layout/fragment_setup_q12" >
+        android:label="setupQ12Fragment"
+        tools:layout="@layout/fragment_setup_q12">
         <action
-            android:id="@+id/action_q12Fragment_to_q13Fragment"
-            app:destination="@id/q13Fragment" />
-        <action
-            android:id="@+id/action_q12Fragment_to_q14Fragment"
-            app:destination="@id/q14Fragment" />
+            android:id="@+id/action_setupQ12Fragment_to_setupQ13Fragment"
+            app:destination="@id/setupQ13Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/q13Fragment"
+        android:id="@+id/setupQ13Fragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ13Fragment"
-        android:label="fragment_q13"
-        tools:layout="@layout/fragment_setup_q13" >
+        android:label="setupQ13Fragment"
+        tools:layout="@layout/fragment_setup_q13">
         <action
-            android:id="@+id/action_q13Fragment_to_q14Fragment"
-            app:destination="@id/q14Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/q14Fragment"
-        android:name="com.example.temiv1.ui.fragments.setup_questions.SetupQ14Fragment"
-        android:label="fragment_q14"
-        tools:layout="@layout/fragment_setup_q14" >
-        <action
-            android:id="@+id/action_q14Fragment_to_paQ1Fragment"
-            app:destination="@id/paQ1Fragment" />
-        <action
-            android:id="@+id/action_q14Fragment_to_endSessionFragment"
+            android:id="@+id/action_setupQ13Fragment_to_endSessionFragment"
             app:destination="@id/endSessionFragment" />
+        <action
+            android:id="@+id/action_setupQ13Fragment_to_paQ1Fragment"
+            app:destination="@id/paQ1Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/danceMoveSelection2"
+        android:id="@+id/danceMoveSelectionFragment"
         android:name="com.example.temiv1.ui.fragments.dance_session.DanceMoveSelection"
-        android:label="DanceMoveSelection" >
+        android:label="DanceMoveSelection">
         <action
-            android:id="@+id/action_danceMoveSelection2_to_songSelectionFragment"
+            android:id="@+id/action_danceMoveSelectionFragment_to_songSelectionFragment"
             app:destination="@id/songSelectionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/videoPlaying"
+        android:id="@+id/videoPlayingFragment"
         android:name="com.example.temiv1.ui.fragments.dance_session.VideoPlaying"
-        android:label="VideoPlaying" >
+        android:label="VideoPlaying">
         <action
-            android:id="@+id/action_videoPlaying_to_readjustDistanceFragment"
+            android:id="@+id/action_videoPlayingFragment_to_readjustDistanceFragment"
             app:destination="@id/readjustDistanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/songSelectionFragment"
         android:name="com.example.temiv1.ui.fragments.dance_session.SongSelectionFragment"
-        android:label="SongSelectionFragment" >
-        <action
-            android:id="@+id/action_songSelectionFragment_to_adjustDistance"
-            app:destination="@id/adjustDistance" />
+        android:label="SongSelectionFragment">
         <action
             android:id="@+id/action_songSelectionFragment_to_readjustDistanceFragment"
             app:destination="@id/readjustDistanceFragment" />
+        <action
+            android:id="@+id/action_songSelectionFragment_to_adjustDistanceFragment"
+            app:destination="@id/adjustDistanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedbackQ1Fragment"
         android:name="com.example.temiv1.ui.fragments.feedback.FeedbackQ1Fragment"
-        android:label="FeedbackQ1Fragment" >
+        android:label="FeedbackQ1Fragment">
         <action
             android:id="@+id/action_feedbackQ1Fragment_to_feedbackQ2Fragment"
             app:destination="@id/feedbackQ2Fragment" />
@@ -189,7 +181,7 @@
     <fragment
         android:id="@+id/feedbackQ2Fragment"
         android:name="com.example.temiv1.ui.fragments.feedback.FeedbackQ2Fragment"
-        android:label="FeedbackQ2Fragment" >
+        android:label="FeedbackQ2Fragment">
         <action
             android:id="@+id/action_feedbackQ2Fragment_to_progressionFragment"
             app:destination="@id/progressionFragment" />
@@ -197,18 +189,18 @@
     <fragment
         android:id="@+id/progressionFragment"
         android:name="com.example.temiv1.ui.fragments.feedback.ProgressionFragment"
-        android:label="ProgressionFragment" >
-        <action
-            android:id="@+id/action_progressionFragment_to_danceMoveSelection2"
-            app:destination="@id/danceMoveSelection2" />
+        android:label="ProgressionFragment">
         <action
             android:id="@+id/action_progressionFragment_to_endSessionFragment"
             app:destination="@id/endSessionFragment" />
+        <action
+            android:id="@+id/action_progressionFragment_to_danceMoveSelectionFragment"
+            app:destination="@id/danceMoveSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/paQ1Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ1Fragment"
-        android:label="PaQ1Fragment" >
+        android:label="PaQ1Fragment">
         <action
             android:id="@+id/action_paQ1Fragment_to_endSessionFragment"
             app:destination="@id/endSessionFragment" />
@@ -224,7 +216,7 @@
         android:id="@+id/paQ2Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ2Fragment"
         android:label="fragment_pa_q2"
-        tools:layout="@layout/fragment_pa_q2" >
+        tools:layout="@layout/fragment_pa_q2">
         <action
             android:id="@+id/action_paQ2Fragment_to_endSessionFragment"
             app:destination="@id/endSessionFragment" />
@@ -236,7 +228,7 @@
         android:id="@+id/paQ3Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ3Fragment"
         android:label="fragment_pa_q3"
-        tools:layout="@layout/fragment_pa_q3" >
+        tools:layout="@layout/fragment_pa_q3">
         <action
             android:id="@+id/action_paQ3Fragment_to_endSessionFragment"
             app:destination="@id/endSessionFragment" />
@@ -248,7 +240,7 @@
         android:id="@+id/paQ4Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ4Fragment"
         android:label="fragment_pa_q4"
-        tools:layout="@layout/fragment_pa_q4" >
+        tools:layout="@layout/fragment_pa_q4">
         <action
             android:id="@+id/action_paQ4Fragment_to_paQ5Fragment"
             app:destination="@id/paQ5Fragment" />
@@ -257,7 +249,7 @@
         android:id="@+id/paQ5Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ5Fragment"
         android:label="fragment_pa_q5"
-        tools:layout="@layout/fragment_pa_q5" >
+        tools:layout="@layout/fragment_pa_q5">
         <action
             android:id="@+id/action_paQ5Fragment_to_paQ6Fragment"
             app:destination="@id/paQ6Fragment" />
@@ -266,7 +258,7 @@
         android:id="@+id/paQ6Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ6Fragment"
         android:label="fragment_pa_q6"
-        tools:layout="@layout/fragment_pa_q6" >
+        tools:layout="@layout/fragment_pa_q6">
         <action
             android:id="@+id/action_paQ6Fragment_to_paQ7Fragment"
             app:destination="@id/paQ7Fragment" />
@@ -275,24 +267,24 @@
         android:id="@+id/paQ7Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ7Fragment"
         android:label="fragment_pa_q7"
-        tools:layout="@layout/fragment_pa_q7" >
+        tools:layout="@layout/fragment_pa_q7">
         <action
             android:id="@+id/action_paQ7Fragment_to_paQ8Fragment2"
-            app:destination="@id/paQ8Fragment2" />
+            app:destination="@id/paQ8Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/paQ8Fragment2"
+        android:id="@+id/paQ8Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ8Fragment"
-        android:label="PaQ8Fragment" >
+        android:label="PaQ8Fragment">
         <action
-            android:id="@+id/action_paQ8Fragment2_to_paQ9Fragment"
+            android:id="@+id/action_paQ8Fragment_to_paQ9Fragment"
             app:destination="@id/paQ9Fragment" />
     </fragment>
     <fragment
         android:id="@+id/paQ9Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ9Fragment"
         android:label="fragment_pa_q9"
-        tools:layout="@layout/fragment_pa_q9" >
+        tools:layout="@layout/fragment_pa_q9">
         <action
             android:id="@+id/action_paQ9Fragment_to_paQ10Fragment"
             app:destination="@id/paQ10Fragment" />
@@ -300,7 +292,7 @@
     <fragment
         android:id="@+id/paQ10Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ10Fragment"
-        android:label="PaQ10Fragment" >
+        android:label="PaQ10Fragment">
         <action
             android:id="@+id/action_paQ10Fragment_to_paQ11Fragment"
             app:destination="@id/paQ11Fragment" />
@@ -309,7 +301,7 @@
         android:id="@+id/paQ11Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ11Fragment"
         android:label="fragment_pa_q11"
-        tools:layout="@layout/fragment_pa_q11" >
+        tools:layout="@layout/fragment_pa_q11">
         <action
             android:id="@+id/action_paQ11Fragment_to_paQ12Fragment"
             app:destination="@id/paQ12Fragment" />
@@ -318,7 +310,7 @@
         android:id="@+id/paQ12Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ12Fragment"
         android:label="fragment_pa_q12"
-        tools:layout="@layout/fragment_pa_q12" >
+        tools:layout="@layout/fragment_pa_q12">
         <action
             android:id="@+id/action_paQ12Fragment_to_paQ13Fragment"
             app:destination="@id/paQ13Fragment" />
@@ -327,7 +319,7 @@
         android:id="@+id/paQ13Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ13Fragment"
         android:label="fragment_pa_q13"
-        tools:layout="@layout/fragment_pa_q13" >
+        tools:layout="@layout/fragment_pa_q13">
         <action
             android:id="@+id/action_paQ13Fragment_to_paQ14Fragment"
             app:destination="@id/paQ14Fragment" />
@@ -335,33 +327,41 @@
     <fragment
         android:id="@+id/paQ14Fragment"
         android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ14Fragment"
-        android:label="PaQ14Fragment" >
+        android:label="PaQ14Fragment">
         <action
-            android:id="@+id/action_paQ14Fragment_to_danceMoveSelection2"
-            app:destination="@id/danceMoveSelection2" />
+            android:id="@+id/action_paQ14Fragment_to_danceMoveSelectionFragment"
+            app:destination="@id/danceMoveSelectionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/adjustDistance"
+        android:id="@+id/adjustDistanceFragment"
         android:name="com.example.temiv1.ui.fragments.dance_session.AdjustDistance"
-        android:label="AdjustDistance" >
+        android:label="AdjustDistance">
         <action
-            android:id="@+id/action_adjustDistance_to_videoPlaying2"
-            app:destination="@id/videoPlaying" />
+            android:id="@+id/action_adjustDistanceFragment_to_videoPlayingFragment"
+            app:destination="@id/videoPlayingFragment" />
     </fragment>
     <fragment
         android:id="@+id/startAppFragment"
         android:name="com.example.temiv1.ui.fragments.setup_questions.StartAppFragment"
-        android:label="StartAppFragment" >
+        android:label="StartAppFragment">
         <action
-            android:id="@+id/action_startAppFragment_to_q1Fragment"
-            app:destination="@id/q1Fragment" />
+            android:id="@+id/action_startAppFragment_to_setupIntroFragment"
+            app:destination="@id/setupIntroFragment" />
     </fragment>
     <fragment
         android:id="@+id/readjustDistanceFragment"
         android:name="com.example.temiv1.ui.fragments.feedback.ReadjustDistanceFragment"
-        android:label="ReadjustDistanceFragment" >
+        android:label="ReadjustDistanceFragment">
         <action
             android:id="@+id/action_readjustDistanceFragment_to_feedbackQ1Fragment"
             app:destination="@id/feedbackQ1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupIntroFragment"
+        android:name="com.example.temiv1.ui.fragments.setup_questions.SetupIntroFragment"
+        android:label="SetupIntroFragment">
+        <action
+            android:id="@+id/action_setupIntroFragment_to_setupQ1Fragment"
+            app:destination="@id/setupQ1Fragment" />
     </fragment>
 </navigation>

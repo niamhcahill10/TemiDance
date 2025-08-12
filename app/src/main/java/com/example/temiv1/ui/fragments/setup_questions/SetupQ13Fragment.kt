@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
@@ -16,7 +15,6 @@ import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.max
 
 class SetupQ13Fragment : BaseFragment() {
     private lateinit var textView: TextView
@@ -32,13 +30,13 @@ class SetupQ13Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView = view.findViewById(R.id.q13)
+        textView = view.findViewById(R.id.q14)
         textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
-            val q13 = TtsRequest.create("Is the text small enough?", false)
-            robot?.askQuestion(q13)
+            val q14 = TtsRequest.create("Great! Now I will ask you some questions to understand your movement capabilities so that I can recommend and play a dance for you to follow on the tablet. If at any point you want to stop the process either press the \\\"X\\\" button on the top right of the screen or say \\\"Hey Temi, stop.\\\" Can you confirm you are happy to proceed?", false)
+            robot?.askQuestion(q14)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -58,18 +56,11 @@ class SetupQ13Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q13Fragment_to_q14Fragment)
+        findNavController().navigate(R.id.action_setupQ13Fragment_to_paQ1Fragment)
     }
 
     private fun onNoSelected() {
-        sessionViewModel.textSizeSp = max(sessionViewModel.textSizeSp - 2f, 32f)
-        textView.textSize = sessionViewModel.textSizeSp
-        if (sessionViewModel.textSizeSp > 32f) {
-            robot?.askQuestion("Is the text small enough?")
-        } else {
-            Toast.makeText(requireContext(), "Minimum text size reached", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_q13Fragment_to_q14Fragment)
-        }
+        findNavController().navigate(R.id.action_setupQ13Fragment_to_endSessionFragment)
     }
 
     override fun handleAsr(command: String) {

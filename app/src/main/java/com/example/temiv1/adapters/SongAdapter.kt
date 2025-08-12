@@ -1,5 +1,6 @@
 package com.example.temiv1.adapters
 
+import android.graphics.Color
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -58,6 +59,13 @@ class SongAdapter(private val songs: List<Song>) :
 
         val imageView: ImageView = holder.itemView.findViewById(R.id.iv_song)
         imageView.setImageResource(R.drawable.ic_music_note)
+
+        val colors = listOf(
+            Color.BLUE,
+            Color.GREEN,
+        )
+        val color = colors[position % colors.size]
+        imageView.setColorFilter(color)
     }
 
     override fun getItemCount(): Int = songs.size

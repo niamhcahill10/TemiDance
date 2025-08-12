@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/how_do_you_typically_stand_up_from_a_chair"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"

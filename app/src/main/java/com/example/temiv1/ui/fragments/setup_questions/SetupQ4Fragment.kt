@@ -27,8 +27,8 @@ class SetupQ4Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q4 = TtsRequest.create("Would you like the screen darker?", false)
-            robot?.askQuestion(q4)
+            val q5 = TtsRequest.create("Is that dark enough?", false)
+            robot?.askQuestion(q5)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -45,9 +45,13 @@ class SetupQ4Fragment : BaseFragment() {
         backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-        }
+    }
 
     private fun onYesSelected() {
+        findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment)
+    }
+
+    private fun onNoSelected() {
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -63,11 +67,8 @@ class SetupQ4Fragment : BaseFragment() {
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness)
 
-        findNavController().navigate(R.id.action_q4Fragment_to_q5Fragment)
-    }
-
-    private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q4Fragment_to_q6Fragment)
+        val q5 = TtsRequest.create("Is that dark enough?", false)
+        robot?.askQuestion(q5)
     }
 
     override fun handleAsr(command: String) {
@@ -78,4 +79,4 @@ class SetupQ4Fragment : BaseFragment() {
             else -> robot?.askQuestion(TtsRequest.create("Please say yes or no.", false))
         }
     }
-    }
+}

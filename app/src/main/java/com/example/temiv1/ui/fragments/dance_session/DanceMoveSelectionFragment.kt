@@ -227,7 +227,7 @@ class DanceMoveSelection : BaseFragment() {
             } else {
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
                 Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")
-                findNavController().navigate(R.id.action_danceMoveSelection2_to_songSelectionFragment)
+                findNavController().navigate(R.id.action_danceMoveSelectionFragment_to_songSelectionFragment)
             }
 
             sessionViewModel.selectedMoves.value = selectedMoves

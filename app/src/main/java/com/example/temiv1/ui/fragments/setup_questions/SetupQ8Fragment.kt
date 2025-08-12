@@ -28,8 +28,8 @@ class SetupQ8Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q8 = TtsRequest.create("Would you like the volume quieter?", false)
-            robot?.askQuestion(q8)
+            val q9 = TtsRequest.create("Is that quiet enough?", false)
+            robot?.askQuestion(q9)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,6 +49,10 @@ class SetupQ8Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
+        findNavController().navigate(R.id.action_setupQ8Fragment_to_setupQ9Fragment)
+    }
+
+    private fun onNoSelected() {
         val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
@@ -60,11 +64,9 @@ class SetupQ8Fragment : BaseFragment() {
             newVolume,
             0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
         )
-        findNavController().navigate(R.id.action_q8Fragment_to_q9Fragment)
-    }
 
-    private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q8Fragment_to_q10Fragment)
+        val q9 = TtsRequest.create("Is that quiet enough?", false)
+        robot?.askQuestion(q9)
     }
 
     override fun handleAsr(command: String) {

@@ -1,17 +1,18 @@
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
+import com.example.temiv1.R
+import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import android.provider.Settings
-import com.example.temiv1.R
-import com.example.temiv1.base.BaseFragment
 
 class SetupQ2Fragment : BaseFragment() {
     override fun onCreateView(
@@ -26,8 +27,8 @@ class SetupQ2Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q2 = TtsRequest.create("Would you like the screen brighter?", false)
-            robot?.askQuestion(q2)
+            val q3 = TtsRequest.create("Is that bright enough?", false)
+            robot?.askQuestion(q3)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -36,18 +37,21 @@ class SetupQ2Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener {
+        noButton.setOnClickListener{
             onNoSelected()
         }
 
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
-
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun onYesSelected() {
+        findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment)
+    }
+
+    private fun onNoSelected() {
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -63,16 +67,10 @@ class SetupQ2Fragment : BaseFragment() {
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness
         )
-        findNavController().navigate(R.id.action_q2Fragment_to_q3Fragment)
-    }
 
-    private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q2Fragment_to_q4Fragment)
+        val q3 = TtsRequest.create("Is that bright enough?", false)
+        robot?.askQuestion(q3)
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

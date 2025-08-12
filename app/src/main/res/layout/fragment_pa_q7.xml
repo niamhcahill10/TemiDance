@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/how_difficult_is_it_for_you_to_walk_around_your_home"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"

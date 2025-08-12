@@ -27,8 +27,8 @@ class SetupQ3Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q3 = TtsRequest.create("Is that bright enough?", false)
-            robot?.askQuestion(q3)
+            val q4 = TtsRequest.create("Would you like the screen darker?", false)
+            robot?.askQuestion(q4)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -37,7 +37,7 @@ class SetupQ3Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener{
+        noButton.setOnClickListener {
             onNoSelected()
         }
 
@@ -45,13 +45,9 @@ class SetupQ3Fragment : BaseFragment() {
         backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
+        }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q3Fragment_to_q6Fragment)
-    }
-
-    private fun onNoSelected() {
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -60,16 +56,18 @@ class SetupQ3Fragment : BaseFragment() {
             125 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
+        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
 
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness
-        )
+            newBrightness)
 
-        val q3 = TtsRequest.create("Is that bright enough?", false)
-        robot?.askQuestion(q3)
+        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ4Fragment)
+    }
+
+    private fun onNoSelected() {
+        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ5Fragment)
     }
 
     override fun handleAsr(command: String) {
@@ -80,4 +78,4 @@ class SetupQ3Fragment : BaseFragment() {
             else -> robot?.askQuestion(TtsRequest.create("Please say yes or no.", false))
         }
     }
-}
+    }

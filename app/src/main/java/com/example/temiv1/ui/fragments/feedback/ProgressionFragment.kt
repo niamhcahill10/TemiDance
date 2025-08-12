@@ -113,7 +113,7 @@ class ProgressionFragment : BaseFragment() {
 
             Log.d("ProgressionFragment", "Continue button clicked")
             Toast.makeText(requireContext(), "Continue clicked", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_progressionFragment_to_danceMoveSelection2)
+            findNavController().navigate(R.id.action_progressionFragment_to_danceMoveSelectionFragment)
 
         }
 

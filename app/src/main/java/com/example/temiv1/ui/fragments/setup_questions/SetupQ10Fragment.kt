@@ -10,10 +10,12 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
+import kotlin.math.min
 
 class SetupQ10Fragment : BaseFragment() {
     private lateinit var textView: TextView
@@ -29,14 +31,13 @@ class SetupQ10Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView = view.findViewById(R.id.q10)
-        sessionViewModel.textSizeSp = 38f
+        textView = view.findViewById(R.id.q11)
         textView.textSize = sessionViewModel.textSizeSp
 
         fragmentScope.launch {
             delay(1000)
-            val q10 = TtsRequest.create("Would you like the text bigger?", false)
-            robot?.askQuestion(q10)
+            val q11 = TtsRequest.create("Is the text big enough?", false)
+            robot?.askQuestion(q11)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -57,12 +58,19 @@ class SetupQ10Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        sessionViewModel.textSizeSp += 2f
-        findNavController().navigate(R.id.action_q10Fragment_to_q11Fragment)
+        findNavController().navigate(R.id.action_setupQ10Fragment_to_setupQ13Fragment)
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q10Fragment_to_q12Fragment)
+        sessionViewModel.textSizeSp = min(sessionViewModel.textSizeSp + 2f, 44f)
+        textView.textSize = sessionViewModel.textSizeSp
+        if (sessionViewModel.textSizeSp < 44f) {
+            robot?.askQuestion("Is the text big enough?")
+        } else {
+            Toast.makeText(requireContext(), "Maximum text size reached", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_setupQ10Fragment_to_setupQ13Fragment)
+        }
+
     }
 
 //    private fun onBackSelected() {

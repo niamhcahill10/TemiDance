@@ -28,8 +28,8 @@ class SetupQ6Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q6 = TtsRequest.create("Would you like the volume louder?", false)
-            robot?.askQuestion(q6)
+            val q7 = TtsRequest.create("Is that loud enough?", false)
+            robot?.askQuestion(q7)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,6 +49,10 @@ class SetupQ6Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
+        findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment)
+    }
+
+    private fun onNoSelected() {
         val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
@@ -62,11 +66,8 @@ class SetupQ6Fragment : BaseFragment() {
             0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
         )
 
-        findNavController().navigate(R.id.action_q6Fragment_to_q7Fragment)
-    }
-
-    private fun onNoSelected() {
-        findNavController().navigate(R.id.action_q6Fragment_to_q8Fragment)
+        val q7 = TtsRequest.create("Is that loud enough?", false)
+        robot?.askQuestion(q7)
     }
 
     override fun handleAsr(command: String) {

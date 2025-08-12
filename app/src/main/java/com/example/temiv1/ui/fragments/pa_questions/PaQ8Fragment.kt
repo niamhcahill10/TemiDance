@@ -54,7 +54,7 @@ class PaQ8Fragment : BaseFragment() {
         continueButton.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
             if (selectedId != -1) {
-                findNavController().navigate(R.id.action_paQ8Fragment2_to_paQ9Fragment)
+                findNavController().navigate(R.id.action_paQ8Fragment_to_paQ9Fragment)
             } else {
                 Toast.makeText(
                     requireContext(),

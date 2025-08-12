@@ -121,7 +121,7 @@ class SongSelectionFragment : BaseFragment() {
                     "Selected ${selectedSong.name} song",
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistance)
+                findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistanceFragment)
             }
             }
 

@@ -1,21 +1,24 @@
 package com.example.temiv1.ui.fragments.setup_questions
 
-import android.content.Context
-import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
-import com.example.temiv1.R
-import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import com.example.temiv1.R
+import com.example.temiv1.base.BaseFragment
+import com.example.temiv1.viewmodel.DanceSessionViewModel
 
 class SetupQ9Fragment : BaseFragment() {
+    private lateinit var textView: TextView
+    private val sessionViewModel: DanceSessionViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,10 +29,14 @@ class SetupQ9Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textView = view.findViewById(R.id.q10)
+        sessionViewModel.textSizeSp = 38f
+        textView.textSize = sessionViewModel.textSizeSp
+
         fragmentScope.launch {
             delay(1000)
-            val q9 = TtsRequest.create("Is that quiet enough?", false)
-            robot?.askQuestion(q9)
+            val q10 = TtsRequest.create("Would you like the text bigger?", false)
+            robot?.askQuestion(q10)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -38,36 +45,29 @@ class SetupQ9Fragment : BaseFragment() {
         }
 
         val noButton: Button = view.findViewById(R.id.noButton)
-        noButton.setOnClickListener{
+        noButton.setOnClickListener {
             onNoSelected()
         }
 
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        val backButton: ImageButton = view.findViewById(R.id.backButton)
+//        backButton.setOnClickListener {
+//            onBackSelected()
+//        }
+
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_q9Fragment_to_q10Fragment)
+        sessionViewModel.textSizeSp += 2f
+        findNavController().navigate(R.id.action_setupQ9Fragment_to_setupQ10Fragment)
     }
 
     private fun onNoSelected() {
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-
-        val newVolume = (currentVolume - 1).coerceAtLeast(0)
-
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
-        )
-
-        val q9 = TtsRequest.create("Is that quiet enough?", false)
-        robot?.askQuestion(q9)
+        findNavController().navigate(R.id.action_setupQ9Fragment_to_setupQ11Fragment)
     }
+
+//    private fun onBackSelected() {
+//        findNavController().popBackStack()
+//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
