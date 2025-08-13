@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.dance.data.DifficultyLevel
 
@@ -126,6 +127,7 @@ class ProgressionFragment : BaseFragment() {
                     dialog.dismiss()
                 }
                 .setNegativeButton("Cancel") { dialog, _ ->
+                    CsvLogger.logEvent("recovery", "end_recovery_button", "clicked")
                     dialog.dismiss()
                 }
                 .show()

@@ -16,6 +16,7 @@ import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.example.temiv1.dance.DanceVideoGenerator
 import com.example.temiv1.R
 import com.example.temiv1.adapters.SongAdapter
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.dance.data.DifficultyLevel
 import com.example.temiv1.dance.data.Song
@@ -109,6 +110,9 @@ class SongSelectionFragment : BaseFragment() {
                     restMove4BeatsLegs = restMove4BeatsLegs,
                     restMove6BeatsLegs = restMove6BeatsLegs
                 )
+
+                val movesPlaylistString = movesPlaylist.joinToString("|") { it.name }
+                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString)
 
                 sessionViewModel.movesPlaylist.value = movesPlaylist
 

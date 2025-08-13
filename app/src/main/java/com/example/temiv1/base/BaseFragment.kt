@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.listeners.OnRobotReadyListener
@@ -36,6 +37,7 @@ open class BaseFragment : Fragment(), OnRobotReadyListener, Robot.AsrListener {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageButton?>(R.id.backButton)?.setOnClickListener {
+            CsvLogger.logEvent("recovery", "back_button", this::class.simpleName ?: "unknown_fragment")
             findNavController().popBackStack()
         }
     }
@@ -64,18 +66,12 @@ open class BaseFragment : Fragment(), OnRobotReadyListener, Robot.AsrListener {
     // Child fragments override this if needed
     open fun handleAsr(command: String) {
         if (!isTemiDevice) return
-
-        when (command) {
-            "back" -> {
-                Log.d("ASR", "Voice command: back")
-                findNavController().popBackStack()
-            }
-        }
     }
 
     override fun onRobotReady(isReady: Boolean) {
         if (isReady) {
             Log.d("Temi", "Robot is ready")
+            robot?.hideTopBar()
         }
     }
 

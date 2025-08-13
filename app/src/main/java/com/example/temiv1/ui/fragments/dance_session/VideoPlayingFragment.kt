@@ -15,6 +15,7 @@ import androidx.media3.common.Player
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 
 class VideoPlaying : BaseFragment() {

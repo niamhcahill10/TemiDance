@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -54,6 +54,9 @@ class PaQ4Fragment : BaseFragment() {
         continueButton.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
             if (selectedId != -1) {
+                val selectedButton: RadioButton = view.findViewById(selectedId)
+                val answerText = selectedButton.text.toString()
+                CsvLogger.logEvent("answers", "feedback_q1", answerText)
                 findNavController().navigate(R.id.action_paQ4Fragment_to_paQ5Fragment)
             } else {
                 Toast.makeText(

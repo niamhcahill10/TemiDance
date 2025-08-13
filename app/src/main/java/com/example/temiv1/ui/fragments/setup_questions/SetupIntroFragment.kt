@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 
 
@@ -21,6 +22,8 @@ class SetupIntroFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        CsvLogger.logUseTime("time", "start_app")
 
         val startButton: Button = view.findViewById(R.id.continueButton)
         startButton.setOnClickListener {

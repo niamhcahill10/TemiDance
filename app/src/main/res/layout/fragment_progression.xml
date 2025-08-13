@@ -11,6 +11,7 @@
 
     <include
         layout="@layout/top_bar"
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,11 +79,11 @@
         android:id="@+id/endSessionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/end_session"
-        android:layout_margin="15dp"
-        android:textSize="24sp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/purple_text"
+        android:text="@string/end_session"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

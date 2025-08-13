@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
@@ -48,6 +49,8 @@ class SetupQ3Fragment : BaseFragment() {
         }
 
     private fun onYesSelected() {
+        CsvLogger.logEvent("answers","setup_q3","yes")
+
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -67,6 +70,7 @@ class SetupQ3Fragment : BaseFragment() {
     }
 
     private fun onNoSelected() {
+        CsvLogger.logEvent("answers","setup_q3","no")
         findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ5Fragment)
     }
 

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.example.temiv1.R
 import com.example.temiv1.adapters.DanceMoveAdapter
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.dance.data.DanceMove
 import com.example.temiv1.dance.data.DifficultyLevel
@@ -214,8 +215,10 @@ class DanceMoveSelection : BaseFragment() {
         toggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 adapter.selectAll()
+                CsvLogger.logEvent("moves", "select_all", "clicked")
             } else {
                 adapter.clearSelection()
+                CsvLogger.logEvent("moves", "clear_all", "clicked")
             }
         }
 
@@ -227,6 +230,10 @@ class DanceMoveSelection : BaseFragment() {
             } else {
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
                 Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")
+
+                val movesString = selectedMoves.joinToString("|") { it.name }
+                CsvLogger.logEvent("moves", "final_selection", movesString)
+
                 findNavController().navigate(R.id.action_danceMoveSelectionFragment_to_songSelectionFragment)
             }
 

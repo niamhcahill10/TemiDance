@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import android.provider.Settings
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 
 class SetupQ1Fragment : BaseFragment() {
@@ -50,6 +51,8 @@ class SetupQ1Fragment : BaseFragment() {
     private fun onYesSelected() {
         val contentResolver = requireContext().contentResolver
 
+        CsvLogger.logEvent("answers","setup_q1","yes")
+
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
@@ -67,6 +70,7 @@ class SetupQ1Fragment : BaseFragment() {
     }
 
     private fun onNoSelected() {
+        CsvLogger.logEvent("answers","setup_q1","no")
         findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ3Fragment)
     }
 

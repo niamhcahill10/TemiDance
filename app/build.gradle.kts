@@ -57,7 +57,6 @@ dependencies {
 
     // add temi sdk
     implementation ("com.robotemi:sdk:1.134.1")
-    //
 }
 
 configurations.all {
