@@ -3,7 +3,7 @@ package com.example.temiv1.dance.data
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
+@Parcelize // For passing objects between fragments
 data class Song(
     val name: String,
     val level: DifficultyLevel,

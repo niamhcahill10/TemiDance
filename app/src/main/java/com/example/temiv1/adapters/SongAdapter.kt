@@ -54,7 +54,7 @@ class SongAdapter(private val songs: List<Song>) :
         }
 
         holder.radioButton.text = song.genre
-        holder.radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22f)
+        holder.radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
         bindSelection(holder, song, position)
 
         val imageView: ImageView = holder.itemView.findViewById(R.id.iv_song)

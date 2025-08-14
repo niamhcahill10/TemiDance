@@ -26,7 +26,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_songs"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginBottom="1dp"
         android:clipToPadding="false"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
         android:text="@string/btn_continue"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:backgroundTint="@color/purple_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,7 +18,7 @@ import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 
-class VideoPlaying : BaseFragment() {
+class VideoPlayingFragment : BaseFragment() {
 
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 

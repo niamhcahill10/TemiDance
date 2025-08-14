@@ -31,7 +31,7 @@ class DanceMoveAdapter(private val moves: List<DanceMove>) :
         val move = moves[position]
         holder.checkBox.text = move.name
         holder.checkBox.isChecked = selectedMoves.contains(move)
-        holder.checkBox.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22f)
+        holder.checkBox.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
 
         holder.checkBox.setOnCheckedChangeListener(null) // Avoid recycled listeners
         holder.checkBox.setOnCheckedChangeListener { _, isChecked ->

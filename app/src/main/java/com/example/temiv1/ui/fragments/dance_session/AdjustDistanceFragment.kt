@@ -16,7 +16,7 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AdjustDistance : BaseFragment() {
+class AdjustDistanceFragment : BaseFragment() {
     private lateinit var textView: TextView
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
 

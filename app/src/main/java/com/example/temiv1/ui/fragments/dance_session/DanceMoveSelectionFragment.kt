@@ -25,7 +25,7 @@ import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DanceMoveSelection : BaseFragment() {
+class DanceMoveSelectionFragment : BaseFragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DanceMoveAdapter
     private val sessionViewModel: DanceSessionViewModel by activityViewModels()
