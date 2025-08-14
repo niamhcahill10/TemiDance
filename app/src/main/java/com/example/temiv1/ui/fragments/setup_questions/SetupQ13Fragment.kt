@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -35,7 +36,7 @@ class SetupQ13Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val sq13 = TtsRequest.create("Great your settings preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song genre that will be used to generate a dance video for you to follow. Can you confirm you are happy to proceed?", false)
+            val sq13 = TtsRequest.create("Great your settings preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song genre that will be used to generate a dance video for you to follow. You will be given maracas to hold for the dance to track your movements. Can you confirm you are happy to proceed?", false)
             robot?.askQuestion(sq13)
         }
 
@@ -56,10 +57,12 @@ class SetupQ13Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
+        CsvLogger.logEvent("answers","setup_q13","yes")
         findNavController().navigate(R.id.action_setupQ13Fragment_to_paQ1Fragment)
     }
 
     private fun onNoSelected() {
+        CsvLogger.logEvent("answers","setup_q13","no")
         findNavController().navigate(R.id.action_setupQ13Fragment_to_endSessionFragment)
     }
 

@@ -85,6 +85,7 @@ object CsvLogger {
         )
     }
 
+    // Asynchronously updates csv log file when an event happens
     private fun append(fields: Map<String, Any?>) {
         scope.launch {
             val file = currentFile ?: return@launch
@@ -96,32 +97,32 @@ object CsvLogger {
         }
     }
 
+    // Comma separated list of column names
     private fun header(): String = listOf(
         "timestampMs","isoTime","sessionId","stream","event",
         "eventId","answer","fromPoint","toPoint","elapsedMs","meta"
     ).joinToString(",")
 
+    // Handle strings, numbers, and null values ready for csv line to be added to log sheet
     private fun toCsv(fields: Map<String, Any?>): String {
-        fun q(s: Any?): String {
-            val str = s?.toString() ?: ""
-            return '"' + str.replace("\"", "\"\"") + '"'
+        fun quote(s: String): String =
+            "\"" + s.replace("\"", "\"\"") + "\""
+
+        fun fmt(v: Any?): String = when (v) {
+            null -> ""              // empty cell
+            is Int, is Long -> v.toString() // integers: no quotes
+            else -> quote(v.toString())     // everything else: quote & escape
         }
-        return listOf(
-            fields["timestampMs"],
-            fields["isoTime"],
-            fields["sessionId"],
-            fields["stream"],
-            fields["event"],
-            fields["eventId"],
-            fields["answer"],
-            fields["fromPoint"],
-            fields["toPoint"],
-            fields["elapsedMs"],
-            fields["reason"],
-            fields["meta"],
-        ).joinToString(",") { q(it) }
+
+        val order = listOf(
+            "timestampMs","isoTime","sessionId","stream","event",
+            "eventId","answer","fromPoint","toPoint","elapsedMs","reason","meta"
+        )
+
+        return order.joinToString(",") { key -> fmt(fields[key]) }
     }
 
+    // Open file and add new line for each event
     private fun writeLine(file: File, line: String) {
         FileOutputStream(file, /* append = */ true).use { fos ->
             BufferedWriter(OutputStreamWriter(fos)).use { out ->

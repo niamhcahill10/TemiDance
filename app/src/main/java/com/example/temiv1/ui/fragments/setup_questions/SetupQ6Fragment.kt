@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
@@ -59,6 +60,7 @@ class SetupQ6Fragment : BaseFragment() {
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
         val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume.toString())
 
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,

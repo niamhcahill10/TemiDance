@@ -94,6 +94,10 @@ class ProgressionFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
+            val selectedButton: RadioButton = view.findViewById(selectedId)
+            val answerText = selectedButton.text.toString()
+            CsvLogger.logEvent("answers", "progression", answerText)
+
             val newLevel = when (selectedId) {
                 R.id.radioProgress -> when (currentLevel) {
                     DifficultyLevel.EASY -> DifficultyLevel.MEDIUM

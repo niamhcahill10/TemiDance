@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -54,6 +55,9 @@ class PaQ13Fragment : BaseFragment() {
         continueButton.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
             if (selectedId != -1) {
+                val selectedButton: RadioButton = view.findViewById(selectedId)
+                val answerText = selectedButton.text.toString()
+                CsvLogger.logEvent("answers", "pa_q13", answerText)
                 findNavController().navigate(R.id.action_paQ13Fragment_to_paQ14Fragment)
             } else {
                 Toast.makeText(

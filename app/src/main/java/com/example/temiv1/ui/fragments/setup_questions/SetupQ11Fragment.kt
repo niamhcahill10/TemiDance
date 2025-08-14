@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -58,6 +59,7 @@ class SetupQ11Fragment : BaseFragment() {
 
     private fun onYesSelected() {
         sessionViewModel.textSizeSp -= 2f
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
         findNavController().navigate(R.id.action_setupQ11Fragment_to_setupQ12Fragment)
     }
 

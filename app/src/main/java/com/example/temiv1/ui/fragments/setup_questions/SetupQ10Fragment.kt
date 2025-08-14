@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import kotlin.math.min
@@ -59,6 +60,7 @@ class SetupQ10Fragment : BaseFragment() {
     private fun onNoSelected() {
         sessionViewModel.textSizeSp = min(sessionViewModel.textSizeSp + 2f, 44f)
         textView.textSize = sessionViewModel.textSizeSp
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
         if (sessionViewModel.textSizeSp < 44f) {
             robot?.askQuestion("Is the text big enough?")
         } else {

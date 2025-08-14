@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     // robot declaration
     // robot variable for use in program
-    private lateinit var robot: Robot
+    // private lateinit var robot: Robot
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

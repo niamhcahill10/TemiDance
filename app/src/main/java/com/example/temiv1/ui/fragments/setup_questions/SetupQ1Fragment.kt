@@ -46,8 +46,6 @@ class SetupQ1Fragment : BaseFragment() {
     private fun onYesSelected() {
         val contentResolver = requireContext().contentResolver
 
-        CsvLogger.logEvent("answers","setup_q1","yes")
-
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
@@ -61,11 +59,11 @@ class SetupQ1Fragment : BaseFragment() {
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness
         )
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
         findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ2Fragment)
     }
 
     private fun onNoSelected() {
-        CsvLogger.logEvent("answers","setup_q1","no")
         findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ3Fragment)
     }
 

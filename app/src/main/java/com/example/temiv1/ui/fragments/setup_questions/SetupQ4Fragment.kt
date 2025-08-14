@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
@@ -52,6 +53,7 @@ class SetupQ4Fragment : BaseFragment() {
     }
 
     private fun onNoSelected() {
+
         val contentResolver = requireContext().contentResolver
 
         val currentBrightness = Settings.System.getInt(
@@ -60,7 +62,8 @@ class SetupQ4Fragment : BaseFragment() {
             125 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
+        val newBrightness = (currentBrightness - 10).coerceAtLeast(0)
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
 
         Settings.System.putInt(
             contentResolver,

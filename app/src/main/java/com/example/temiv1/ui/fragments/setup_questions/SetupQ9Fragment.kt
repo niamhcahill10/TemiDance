@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 
@@ -58,6 +59,7 @@ class SetupQ9Fragment : BaseFragment() {
 
     private fun onYesSelected() {
         sessionViewModel.textSizeSp += 2f
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
         findNavController().navigate(R.id.action_setupQ9Fragment_to_setupQ10Fragment)
     }
 

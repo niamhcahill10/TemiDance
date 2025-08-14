@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -64,6 +65,7 @@ class SetupQ12Fragment : BaseFragment() {
     private fun onNoSelected() {
         sessionViewModel.textSizeSp = max(sessionViewModel.textSizeSp - 2f, 32f)
         textView.textSize = sessionViewModel.textSizeSp
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
         if (sessionViewModel.textSizeSp > 32f) {
             robot?.askQuestion("Is the text small enough?")
         } else {

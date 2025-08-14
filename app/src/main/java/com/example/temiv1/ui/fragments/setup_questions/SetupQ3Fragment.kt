@@ -49,7 +49,6 @@ class SetupQ3Fragment : BaseFragment() {
         }
 
     private fun onYesSelected() {
-        CsvLogger.logEvent("answers","setup_q3","yes")
 
         val contentResolver = requireContext().contentResolver
 
@@ -59,7 +58,8 @@ class SetupQ3Fragment : BaseFragment() {
             125 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0) // min 0
+        val newBrightness = (currentBrightness - 10).coerceAtLeast(0)
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
 
         Settings.System.putInt(
             contentResolver,
@@ -70,7 +70,6 @@ class SetupQ3Fragment : BaseFragment() {
     }
 
     private fun onNoSelected() {
-        CsvLogger.logEvent("answers","setup_q3","no")
         findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ5Fragment)
     }
 

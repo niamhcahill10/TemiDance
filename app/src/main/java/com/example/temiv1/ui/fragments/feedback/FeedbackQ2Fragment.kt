@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 
@@ -54,6 +55,9 @@ class FeedbackQ2Fragment : BaseFragment() {
         continueButton.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
             if (selectedId != -1) {
+                val selectedButton: RadioButton = view.findViewById(selectedId)
+                val answerText = selectedButton.text.toString()
+                CsvLogger.logEvent("answers", "feedback_q2", answerText)
                 findNavController().navigate(R.id.action_feedbackQ2Fragment_to_progressionFragment)
             } else {
                 Toast.makeText(requireContext(), "Please select an answer before continuing.", Toast.LENGTH_SHORT).show()

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -56,10 +57,12 @@ class PaQ1Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
+        CsvLogger.logEvent("answers","pa_q1","yes")
         findNavController().navigate(R.id.action_paQ1Fragment_to_paQ2Fragment)
     }
 
     private fun onNoSelected() {
+        CsvLogger.logEvent("answers","pa_q1","no")
         findNavController().navigate(R.id.action_paQ1Fragment_to_endSessionFragment)
     }
 

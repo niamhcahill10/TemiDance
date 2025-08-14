@@ -46,7 +46,7 @@ class PaQ4Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val paq4 = TtsRequest.create("How do you typically stand up from a chair?", false)
+            val paq4 = TtsRequest.create("The remaining questions do not have voice recognition so you will need to select an answer on the screen. How do you typically stand up from a chair?", false)
             robot?.speak(paq4)
         }
 
@@ -56,7 +56,7 @@ class PaQ4Fragment : BaseFragment() {
             if (selectedId != -1) {
                 val selectedButton: RadioButton = view.findViewById(selectedId)
                 val answerText = selectedButton.text.toString()
-                CsvLogger.logEvent("answers", "feedback_q1", answerText)
+                CsvLogger.logEvent("answers", "pa_q4", answerText)
                 findNavController().navigate(R.id.action_paQ4Fragment_to_paQ5Fragment)
             } else {
                 Toast.makeText(

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
+import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.robotemi.sdk.TtsRequest
@@ -41,7 +42,18 @@ class AdjustDistance : BaseFragment() {
         val playButton: Button = view.findViewById(R.id.playButton)
 
         playButton.setOnClickListener {
-            findNavController().navigate(R.id.action_adjustDistanceFragment_to_videoPlayingFragment)
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Begin Dance")
+                .setMessage("Are you sure you want to begin the dance?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    findNavController().navigate(R.id.action_adjustDistanceFragment_to_videoPlayingFragment)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    CsvLogger.logEvent("recovery", "dance_recovery_button", "clicked")
+                    dialog.dismiss()
+                }
+                .show()
         }
 
     }

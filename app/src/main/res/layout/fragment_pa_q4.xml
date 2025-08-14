@@ -18,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
         android:text="@string/how_do_you_typically_stand_up_from_a_chair"
         android:textAlignment="textStart"
         android:textSize="38sp"

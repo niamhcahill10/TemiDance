@@ -78,6 +78,9 @@ class SongSelectionFragment : BaseFragment() {
             if (selectedSong == null) {
                 Toast.makeText(requireContext(), "Select a song to continue", Toast.LENGTH_SHORT).show()
             } else {
+                val songString = selectedSong.name
+                CsvLogger.logEvent("moves", "song_selection", songString)
+
                 sessionViewModel.selectedSong.value = selectedSong
 
                 val songDuration = DanceVideoGenerator.getAudioDurationFromRaw(

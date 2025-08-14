@@ -30,30 +30,27 @@ class StartAppFragment : BaseFragment() {
         val backButton: ImageButton = view.findViewById(R.id.backButton)
         backButton.visibility = View.INVISIBLE
 
-        val contentResolver = requireContext().contentResolver
+        if (isTemiDevice) {
+            val contentResolver = requireContext().contentResolver
 
-        val newBrightness = (255 * 0.75).toInt()
+            val newBrightness = (255 * 0.75).toInt()
+            Settings.System.putInt(
+                contentResolver,
+                Settings.System.SCREEN_BRIGHTNESS,
+                newBrightness
+            )
+            CsvLogger.logEvent("settings", "brightness_set", newBrightness.toString())
 
-        Settings.System.putInt(
-            contentResolver,
-            Settings.System.SCREEN_BRIGHTNESS,
-            newBrightness
-        )
-
-        CsvLogger.logEvent("settings", "brightness_set", newBrightness.toString())
-
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-        val newVolume = (maxVolume * 0.4).toInt().coerceAtMost(maxVolume)
-
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            newVolume,
-            0
-        )
-
-        CsvLogger.logEvent("settings", "volume_set", newVolume.toString())
+            val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            val newVolume = (maxVolume * 0.4).toInt().coerceAtMost(maxVolume)
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_MUSIC,
+                newVolume,
+                0
+            )
+            CsvLogger.logEvent("settings", "volume_set", newVolume.toString())
+        }
 
         val startButton: Button = view.findViewById(R.id.startButton)
         startButton.setOnClickListener {
