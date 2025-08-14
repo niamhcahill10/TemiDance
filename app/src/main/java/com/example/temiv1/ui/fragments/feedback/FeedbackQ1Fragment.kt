@@ -60,10 +60,7 @@ class FeedbackQ1Fragment : BaseFragment() {
                 CsvLogger.logEvent("answers", "feedback_q1", answerText)
                 findNavController().navigate(R.id.action_feedbackQ1Fragment_to_feedbackQ2Fragment)
             } else {
-                Toast.makeText(requireContext(), "Please select an answer before continuing.", Toast.LENGTH_SHORT).show()
-                val reqAnswer =
-                    TtsRequest.create("Please select an answer to continue", false)
-                robot?.speak(reqAnswer)
+                Toast.makeText(requireContext(), "Please select an answer", Toast.LENGTH_SHORT).show()
             }
         }
     }

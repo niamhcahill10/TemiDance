@@ -85,12 +85,9 @@ class ProgressionFragment : BaseFragment() {
             if (selectedId == -1) {
                 Toast.makeText(
                     requireContext(),
-                    "Please select an answer before continuing.",
+                    "Please select an answer",
                     Toast.LENGTH_SHORT
                 ).show()
-                val reqAnswer =
-                    TtsRequest.create("Please select an answer to continue", false)
-                robot?.speak(reqAnswer)
                 return@setOnClickListener
             }
 

@@ -50,11 +50,6 @@ class SetupQ11Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {

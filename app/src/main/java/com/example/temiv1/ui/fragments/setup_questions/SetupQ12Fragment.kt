@@ -67,7 +67,8 @@ class SetupQ12Fragment : BaseFragment() {
         textView.textSize = sessionViewModel.textSizeSp
         CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
         if (sessionViewModel.textSizeSp > 32f) {
-            robot?.askQuestion("Is the text small enough?")
+            val sq12 = TtsRequest.create("Is the text small enough?", false)
+            robot?.askQuestion(sq12)
         } else {
             Toast.makeText(requireContext(), "Minimum text size reached", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_setupQ12Fragment_to_setupQ13Fragment)

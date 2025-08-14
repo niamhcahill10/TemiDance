@@ -36,7 +36,7 @@ class SetupQ13Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val sq13 = TtsRequest.create("Great your settings preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song genre that will be used to generate a dance video for you to follow. You will be given maracas to hold for the dance to track your movements. Can you confirm you are happy to proceed?", false)
+            val sq13 = TtsRequest.create("Great your preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song that will be used to generate a dance video for you to follow. You will be given maracas to hold for the dance to track your movements. Can you confirm you are happy to proceed?", false)
             robot?.askQuestion(sq13)
         }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -68,8 +69,13 @@ class SetupQ6Fragment : BaseFragment() {
             0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
         )
 
-        val q7 = TtsRequest.create("Is that loud enough?", false)
-        robot?.askQuestion(q7)
+        if (newVolume < maxVolume) {
+            val sq6 = TtsRequest.create("Is that loud enough?", false)
+            robot?.askQuestion(sq6)
+        } else {
+            Toast.makeText(requireContext(), "Maximum volume reached", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment)
+        }
     }
 
     override fun handleAsr(command: String) {

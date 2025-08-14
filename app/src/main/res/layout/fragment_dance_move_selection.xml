@@ -41,8 +41,6 @@
         android:id="@+id/selectClearSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
         android:showText="false"
         android:checked="false"
         app:thumbTint="@color/purple_greyed"
@@ -85,7 +83,7 @@
         android:layout_marginBottom="65dp"
         android:backgroundTint="@color/purple_text"
         android:text="@string/btn_continue"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

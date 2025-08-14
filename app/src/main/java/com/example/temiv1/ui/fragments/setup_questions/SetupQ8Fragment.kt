@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -67,8 +68,13 @@ class SetupQ8Fragment : BaseFragment() {
             0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
         )
 
-        val q9 = TtsRequest.create("Is that quiet enough?", false)
-        robot?.askQuestion(q9)
+        if (newVolume != 0) {
+            val sq8 = TtsRequest.create("Is that quiet enough?", false)
+            robot?.askQuestion(sq8)
+        } else {
+            Toast.makeText(requireContext(), "Robot muted", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_setupQ8Fragment_to_setupQ9Fragment)
+        }
     }
 
     override fun handleAsr(command: String) {

@@ -30,7 +30,7 @@ class SetupIntroFragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val intro = TtsRequest.create("Welcome! This app will ask some physical capabilities questions and generate dance videos for you to follow based on the moves you select. On screens where you can see yes or no buttons you can either verbally respond yes or no once the question has been asked and you see the blue listener eyes pop-up in the bottom left corner, or you can tap the buttons instead. Questions with multiple answers must be selected by hand as no voice recognition is enabled for these.", false)
+            val intro = TtsRequest.create("Welcome! This app will ask some questions about your movement capabilities and generate dance videos for you to follow based on the moves you select. On screens where you can see yes or no buttons you can either verbally respond yes or no once the question has been asked, and you see the blue listener eyes pop-up in the bottom left corner, or you can tap the buttons instead. Questions with multiple answers must be selected by hand as no voice recognition is enabled for these. Press continue to proceed.", false)
             robot?.speak(intro)
         }
 

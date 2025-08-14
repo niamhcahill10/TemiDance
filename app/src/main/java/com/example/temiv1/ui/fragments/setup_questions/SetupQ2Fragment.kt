@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -59,10 +60,10 @@ class SetupQ2Fragment : BaseFragment() {
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
+            7 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
+        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // max 255
         CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
 
         Settings.System.putInt(
@@ -71,8 +72,13 @@ class SetupQ2Fragment : BaseFragment() {
             newBrightness
         )
 
-        val q3 = TtsRequest.create("Is that bright enough?", false)
-        robot?.askQuestion(q3)
+        if (newBrightness != 255) {
+            val sq2 = TtsRequest.create("Is that bright enough?", false)
+            robot?.askQuestion(sq2)
+        } else {
+            Toast.makeText(requireContext(), "Maximum brightness reached", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment)
+        }
     }
 
     override fun handleAsr(command: String) {

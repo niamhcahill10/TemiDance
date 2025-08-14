@@ -50,11 +50,6 @@ class SetupQ9Fragment : BaseFragment() {
             onNoSelected()
         }
 
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
-
     }
 
     private fun onYesSelected() {
@@ -66,10 +61,6 @@ class SetupQ9Fragment : BaseFragment() {
     private fun onNoSelected() {
         findNavController().navigate(R.id.action_setupQ9Fragment_to_setupQ11Fragment)
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_continue"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:backgroundTint="@color/purple_text"
         android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintBottom_toBottomOf="parent"

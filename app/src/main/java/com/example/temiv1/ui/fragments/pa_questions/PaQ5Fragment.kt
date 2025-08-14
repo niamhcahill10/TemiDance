@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
@@ -62,12 +61,9 @@ class PaQ5Fragment : BaseFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please select an answer before continuing.",
+                    "Please select an answer",
                     Toast.LENGTH_SHORT
                 ).show()
-                val reqAnswer =
-                    TtsRequest.create("Please select an answer to continue", false)
-                robot?.speak(reqAnswer)
             }
         }
     }

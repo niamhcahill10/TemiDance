@@ -55,10 +55,10 @@ class SetupQ3Fragment : BaseFragment() {
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
+            191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0)
+        val newBrightness = (currentBrightness - 16).coerceAtLeast(127)
         CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
 
         Settings.System.putInt(

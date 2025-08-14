@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -41,11 +42,6 @@ class SetupQ4Fragment : BaseFragment() {
         noButton.setOnClickListener {
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
@@ -59,10 +55,10 @@ class SetupQ4Fragment : BaseFragment() {
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
+            191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 10).coerceAtLeast(0)
+        val newBrightness = (currentBrightness - 16).coerceAtLeast(127)
         CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
 
         Settings.System.putInt(
@@ -70,8 +66,13 @@ class SetupQ4Fragment : BaseFragment() {
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness)
 
-        val q5 = TtsRequest.create("Is that dark enough?", false)
-        robot?.askQuestion(q5)
+        if (newBrightness != 127) {
+            val sq4 = TtsRequest.create("Is that dark enough?", false)
+            robot?.askQuestion(sq4)
+        } else {
+            Toast.makeText(requireContext(), "Minimum brightness reached", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment)
+        }
     }
 
     override fun handleAsr(command: String) {

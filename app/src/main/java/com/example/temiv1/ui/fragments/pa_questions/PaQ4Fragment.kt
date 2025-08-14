@@ -46,7 +46,7 @@ class PaQ4Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val paq4 = TtsRequest.create("The remaining questions do not have voice recognition so you will need to select an answer on the screen. How do you typically stand up from a chair?", false)
+            val paq4 = TtsRequest.create("The remaining questions do not have voice recognition so you will need to select an answer on the screen and then press continue. How do you typically stand up from a chair?", false)
             robot?.speak(paq4)
         }
 
@@ -61,12 +61,9 @@ class PaQ4Fragment : BaseFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please select an answer before continuing.",
+                    "Please select an answer",
                     Toast.LENGTH_SHORT
                 ).show()
-                val reqAnswer =
-                    TtsRequest.create("Please select an answer to continue", false)
-                robot?.speak(reqAnswer)
             }
         }
     }

@@ -226,7 +226,6 @@ class DanceMoveSelectionFragment : BaseFragment() {
             val selectedMoves = adapter.getSelectedMoves()
             if (selectedMoves.isEmpty()) {
                 Toast.makeText(requireContext(), "Please select at least one move", Toast.LENGTH_SHORT).show()
-                robot?.speak(TtsRequest.create("Please select at least one move", false))
             } else {
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
                 Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")

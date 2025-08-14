@@ -62,12 +62,9 @@ class PaQ14Fragment : BaseFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please select an answer before continuing.",
+                    "Please select an answer",
                     Toast.LENGTH_SHORT
                 ).show()
-                val reqAnswer =
-                    TtsRequest.create("Please select an answer to continue", false)
-                robot?.speak(reqAnswer)
             }
         }
     }

@@ -45,35 +45,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/unable_to_stand_up_from_a_chair"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/with_full_assistance_from_another_person"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/with_some_assistance_e_g_cane_walker_person"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/independently_but_need_to_use_arms"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/independently_without_using_arms"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
     </RadioGroup>
 
     <Button
@@ -82,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="@string/btn_continue"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:backgroundTint="@color/purple_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

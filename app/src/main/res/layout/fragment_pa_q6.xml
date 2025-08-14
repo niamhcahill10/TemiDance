@@ -41,35 +41,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/_1_not_difficult_at_all"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/_2_a_little_difficult"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/moderately_difficult"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/extremely_difficult"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/unable_to_do_it"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
     </RadioGroup>
 
@@ -78,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_continue"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:backgroundTint="@color/purple_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

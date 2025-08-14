@@ -49,10 +49,10 @@ class SetupQ1Fragment : BaseFragment() {
         val currentBrightness = Settings.System.getInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
-            125 // fallback default if not set
+            191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 10).coerceAtMost(255) // max 255
+        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // max 255
 
         Settings.System.putInt(
             contentResolver,

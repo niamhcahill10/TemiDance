@@ -45,21 +45,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/go_up_a_level"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioMaintain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/stay_at_the_same_level"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
         <RadioButton
             android:id="@+id/radioRegress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/go_down_a_level"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#BF000000" />
 
     </RadioGroup>
 
@@ -83,7 +86,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/purple_text"
         android:text="@string/end_session"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/top_bar" />
 
