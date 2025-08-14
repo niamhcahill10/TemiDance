@@ -40,9 +40,9 @@ class ProgressionFragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q1feedback =
-                TtsRequest.create("The next level is slightly faster and has 12 reps per move. Would you like to try it?", false)
-            robot?.speak(q1feedback)
+            val progression =
+                TtsRequest.create("Would you like to change your level? See the descriptions for each level below.", false)
+            robot?.speak(progression)
         }
 
         val radioProgress: RadioButton = view.findViewById(R.id.radioProgress)

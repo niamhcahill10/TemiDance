@@ -61,7 +61,7 @@ class SongSelectionFragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val requestSelection = TtsRequest.create("Please select a song.", false)
+            val requestSelection = TtsRequest.create("Select your song.", false)
             robot?.speak(requestSelection)
         }
 
@@ -76,8 +76,7 @@ class SongSelectionFragment : BaseFragment() {
         continueButton.setOnClickListener {
             val selectedSong = adapter.getSelectedSong()
             if (selectedSong == null) {
-                Toast.makeText(requireContext(), "Please select a song", Toast.LENGTH_SHORT).show()
-                robot?.speak(TtsRequest.create("Please select a song", false))
+                Toast.makeText(requireContext(), "Select a song to continue", Toast.LENGTH_SHORT).show()
             } else {
                 sessionViewModel.selectedSong.value = selectedSong
 

@@ -35,8 +35,8 @@ class PaQ3Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q3 = TtsRequest.create("Are you able to twist your torso to both sides and look over your shoulder without any pain or discomfort?", false)
-            robot?.askQuestion(q3)
+            val paq3 = TtsRequest.create("Are you able to twist your torso to both sides and look over your shoulder without any pain or discomfort?", false)
+            robot?.askQuestion(paq3)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)

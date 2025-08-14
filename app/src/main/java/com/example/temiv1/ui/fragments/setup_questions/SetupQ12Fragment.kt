@@ -37,8 +37,8 @@ class SetupQ12Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q13 = TtsRequest.create("Is the text small enough?", false)
-            robot?.askQuestion(q13)
+            val sq12 = TtsRequest.create("Is the text small enough?", false)
+            robot?.askQuestion(sq12)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)

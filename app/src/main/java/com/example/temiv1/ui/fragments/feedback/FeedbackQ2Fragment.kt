@@ -37,9 +37,9 @@ class FeedbackQ2Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q1feedback =
+            val q2feedback =
                 TtsRequest.create("How well were you able to follow the moves during the dance?", false)
-            robot?.speak(q1feedback)
+            robot?.speak(q2feedback)
         }
 
         val continueButton: Button = view.findViewById(R.id.continueButton)

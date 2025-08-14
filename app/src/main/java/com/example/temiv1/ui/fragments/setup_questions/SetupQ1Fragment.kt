@@ -27,8 +27,8 @@ class SetupQ1Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q2 = TtsRequest.create("Would you like the screen brighter?", false)
-            robot?.askQuestion(q2)
+            val sq1 = TtsRequest.create("The first few questions will get the brightness, volume, and text size adjusted to your preferences. Would you like the screen brighter?", false)
+            robot?.askQuestion(sq1)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -40,11 +40,6 @@ class SetupQ1Fragment : BaseFragment() {
         noButton.setOnClickListener {
             onNoSelected()
         }
-
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
 
     }
 
@@ -73,10 +68,6 @@ class SetupQ1Fragment : BaseFragment() {
         CsvLogger.logEvent("answers","setup_q1","no")
         findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ3Fragment)
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

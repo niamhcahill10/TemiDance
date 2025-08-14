@@ -35,8 +35,8 @@ class SetupQ13Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q14 = TtsRequest.create("Great! Now I will ask you some questions to understand your movement capabilities so that I can recommend and play a dance for you to follow on the tablet. If at any point you want to stop the process either press the \\\"X\\\" button on the top right of the screen or say \\\"Hey Temi, stop.\\\" Can you confirm you are happy to proceed?", false)
-            robot?.askQuestion(q14)
+            val sq13 = TtsRequest.create("Great your settings preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song genre that will be used to generate a dance video for you to follow. Can you confirm you are happy to proceed?", false)
+            robot?.askQuestion(sq13)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)

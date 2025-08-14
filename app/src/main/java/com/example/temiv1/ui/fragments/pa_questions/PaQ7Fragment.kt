@@ -46,8 +46,8 @@ class PaQ7Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q7 = TtsRequest.create("How difficult is it for you to walk around your home?", false)
-            robot?.speak(q7)
+            val paq7 = TtsRequest.create("How difficult is it for you to walk around your home?", false)
+            robot?.speak(paq7)
         }
 
         val continueButton: Button = view.findViewById(R.id.continueButton)

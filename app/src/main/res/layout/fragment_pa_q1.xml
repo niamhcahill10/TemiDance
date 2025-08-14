@@ -21,6 +21,8 @@
         android:text="@string/are_you_able_to_lift_your_arms_above_shoulder_height"
         android:textAlignment="textStart"
         android:textSize="38sp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

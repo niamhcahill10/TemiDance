@@ -46,8 +46,8 @@ class PaQ13Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q13 = TtsRequest.create("How many times a week do you participate in vigorous exercise? (running, lifting heavy objects, strenuous sports)", false)
-            robot?.speak(q13)
+            val paq13 = TtsRequest.create("How many times a week do you participate in vigorous exercise? (e.g. running, lifting heavy objects, strenuous sports)", false)
+            robot?.speak(paq13)
         }
 
         val continueButton: Button = view.findViewById(R.id.continueButton)

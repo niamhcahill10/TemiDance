@@ -36,8 +36,8 @@ class SetupQ10Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q11 = TtsRequest.create("Is the text big enough?", false)
-            robot?.askQuestion(q11)
+            val sq10 = TtsRequest.create("Is the text big enough?", false)
+            robot?.askQuestion(sq10)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -49,11 +49,6 @@ class SetupQ10Fragment : BaseFragment() {
         noButton.setOnClickListener {
             onNoSelected()
         }
-
-//        val backButton: ImageButton = view.findViewById(R.id.backButton)
-//        backButton.setOnClickListener {
-//            onBackSelected()
-//        }
 
     }
 
@@ -72,10 +67,6 @@ class SetupQ10Fragment : BaseFragment() {
         }
 
     }
-
-//    private fun onBackSelected() {
-//        findNavController().popBackStack()
-//    }
 
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return

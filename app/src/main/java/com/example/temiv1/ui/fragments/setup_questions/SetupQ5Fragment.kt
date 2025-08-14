@@ -28,8 +28,8 @@ class SetupQ5Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q6 = TtsRequest.create("Would you like the volume louder?", false)
-            robot?.askQuestion(q6)
+            val sq5 = TtsRequest.create("Would you like the volume louder?", false)
+            robot?.askQuestion(sq5)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)
@@ -59,7 +59,7 @@ class SetupQ5Fragment : BaseFragment() {
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+            0
         )
 
         findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ6Fragment)

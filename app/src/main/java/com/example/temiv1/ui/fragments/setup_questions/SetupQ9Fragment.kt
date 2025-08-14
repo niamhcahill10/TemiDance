@@ -35,8 +35,8 @@ class SetupQ9Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val q10 = TtsRequest.create("Would you like the text bigger?", false)
-            robot?.askQuestion(q10)
+            val sq9 = TtsRequest.create("Would you like the text bigger?", false)
+            robot?.askQuestion(sq9)
         }
 
         val yesButton: Button = view.findViewById(R.id.yesButton)

@@ -198,7 +198,7 @@ class DanceMoveSelection : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val requestSelection = TtsRequest.create("Please select dance moves you would like to perform.", false)
+            val requestSelection = TtsRequest.create("Choose your dance moves.", false)
             robot?.speak(requestSelection)
         }
 

@@ -38,7 +38,7 @@ class FeedbackQ1Fragment : BaseFragment() {
         fragmentScope.launch {
             delay(1000)
             val q1feedback =
-                TtsRequest.create("How physically challenging did you find the dance?", false)
+                TtsRequest.create("How physically challenging did you find that dance?", false)
             robot?.speak(q1feedback)
         }
 

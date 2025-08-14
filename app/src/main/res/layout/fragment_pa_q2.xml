@@ -21,6 +21,8 @@
         android:text="@string/are_you_able_to_sit_up_in_bed_from_a_lying_position"
         android:textAlignment="textStart"
         android:textSize="38sp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

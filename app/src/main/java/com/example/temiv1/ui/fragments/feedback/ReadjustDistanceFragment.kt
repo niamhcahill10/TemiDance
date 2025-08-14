@@ -34,7 +34,7 @@ class ReadjustDistanceFragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val adjustReminder = TtsRequest.create("Now lets re-adjust the distance of the robot so that you can answer the feedback questions. The researcher will move the robot, measure the distance, and then click continue.", false)
+            val adjustReminder = TtsRequest.create("Now lets re-adjust the distance of the robot so that you can answer the feedback questions. The researcher will take the maracas, move the robot, measure the distance, and then click continue.", false)
             robot?.speak(adjustReminder)
         }
 

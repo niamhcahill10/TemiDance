@@ -29,7 +29,7 @@
         android:fontFamily="@font/baloo_chettan"
         android:text="@string/dance_with_temi"
         android:textColor="@color/purple_text"
-        android:textSize="46sp"
+        android:textSize="62sp"
         app:drawableEndCompat="@drawable/outline_music_note_24"
         app:drawableStartCompat="@drawable/outline_music_note_24"
         app:drawableTint="@color/purple_text"

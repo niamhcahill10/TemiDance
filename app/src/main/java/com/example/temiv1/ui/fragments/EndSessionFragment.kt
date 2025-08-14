@@ -40,7 +40,7 @@ class EndSessionFragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val endText = TtsRequest.create("Thank you for interacting with me today. The session has now ended. Enjoy your day!", false)
+            val endText = TtsRequest.create("The session has now ended. Enjoy the rest of your day!", false)
             robot?.speak(endText)
         }
 
