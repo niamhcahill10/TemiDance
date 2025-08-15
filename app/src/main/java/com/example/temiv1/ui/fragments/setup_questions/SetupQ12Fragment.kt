@@ -65,7 +65,7 @@ class SetupQ12Fragment : BaseFragment() {
     private fun onNoSelected() {
         sessionViewModel.textSizeSp = max(sessionViewModel.textSizeSp - 2f, 32f)
         textView.textSize = sessionViewModel.textSizeSp
-        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp)
         if (sessionViewModel.textSizeSp > 32f) {
             val sq12 = TtsRequest.create("Is the text small enough?", false)
             robot?.askQuestion(sq12)

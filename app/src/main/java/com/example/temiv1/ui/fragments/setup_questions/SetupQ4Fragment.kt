@@ -59,7 +59,7 @@ class SetupQ4Fragment : BaseFragment() {
         )
 
         val newBrightness = (currentBrightness - 16).coerceAtLeast(127)
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
 
         Settings.System.putInt(
             contentResolver,

@@ -39,7 +39,7 @@ class StartAppFragment : BaseFragment() {
                 Settings.System.SCREEN_BRIGHTNESS,
                 newBrightness
             )
-            CsvLogger.logEvent("settings", "brightness_set", newBrightness.toString())
+            CsvLogger.logEvent("settings", "brightness_set", newBrightness)
 
             val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
             val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
@@ -49,7 +49,7 @@ class StartAppFragment : BaseFragment() {
                 newVolume,
                 0
             )
-            CsvLogger.logEvent("settings", "volume_set", newVolume.toString())
+            CsvLogger.logEvent("settings", "volume_set", newVolume)
         }
 
         val startButton: Button = view.findViewById(R.id.startButton)

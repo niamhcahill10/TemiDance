@@ -55,7 +55,7 @@ class SetupQ7Fragment : BaseFragment() {
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
         val newVolume = (currentVolume - 1).coerceAtLeast(0)
-        CsvLogger.logEvent("settings", "volume_adjust", newVolume.toString())
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume)
 
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,

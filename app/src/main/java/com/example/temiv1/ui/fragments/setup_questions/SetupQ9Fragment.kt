@@ -54,7 +54,7 @@ class SetupQ9Fragment : BaseFragment() {
 
     private fun onYesSelected() {
         sessionViewModel.textSizeSp += 2f
-        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp.toString())
+        CsvLogger.logEvent("settings", "text_adjust", sessionViewModel.textSizeSp)
         findNavController().navigate(R.id.action_setupQ9Fragment_to_setupQ10Fragment)
     }
 

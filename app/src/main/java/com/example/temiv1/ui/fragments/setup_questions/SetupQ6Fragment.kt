@@ -61,7 +61,7 @@ class SetupQ6Fragment : BaseFragment() {
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
         val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
-        CsvLogger.logEvent("settings", "volume_adjust", newVolume.toString())
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume)
 
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,

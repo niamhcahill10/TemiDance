@@ -69,7 +69,7 @@ object CsvLogger {
     }
 
     // Event logger for answers, selections, recovery clicks, and select or clear all clicks
-    fun logEvent(stream: String, eventId: String, value: String, meta: String? = null) {
+    fun logEvent(stream: String, eventId: String, value: Any, meta: String? = null) {
         val now = System.currentTimeMillis()
         append(
             mapOf(
@@ -110,8 +110,14 @@ object CsvLogger {
 
         fun fmt(v: Any?): String = when (v) {
             null -> ""              // empty cell
-            is Int, is Long -> v.toString() // integers: no quotes
-            else -> quote(v.toString())     // everything else: quote & escape
+            is Int, is Long -> v.toString() // integers no quotes
+            is Float -> {
+                if (v % 1.0 == 0.0) v.toInt().toString() else v.toString()
+            } // convert text size floats to integers then to strings w/o quotes
+            is Double -> {
+                if (v % 1.0 == 0.0) v.toInt().toString() else v.toString()
+            }
+            else -> quote(v.toString())
         }
 
         val order = listOf(

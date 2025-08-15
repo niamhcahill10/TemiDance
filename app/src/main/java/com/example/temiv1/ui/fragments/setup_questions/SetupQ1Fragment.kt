@@ -59,7 +59,7 @@ class SetupQ1Fragment : BaseFragment() {
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness
         )
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness.toString())
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
         findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ2Fragment)
     }
 
