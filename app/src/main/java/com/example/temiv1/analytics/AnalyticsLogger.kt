@@ -78,6 +78,8 @@ object CsvLogger {
         moveEndMs: Long? = null,
         moveDurationMs: Long? = null,
         songDurationMs: Long? = null,
+        currentLevel: String? = null,
+        danceSessionId: Int? = null,
         meta: String? = null
     ) {
         val now = System.currentTimeMillis()
@@ -95,6 +97,8 @@ object CsvLogger {
                 "moveEndMs" to (moveEndMs?.toString() ?: ""),
                 "moveDurationMs" to (moveDurationMs?.toString() ?: ""),
                 "songDurationMs" to (songDurationMs?.toString() ?: ""),
+                "currentLevel" to (currentLevel ?: ""),
+                "danceSessionId" to (danceSessionId ?: ""),
                 "meta" to (meta ?: "")
             )
         )
@@ -116,7 +120,7 @@ object CsvLogger {
     // Comma separated list of column names
     private fun header(): String = listOf(
         "timestampMs","isoTime","sessionId","stream","event", "eventId","answer",
-        "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs",
+        "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs", "currentLevel", "danceSessionId",
         "fromPoint","toPoint","elapsedMs","meta"
     ).joinToString(",")
 
@@ -139,7 +143,7 @@ object CsvLogger {
 
         val order = listOf(
             "timestampMs","isoTime","sessionId","stream","event", "eventId","answer",
-            "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs",
+            "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs", "currentLevel", "danceSessionId",
             "fromPoint","toPoint","elapsedMs","meta"
         )
 

@@ -53,8 +53,8 @@
     <string name="how_do_you_typically_stand_up_from_a_chair">The remaining questions do not have voice recognition so you will need to select an answer on the screen and then press continue.\n\nHow do you typically stand up from a chair?</string>
     <string name="unable_to_stand_up_from_a_chair">Unable to stand up from a chair</string>
     <string name="with_full_assistance_from_another_person">With full assistance from another person</string>
-    <string name="with_some_assistance_e_g_cane_walker_person">With some assistance (e.g., cane, walker, person)</string>
-    <string name="independently_but_need_to_use_arms">Independently, but need to use arms</string>
+    <string name="with_some_assistance_e_g_cane_walker_person">With some assistance (e.g. cane, walker, person)</string>
+    <string name="independently_but_need_to_use_arms">Independently but need to use arms</string>
     <string name="independently_without_using_arms">Independently without using arms</string>
     <string name="how_difficult_is_it_for_you_to_climb_one_flight_of_stairs_about_10_12_steps">How difficult is it for you to climb one flight of stairs?</string>
     <string name="_1_not_difficult_at_all">Not difficult at all</string>
@@ -78,7 +78,7 @@
     <string name="_1_less_than_30_minutes">Less than 30 minutes</string>
     <string name="_2_30_59_minutes">30-59 minutes</string>
     <string name="_3_1_2_hours">1-2 hours</string>
-    <string name="_4_2_4_hours">2-4 hours</string>
+    <string name="_4_2_4_hours">More than 2 hours, up to 4 hours</string>
     <string name="_5_more_than_4_hours">More than 4 hours</string>
     <string name="how_many_times_a_week_do_you_participate_in_vigorous_exercise_running_lifting_heavy_objects_strenuous_sports">How many times a week do you participate in vigorous exercise? (e.g. running, lifting heavy objects, strenuous sports)</string>
     <string name="_2_1_time">1 time</string>

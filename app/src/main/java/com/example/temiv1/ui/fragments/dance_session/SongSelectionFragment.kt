@@ -113,10 +113,14 @@ class SongSelectionFragment : BaseFragment() {
                     restMove6BeatsLegs = restMove6BeatsLegs
                 )
 
-                val movesPlaylistString = movesPlaylist.joinToString("|") { it.move.name }
-                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString, songDurationMs = songDuration)
-
                 sessionViewModel.movesPlaylist.value = movesPlaylist
+
+                val movesPlaylistString = movesPlaylist.joinToString("|") { it.move.name }
+                val level = sessionViewModel.currentLevel.value?.name ?: "UNKNOWN"
+                val dsid = (sessionViewModel.currentDanceSessionId.value ?: 0) + 1
+                sessionViewModel.currentDanceSessionId.value = dsid
+
+                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString, songDurationMs = songDuration, currentLevel = level, danceSessionId = dsid)
 
                 movesPlaylist.forEachIndexed { index, moveTime ->
                     CsvLogger.logEvent(
@@ -126,7 +130,8 @@ class SongSelectionFragment : BaseFragment() {
                         moveIndex = index,
                         moveStartMs = moveTime.startTimeMs,
                         moveEndMs = moveTime.endTimeMs,
-                        moveDurationMs = moveTime.endTimeMs - moveTime.startTimeMs
+                        moveDurationMs = moveTime.endTimeMs - moveTime.startTimeMs,
+                        danceSessionId = dsid
                     )
                 }
 
