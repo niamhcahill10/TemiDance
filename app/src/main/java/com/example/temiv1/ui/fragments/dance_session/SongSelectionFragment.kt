@@ -113,13 +113,25 @@ class SongSelectionFragment : BaseFragment() {
                     restMove6BeatsLegs = restMove6BeatsLegs
                 )
 
-                val movesPlaylistString = movesPlaylist.joinToString("|") { it.name }
-                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString)
+                val movesPlaylistString = movesPlaylist.joinToString("|") { it.move.name }
+                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString, songDurationMs = songDuration)
 
                 sessionViewModel.movesPlaylist.value = movesPlaylist
 
-                Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.name }}")
-                val counts = movesPlaylist.groupingBy { it.name }.eachCount()
+                movesPlaylist.forEachIndexed { index, moveTime ->
+                    CsvLogger.logEvent(
+                        stream = "moves",
+                        eventId = "move_time",
+                        value = moveTime.move.name,
+                        moveIndex = index,
+                        moveStartMs = moveTime.startTimeMs,
+                        moveEndMs = moveTime.endTimeMs,
+                        moveDurationMs = moveTime.endTimeMs - moveTime.startTimeMs
+                    )
+                }
+
+                Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.move.name }}")
+                val counts = movesPlaylist.groupingBy { it.move.name }.eachCount()
                 Log.d("DanceVideo", "Move usage counts: $counts")
 
                 Toast.makeText(

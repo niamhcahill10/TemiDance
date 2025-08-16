@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.MediaMetadataRetriever
 import com.example.temiv1.dance.data.DanceMove
 import androidx.core.net.toUri
+import com.example.temiv1.dance.data.MoveTime
 import com.example.temiv1.dance.data.MoveType
 
 // Generate a dance for the user given their selected moves
@@ -44,32 +45,34 @@ object DanceVideoGenerator {
         restMove6BeatsArms: DanceMove,
         restMove4BeatsLegs: DanceMove,
         restMove6BeatsLegs: DanceMove,
-    ): List<DanceMove> {
+    ): List<MoveTime> {
         if (selectedMoves.isEmpty()) return emptyList()
 
-        val playlist = mutableListOf<DanceMove>()
+        val timedPlaylist = mutableListOf<MoveTime>()
         val usageCount = mutableMapOf<DanceMove, Int>().withDefault { 0 }
         var totalDuration = 0L
         val random = java.util.Random()
 
         val firstMove = selectedMoves.random()
         val firstMoveDuration = moveDurations[firstMove.videoResId] ?: 5000L
+        usageCount[firstMove] = usageCount.getValue(firstMove) + 1
 
         val firstRestMove = if (firstMove.type == MoveType.ARM) restMove6BeatsArms else restMove6BeatsLegs
         val firstRestDuration = moveDurations[firstRestMove.videoResId] ?: 3000L
-        playlist.add(firstRestMove)
+        timedPlaylist += MoveTime(firstRestMove, totalDuration, firstRestDuration) // totalDuration starts at 0 so is the start time for the first move, duration is the end
         totalDuration += firstRestDuration
 
-        playlist.add(firstMove)
+        val firstMoveEnd = totalDuration + firstMoveDuration
+        timedPlaylist += MoveTime(firstMove, totalDuration, firstMoveEnd)
         totalDuration += firstMoveDuration
 
         // keep adding moves until the playlist is the same length as the song selected
         while(totalDuration < targetDurationMillis - 14_000L) {
-            val lastMove = playlist.lastOrNull { !it.name.contains("rest", ignoreCase = true) }
+            val lastMove = timedPlaylist.lastOrNull { !it.move.name.contains("rest", ignoreCase = true) }
 
             // ensure next move is a different move if more than one is selected
             val choices = if (lastMove != null && selectedMoves.size > 1) {
-                selectedMoves.filter { it != lastMove }
+                selectedMoves.filter { it.name != lastMove.move.name }
             } else {
                 selectedMoves
             }
@@ -84,16 +87,18 @@ object DanceVideoGenerator {
             val nextRestMove = if (nextMove.type == MoveType.ARM) restMove4BeatsArms else restMove4BeatsLegs
             val nextRestDuration = moveDurations[nextRestMove.videoResId] ?: 2000L
 
-            playlist.add(nextRestMove)
+            val nextRestEnd = totalDuration + nextRestDuration
+            timedPlaylist += MoveTime(nextRestMove, totalDuration, nextRestEnd)
             totalDuration += nextRestDuration
 
-            playlist.add(nextMove) // add moves to the playlist
+            val nextMoveEnd = totalDuration + nextMoveDuration
+            timedPlaylist += MoveTime(nextMove, totalDuration, nextMoveEnd) // add moves to the playlist
             usageCount[nextMove] =
                 usageCount.getValue(nextMove) + 1 // update the number of times the move is used
             totalDuration += nextMoveDuration // update the clip duration
 
         }
 
-        return playlist
+        return timedPlaylist
     }
 }

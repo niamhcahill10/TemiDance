@@ -69,7 +69,17 @@ object CsvLogger {
     }
 
     // Event logger for answers, selections, recovery clicks, and select or clear all clicks
-    fun logEvent(stream: String, eventId: String, value: Any, meta: String? = null) {
+    fun logEvent(
+        stream: String,
+        eventId: String,
+        value: Any,
+        moveIndex: Int? = null,
+        moveStartMs: Long? = null,
+        moveEndMs: Long? = null,
+        moveDurationMs: Long? = null,
+        songDurationMs: Long? = null,
+        meta: String? = null
+    ) {
         val now = System.currentTimeMillis()
         append(
             mapOf(
@@ -80,12 +90,17 @@ object CsvLogger {
                 "event" to "EVENT",
                 "eventId" to eventId,
                 "answer" to value,
+                "moveIndex" to (moveIndex?.toString() ?: ""),
+                "moveStartMs" to (moveStartMs?.toString() ?: ""),
+                "moveEndMs" to (moveEndMs?.toString() ?: ""),
+                "moveDurationMs" to (moveDurationMs?.toString() ?: ""),
+                "songDurationMs" to (songDurationMs?.toString() ?: ""),
                 "meta" to (meta ?: "")
             )
         )
     }
 
-    // Asynchronously updates csv log file when an event happens
+    // Asynchronously updates csv log file when an event happens but ensure written in event order using Mutex
     private fun append(fields: Map<String, Any?>) {
         scope.launch {
             val file = currentFile ?: return@launch
@@ -94,13 +109,15 @@ object CsvLogger {
                 wroteHeader = true
             }
             writeLine(file, toCsv(fields))
+
         }
     }
 
     // Comma separated list of column names
     private fun header(): String = listOf(
-        "timestampMs","isoTime","sessionId","stream","event",
-        "eventId","answer","fromPoint","toPoint","elapsedMs","meta"
+        "timestampMs","isoTime","sessionId","stream","event", "eventId","answer",
+        "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs",
+        "fromPoint","toPoint","elapsedMs","meta"
     ).joinToString(",")
 
     // Handle strings, numbers, and null values ready for csv line to be added to log sheet
@@ -121,8 +138,9 @@ object CsvLogger {
         }
 
         val order = listOf(
-            "timestampMs","isoTime","sessionId","stream","event",
-            "eventId","answer","fromPoint","toPoint","elapsedMs","reason","meta"
+            "timestampMs","isoTime","sessionId","stream","event", "eventId","answer",
+            "moveIndex","moveStartMs","moveEndMs","moveDurationMs","songDurationMs",
+            "fromPoint","toPoint","elapsedMs","meta"
         )
 
         return order.joinToString(",") { key -> fmt(fields[key]) }

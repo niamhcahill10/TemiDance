@@ -38,7 +38,7 @@ class VideoPlayingFragment : BaseFragment() {
         val movesPlaylist = sessionViewModel.movesPlaylist.value ?: emptyList()
         val selectedSong = sessionViewModel.selectedSong.value
 
-        Log.d("VideoPlaying", "Upcoming moves: ${movesPlaylist.map { it.name }}")
+        Log.d("VideoPlaying", "Upcoming moves: ${movesPlaylist.map { it.move.name }}")
         Log.d("VideoPlaying", "Selected song: ${selectedSong?.genre}}")
 
         val playerView = view.findViewById<PlayerView>(R.id.playerView)
@@ -50,7 +50,7 @@ class VideoPlayingFragment : BaseFragment() {
             playerView.player = player // should appear in playerView
 
             val mediaItems = movesPlaylist.map { move ->
-                val uri = "android.resource://${context.packageName}/${move.videoResId}".toUri()
+                val uri = "android.resource://${context.packageName}/${move.move.videoResId}".toUri()
                 MediaItem.fromUri(uri)
             }
 
@@ -62,14 +62,14 @@ class VideoPlayingFragment : BaseFragment() {
                     val currentIndex = player.currentMediaItemIndex
                     val currentMove = movesPlaylist.getOrNull(currentIndex)
 
-                    val isRestMove = currentMove != null && currentMove.name.contains("rest", ignoreCase = true)
+                    val isRestMove = currentMove != null && currentMove.move.name.contains("rest", ignoreCase = true)
 
                     if (isRestMove) {
                         val nextMove = movesPlaylist
                             .subList(currentIndex + 1, movesPlaylist.size)
-                            .firstOrNull { !it.name.contains("rest", ignoreCase = true) }
+                            .firstOrNull { !it.move.name.contains("rest", ignoreCase = true) }
 
-                        val nextMoveName = nextMove?.name ?: "Next move coming..."
+                        val nextMoveName = nextMove?.move?.name ?: "Next move coming..."
                         upNextTextOverlay.text = getString(R.string.next_move_label, nextMoveName)
                         upNextTextOverlay.visibility = View.VISIBLE
                     } else {
@@ -80,10 +80,10 @@ class VideoPlayingFragment : BaseFragment() {
 
             val nextMove = movesPlaylist
                 .drop(1)
-                .firstOrNull { !it.name.contains("rest", ignoreCase = true) }
+                .firstOrNull { !it.move.name.contains("rest", ignoreCase = true) }
 
             if (nextMove != null) {
-                val nextMoveName = nextMove.name
+                val nextMoveName = nextMove.move.name
                 upNextTextOverlay.text = getString(R.string.next_move_label, nextMoveName)
                 upNextTextOverlay.visibility = View.VISIBLE
             } else {
