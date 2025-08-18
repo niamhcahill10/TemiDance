@@ -70,7 +70,6 @@ class SongSelectionFragment : BaseFragment() {
         adapter = SongAdapter(filteredSongs)
         recyclerView.adapter = adapter
 
-        val skipButton: Button = view.findViewById(R.id.skipButton)
         val continueButton: Button = view.findViewById(R.id.songContinueButton)
 
         continueButton.setOnClickListener {
@@ -147,9 +146,5 @@ class SongSelectionFragment : BaseFragment() {
                 findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistanceFragment)
             }
             }
-
-        skipButton.setOnClickListener {
-            findNavController().navigate(R.id.action_songSelectionFragment_to_readjustDistanceFragment)
-        }
         }
 }
