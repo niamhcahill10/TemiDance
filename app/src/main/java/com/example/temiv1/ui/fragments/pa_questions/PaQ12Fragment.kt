@@ -47,7 +47,7 @@ class PaQ12Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val paq12 = TtsRequest.create("Approximately how much total time do you spend exercising or being physically active in a typical week?", false)
+            val paq12 = TtsRequest.create("How many times a week do you participate in moderate exercise? (e.g. walking, gardening, moving a table, pushing a vacuum cleaner, bowling, golf)", false)
             robot?.speak(paq12)
         }
 

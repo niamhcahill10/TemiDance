@@ -47,7 +47,7 @@ class PaQ11Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val paq11 = TtsRequest.create("How often do you exercise?", false)
+            val paq11 = TtsRequest.create("How many times a week do you participate in vigorous exercise? (e.g. running, lifting heavy objects, strenuous sports)", false)
             robot?.speak(paq11)
         }
 

@@ -20,7 +20,7 @@
         android:paddingStart="100dp"
         android:paddingEnd="100dp"
         android:layout_marginTop="60dp"
-        android:text="@string/approximately_how_much_total_time_do_you_spend_exercising_or_being_physically_active_in_a_typical_week"
+        android:text="@string/how_many_times_a_week_do_you_participate_in_moderate_exercise_gardening_moving_a_table_pushing_a_vacuum_cleaner_bowling_golf"
         android:textAlignment="textStart"
         android:textSize="38sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
@@ -42,7 +42,7 @@
             android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_1_less_than_30_minutes"
+            android:text="@string/_1_never"
             android:textSize="24sp"
             android:textColor="#BF000000" />
 
@@ -50,7 +50,7 @@
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_2_30_59_minutes"
+            android:text="@string/_2_1_time"
             android:textSize="24sp"
             android:textColor="#BF000000" />
 
@@ -58,7 +58,7 @@
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_3_1_2_hours"
+            android:text="@string/_3_2_times"
             android:textSize="24sp"
             android:textColor="#BF000000" />
 
@@ -66,7 +66,7 @@
             android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_4_2_4_hours"
+            android:text="@string/_4_3_4_times"
             android:textSize="24sp"
             android:textColor="#BF000000" />
 
@@ -74,7 +74,7 @@
             android:id="@+id/radioButton5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_5_more_than_4_hours"
+            android:text="@string/_5_5_or_more_times"
             android:textSize="24sp"
             android:textColor="#BF000000" />
 

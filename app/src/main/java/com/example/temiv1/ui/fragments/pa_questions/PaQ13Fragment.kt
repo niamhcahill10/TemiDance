@@ -47,7 +47,7 @@ class PaQ13Fragment : BaseFragment() {
 
         fragmentScope.launch {
             delay(1000)
-            val paq13 = TtsRequest.create("How many times a week do you participate in vigorous exercise? (e.g. running, lifting heavy objects, strenuous sports)", false)
+            val paq13 = TtsRequest.create("In a typical week, approximately how much total time do you spend doing moderate or vigorous physical activity?", false)
             robot?.speak(paq13)
         }
 
@@ -58,7 +58,7 @@ class PaQ13Fragment : BaseFragment() {
                 val selectedButton: RadioButton = view.findViewById(selectedId)
                 val answerText = selectedButton.text.toString()
                 CsvLogger.logEvent("answers", "pa_q13", answerText)
-                findNavController().navigate(R.id.action_paQ13Fragment_to_paQ14Fragment)
+                findNavController().navigate(R.id.action_paQ13Fragment_to_danceMoveSelectionFragment)
             } else {
                 Toast.makeText(
                     requireContext(),

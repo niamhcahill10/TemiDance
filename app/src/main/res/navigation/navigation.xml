@@ -321,15 +321,7 @@
         android:label="fragment_pa_q13"
         tools:layout="@layout/fragment_pa_q13">
         <action
-            android:id="@+id/action_paQ13Fragment_to_paQ14Fragment"
-            app:destination="@id/paQ14Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/paQ14Fragment"
-        android:name="com.example.temiv1.ui.fragments.pa_questions.PaQ14Fragment"
-        android:label="PaQ14Fragment">
-        <action
-            android:id="@+id/action_paQ14Fragment_to_danceMoveSelectionFragment"
+            android:id="@+id/action_paQ13Fragment_to_danceMoveSelectionFragment"
             app:destination="@id/danceMoveSelectionFragment" />
     </fragment>
     <fragment
