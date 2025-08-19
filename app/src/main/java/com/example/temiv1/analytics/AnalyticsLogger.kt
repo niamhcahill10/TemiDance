@@ -1,3 +1,11 @@
+/**
+ * Logs events and produces and exports a csv downloaded to Temi.
+ *
+ * - Logs time span of app use
+ * - Logs events: answers, recovery buttons, other selections
+ * - Logs the dance moves selected and time they appear in the song for labelling IMU sensor data
+ */
+
 package com.example.temiv1.analytics
 
 import android.content.ContentUris
@@ -104,7 +112,7 @@ object CsvLogger {
         )
     }
 
-    // Asynchronously updates csv log file when an event happens but ensure written in event order using Mutex
+    // Asynchronously updates csv log file when an event happens
     private fun append(fields: Map<String, Any?>) {
         scope.launch {
             val file = currentFile ?: return@launch
@@ -160,6 +168,7 @@ object CsvLogger {
         }
     }
 
+    // export csv to Temi downloads
     fun exportToDownloads(context: Context, fixedName: String = "temi_latest.csv"): Uri {
         val file = currentFile ?: error("Logger not initialized")
 

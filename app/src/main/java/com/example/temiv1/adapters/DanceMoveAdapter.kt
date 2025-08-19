@@ -1,3 +1,10 @@
+/**
+ * Displays dance moves in a RecyclerView and manages multi-selection.
+ *
+ * - Binds image/move and CheckBox state
+ * - Keeps UI in sync with `selectedMoves`
+ */
+
 package com.example.temiv1.adapters
 
 import android.util.TypedValue
@@ -17,29 +24,34 @@ class DanceMoveAdapter(private val moves: List<DanceMove>) :
 
     inner class MoveViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val checkBox: CheckBox = view.findViewById(R.id.cb_move)
+        val image: ImageView = view.findViewById(R.id.iv_move_thumbnail)
     }
 
-    // Creates empty view
+    // Inflates item view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoveViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_dance_move, parent, false)
         return MoveViewHolder(view)
     }
 
-    // Called to fill the view with items, called again for scrolling if new photo needs to appear in the view in place of a previous
+    // Binds the move name, image, and selection state
     override fun onBindViewHolder(holder: MoveViewHolder, position: Int) {
         val move = moves[position]
-        holder.checkBox.text = move.name
-        holder.checkBox.isChecked = selectedMoves.contains(move)
-        holder.checkBox.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
 
-        holder.checkBox.setOnCheckedChangeListener(null) // Avoid recycled listeners
-        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) selectedMoves.add(move) else selectedMoves.remove(move)
+        holder.checkBox.apply {
+            // Detach listener to avoid firing during re-binding / programmatic set e.g. after select all
+            setOnCheckedChangeListener(null)
+
+            text = move.name
+            isChecked = selectedMoves.contains(move)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
+
+            setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) selectedMoves.add(move) else selectedMoves.remove(move)
+            }
         }
 
-        val imageView: ImageView = holder.itemView.findViewById(R.id.iv_move_thumbnail)
-        imageView.setImageResource(move.imageResId)
+        holder.image.setImageResource(move.imageResId)
     }
 
     override fun getItemCount(): Int = moves.size

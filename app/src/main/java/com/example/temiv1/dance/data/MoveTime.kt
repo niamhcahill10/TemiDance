@@ -1,3 +1,5 @@
+/** Start and end time of a given move during a given dance. */
+
 package com.example.temiv1.dance.data
 
 data class MoveTime(

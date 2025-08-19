@@ -1,3 +1,5 @@
+/** Difficulty levels a DanceMove can be. */
+
 package com.example.temiv1.dance.data
 
 enum class DifficultyLevel {

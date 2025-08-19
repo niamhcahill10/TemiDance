@@ -1,3 +1,11 @@
+/**
+ * Displays songs in a RecyclerView and manages single selection.
+ *
+ * - Binds icon/genre and RadioButton state
+ * - Uses payloads for selection-only updates (no flicker)
+ * - Keeps UI in sync with `selectedSong`
+ */
+
 package com.example.temiv1.adapters
 
 import android.graphics.Color
@@ -16,6 +24,7 @@ class SongAdapter(private val songs: List<Song>) :
 
     private var selectedSong: Song? = null
 
+    // Hold id references for a given row to enable single call, make available to other class functions using inner
     inner class SongViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val radioButton: RadioButton = view.findViewById(R.id.rb_song)
     }
@@ -27,11 +36,16 @@ class SongAdapter(private val songs: List<Song>) :
         return SongViewHolder(view)
     }
 
-    // required to compile bind view initially when no payloads are present
+    // full bind (attaches data to view) on first run or page refresh
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        onBindViewHolder(holder, position, emptyList())
+        onBindViewHolder(holder, position, emptyList()) // calls partial bind with empty payload to render
     }
 
+    /**
+     * Syncs the RadioButton with the current model (selectedSong) and reattaches a fresh listener.
+     * Detaches the listener before programmatic isChecked changes to avoid feedback loops.
+     * Called on both full binds (no payload) and partial binds ("selection_changed").
+     */
     private fun bindSelection(holder: SongViewHolder, song: Song, position: Int) {
         holder.radioButton.setOnCheckedChangeListener(null)
         holder.radioButton.isChecked = (song == selectedSong)
@@ -45,14 +59,22 @@ class SongAdapter(private val songs: List<Song>) :
         }
     }
 
+    /**
+     * Binds (attaches data to the view) the song row.
+     * - Full bind: when payloads are empty, sets text, icon, colors, and selection state.
+     * - Partial bind: when payloads contain "selection_changed", only updates the RadioButton.
+     * Using payloads avoids rebinding the entire row, which prevents flickering. Called via notifyItemChanged.
+    */
     override fun onBindViewHolder(holder: SongViewHolder, position: Int, payloads: List<Any>) {
         val song = songs[position]
 
+        // update bind selection only to prevent flickering
         if (payloads.contains("selection_changed")) {
             bindSelection(holder, song, position)
             return
         }
 
+        // render all songs
         holder.radioButton.text = song.genre
         holder.radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
         bindSelection(holder, song, position)

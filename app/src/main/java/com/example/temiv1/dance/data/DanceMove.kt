@@ -1,3 +1,5 @@
+/** Data model for a single dance move with its metadata. */
+
 package com.example.temiv1.dance.data
 
 import android.os.Parcelable
