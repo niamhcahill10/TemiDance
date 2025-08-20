@@ -36,7 +36,9 @@ encouraging physical activity amongst older adults of those with accessibility n
 ## Project Structure
 
 - **Back-end**
+
 ![img.png](img.png)
+
     - Navigate to app/src/main/java/com.example.temiv1 to see backend folders
       - adapters: helpers to get dance moves and songs into recycler view for selection
       - analytics: logs app usage for exportable csv
@@ -48,7 +50,9 @@ encouraging physical activity amongst older adults of those with accessibility n
       - viewmodel: allows for relevant information to be accessible across fragments
 
 - **Front-end**
+
 ![img_1.png](img_1.png)
+
   - Navigate to app/src/main/res for frontend folders
     - drawable: icons and pictures
     - layout: all fragments, dance and song items, top bar used across all fragments for logo and back button
