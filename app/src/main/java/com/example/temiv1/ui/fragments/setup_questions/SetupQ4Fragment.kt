@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up brightness preference.
+ *
+ * - Yes keeps brightness as is and navigates to volume preference fragment
+ * - No decreases brightness incrementally on each click until min reached then navigates to volume preference fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs any adjustment to the brightness
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
@@ -6,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
@@ -45,7 +53,7 @@ class SetupQ4Fragment : BaseFragment() {
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment)
+        findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment) // Navigates to volume preferences fragment on yes selected
     }
 
     private fun onNoSelected() {
@@ -58,9 +66,10 @@ class SetupQ4Fragment : BaseFragment() {
             191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 16).coerceAtLeast(127)
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
+        val newBrightness = (currentBrightness - 16).coerceAtLeast(127) // Sets new level of brightness, 16 point increment (decreasing) each time no selected
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness) // Exportable log of brightness level
 
+        // Decreases brightness on no selected or recognised via speech
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
@@ -71,10 +80,11 @@ class SetupQ4Fragment : BaseFragment() {
             robot?.askQuestion(sq4)
         } else {
             Toast.makeText(requireContext(), "Minimum brightness reached", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment)
+            findNavController().navigate(R.id.action_setupQ4Fragment_to_setupQ5Fragment) // Navigates to volume preferences fragment once min brightness reached on no selected
         }
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

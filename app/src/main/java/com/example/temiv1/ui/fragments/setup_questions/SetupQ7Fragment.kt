@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up volume preference.
+ *
+ * - Yes decreases volume one increment and navigates to volume decrease fragment
+ * - No moves to text size preference fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs volume if chosen to decrease from initial setting
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.content.Context
@@ -7,7 +16,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -42,11 +50,6 @@ class SetupQ7Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
@@ -54,21 +57,23 @@ class SetupQ7Fragment : BaseFragment() {
 
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-        val newVolume = (currentVolume - 1).coerceAtLeast(0)
-        CsvLogger.logEvent("settings", "volume_adjust", newVolume)
+        val newVolume = (currentVolume - 1).coerceAtLeast(0) // Sets new volume level, 1 point increment (decreasing)
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume) // Exportable log of first volume decrease
 
+        // Decreases volume on yes selected or recognised via speech
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+            0
         )
-        findNavController().navigate(R.id.action_setupQ7Fragment_to_setupQ8Fragment)
+        findNavController().navigate(R.id.action_setupQ7Fragment_to_setupQ8Fragment) // Navigates to fragment that allows further decrease in volume on yes selected
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_setupQ7Fragment_to_setupQ9Fragment)
+        findNavController().navigate(R.id.action_setupQ7Fragment_to_setupQ9Fragment) // Navigates to text size preference fragment on no selected
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

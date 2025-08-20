@@ -1,3 +1,10 @@
+/**
+ * UI fragment for introducing the app.
+ *
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs start time of app usage
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
@@ -36,7 +43,7 @@ class SetupIntroFragment : BaseFragment() {
 
         val startButton: Button = view.findViewById(R.id.continueButton)
         startButton.setOnClickListener {
-            findNavController().navigate(R.id.action_setupIntroFragment_to_setupQ1Fragment)
+            findNavController().navigate(R.id.action_setupIntroFragment_to_setupQ1Fragment) // Navigates to first setup question fragment when the user clicks continue
         }
     }
 }

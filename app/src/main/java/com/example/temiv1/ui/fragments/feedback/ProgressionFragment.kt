@@ -1,7 +1,17 @@
+/**
+ * UI fragment for level selection.
+ *
+ * - User starts at easy and can progress one-level at a time to medium and then hard,
+ *   user can also stay at the same level or regress (once at medium or hard)
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks) and answer
+ */
+
 package com.example.temiv1.ui.fragments.feedback
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +46,7 @@ class ProgressionFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.progression)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -52,7 +62,7 @@ class ProgressionFragment : BaseFragment() {
         for (i in 0 until radioGroup.childCount) {
             val child = radioGroup.getChildAt(i)
             if (child is RadioButton) {
-                child.textSize = sessionViewModel.textSizeSp
+                child.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp)
             }
         }
 
@@ -61,21 +71,24 @@ class ProgressionFragment : BaseFragment() {
 
         val currentLevel = sessionViewModel.currentLevel.value ?: DifficultyLevel.EASY
 
+        // Only display available level options
         when (currentLevel) {
+            // Cannot regress from easy
             DifficultyLevel.EASY -> {
-                radioProgress.visibility = View.VISIBLE
-                radioMaintain.visibility = View.VISIBLE
                 radioRegress.visibility = View.GONE
+                radioMaintain.visibility = View.VISIBLE
+                radioProgress.visibility = View.VISIBLE
             }
             DifficultyLevel.MEDIUM -> {
+                radioRegress.visibility = View.VISIBLE
+                radioMaintain.visibility = View.VISIBLE
                 radioProgress.visibility = View.VISIBLE
-                radioMaintain.visibility = View.VISIBLE
-                radioRegress.visibility = View.VISIBLE
             }
+            // Cannot progress from hard
             DifficultyLevel.HARD -> {
-                radioProgress.visibility = View.GONE
-                radioMaintain.visibility = View.VISIBLE
                 radioRegress.visibility = View.VISIBLE
+                radioMaintain.visibility = View.VISIBLE
+                radioProgress.visibility = View.GONE
             }
         }
 
@@ -93,8 +106,9 @@ class ProgressionFragment : BaseFragment() {
 
             val selectedButton: RadioButton = view.findViewById(selectedId)
             val answerText = selectedButton.text.toString()
-            CsvLogger.logEvent("answers", "progression", answerText)
+            CsvLogger.logEvent("answers", "progression", answerText) // Exportable log of selected level
 
+            // Determine newLevel based on user selection
             val newLevel = when (selectedId) {
                 R.id.radioProgress -> when (currentLevel) {
                     DifficultyLevel.EASY -> DifficultyLevel.MEDIUM
@@ -111,24 +125,24 @@ class ProgressionFragment : BaseFragment() {
 
             sessionViewModel.currentLevel.value = newLevel
 
-            Log.d("ProgressionFragment", "Current level: $currentLevel, New level: $newLevel")
-
+            Log.d("ProgressionFragment", "Current level: $currentLevel, New level: $newLevel") // Debugging logs
             Log.d("ProgressionFragment", "Continue button clicked")
+
             Toast.makeText(requireContext(), "Continue clicked", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_progressionFragment_to_danceMoveSelectionFragment)
+            findNavController().navigate(R.id.action_progressionFragment_to_danceMoveSelectionFragment) // Navigate to select dance moves for next dance
 
         }
 
         endSessionButton.setOnClickListener {
-            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            androidx.appcompat.app.AlertDialog.Builder(requireContext()) // Alert to check user really wants to end session (recovery)
                 .setTitle("End Session")
                 .setMessage("Are you sure you want to end your session?")
                 .setPositiveButton("Yes") { dialog, _ ->
-                    findNavController().navigate(R.id.action_progressionFragment_to_endSessionFragment)
+                    findNavController().navigate(R.id.action_progressionFragment_to_endSessionFragment) // Navigate to end session fragment
                     dialog.dismiss()
                 }
                 .setNegativeButton("Cancel") { dialog, _ ->
-                    CsvLogger.logEvent("recovery", "end_recovery_button", "clicked")
+                    CsvLogger.logEvent("recovery", "end_recovery_button", "clicked") // Exportable log of recovery button usage
                     dialog.dismiss()
                 }
                 .show()

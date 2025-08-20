@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up volume preference.
+ *
+ * - Yes increases volume one increment and navigates to volume increase fragment
+ * - No moves to volume decrease fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs volume if chosen to increase from initial setting
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.content.Context
@@ -7,7 +16,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -50,22 +58,24 @@ class SetupQ5Fragment : BaseFragment() {
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
-        CsvLogger.logEvent("settings", "volume_adjust", newVolume)
+        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume) // Sets new volume level, 1 point increment
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume) // Exportable log of first volume increase
 
+        // Increases volume on yes selected or recognised via speech
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             newVolume,
             0
         )
 
-        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ6Fragment)
+        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ6Fragment) // Navigates to fragment that allows further increase in volume on yes selected
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ7Fragment)
+        findNavController().navigate(R.id.action_setupQ5Fragment_to_setupQ7Fragment) // Navigates to volume decrease fragment on no selected
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

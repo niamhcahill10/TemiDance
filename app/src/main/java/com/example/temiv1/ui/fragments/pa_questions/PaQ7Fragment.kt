@@ -1,12 +1,20 @@
+/**
+ * UI fragment for asking physical capabilities question.
+ *
+ * - Single-select from five options
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks) and answer
+ */
+
 package com.example.temiv1.ui.fragments.pa_questions
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
@@ -35,13 +43,13 @@ class PaQ7Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.q7)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         val radioGroup: RadioGroup = view.findViewById(R.id.radioGroup)
         for (i in 0 until radioGroup.childCount) {
             val child = radioGroup.getChildAt(i)
             if (child is RadioButton) {
-                child.textSize = sessionViewModel.textSizeSp
+                child.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp)
             }
         }
 
@@ -58,7 +66,7 @@ class PaQ7Fragment : BaseFragment() {
                 val selectedButton: RadioButton = view.findViewById(selectedId)
                 val answerText = selectedButton.text.toString()
                 CsvLogger.logEvent("answers", "pa_q7", answerText)
-                findNavController().navigate(R.id.action_paQ7Fragment_to_paQ8Fragment2)
+                findNavController().navigate(R.id.action_paQ7Fragment_to_paQ8Fragment2) // Navigate to next fragment once an answer has been selected and user clicks continue
             } else {
                 Toast.makeText(
                     requireContext(),

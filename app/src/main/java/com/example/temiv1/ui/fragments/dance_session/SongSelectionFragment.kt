@@ -12,6 +12,7 @@ package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,7 @@ class SongSelectionFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.songSelectionTitle)
-        textView.textSize = sessionViewModel.textSizeSp // Keep user's specified text size preference
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         recyclerView = view.findViewById(R.id.recycler_songs)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // Populate the recycler view with 3 items per row

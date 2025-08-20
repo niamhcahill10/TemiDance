@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up volume preference.
+ *
+ * - Yes keeps volume as is and navigates to text size preference fragment
+ * - No increases volume incrementally on each click until max reached then navigates to text size preference fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs any adjustment to the volume
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.content.Context
@@ -7,7 +16,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
@@ -43,15 +51,10 @@ class SetupQ6Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment)
+        findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment) // Navigates to text size preferences fragment on yes selected
     }
 
     private fun onNoSelected() {
@@ -60,13 +63,14 @@ class SetupQ6Fragment : BaseFragment() {
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume)
-        CsvLogger.logEvent("settings", "volume_adjust", newVolume)
+        val newVolume = (currentVolume + 1).coerceAtMost(maxVolume) // Sets new volume level, 1 point increment each time no selected
+        CsvLogger.logEvent("settings", "volume_adjust", newVolume) // Exportable log of volume level
 
+        // Increases volume on no selected or recognised via speech
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             newVolume,
-            0 // Flags: 0 = no UI sound, use FLAG_SHOW_UI to show volume bar
+            0
         )
 
         if (newVolume < maxVolume) {
@@ -74,10 +78,11 @@ class SetupQ6Fragment : BaseFragment() {
             robot?.askQuestion(sq6)
         } else {
             Toast.makeText(requireContext(), "Maximum volume reached", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment)
+            findNavController().navigate(R.id.action_setupQ6Fragment_to_setupQ9Fragment) // Navigates to text size preferences fragment once max volume reached on no selected
         }
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

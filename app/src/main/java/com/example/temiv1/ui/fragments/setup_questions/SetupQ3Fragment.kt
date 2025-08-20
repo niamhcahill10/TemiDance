@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up brightness preference.
+ *
+ * - Yes decreases brightness one increment and navigates to brightness decrease fragment
+ * - No moves to volume settings fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs brightness if chosen to decrease from initial setting
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
@@ -6,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
 import com.example.temiv1.analytics.CsvLogger
@@ -41,12 +49,7 @@ class SetupQ3Fragment : BaseFragment() {
         noButton.setOnClickListener {
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-        }
+    }
 
     private fun onYesSelected() {
 
@@ -58,21 +61,23 @@ class SetupQ3Fragment : BaseFragment() {
             191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness - 16).coerceAtLeast(127)
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
+        val newBrightness = (currentBrightness - 16).coerceAtLeast(127) // Sets new level of brightness, 16 point increment (decreasing) each time yes selected
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness) // Exportable log of first brightness decrease
 
+        // Decreases brightness on yes selected or recognised via speech
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness)
 
-        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ4Fragment)
+        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ4Fragment) // Navigates to fragment that allows further decrease in brightness on yes selected
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ5Fragment)
+        findNavController().navigate(R.id.action_setupQ3Fragment_to_setupQ5Fragment) // Navigates to volume preferences fragment on no selected
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

@@ -10,6 +10,7 @@ package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -202,7 +203,7 @@ class DanceMoveSelectionFragment : BaseFragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // Populate the recycler view with 3 items per row
 
         textView = view.findViewById(R.id.titleSelection)
-        textView.textSize = sessionViewModel.textSizeSp // Keep user's specified text size preference
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)

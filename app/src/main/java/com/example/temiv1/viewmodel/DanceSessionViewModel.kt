@@ -1,3 +1,5 @@
+/** ViewModel for passing relevant information across fragments.*/
+
 package com.example.temiv1.viewmodel
 
 import androidx.lifecycle.MutableLiveData
@@ -7,9 +9,9 @@ import com.example.temiv1.dance.data.DifficultyLevel
 import com.example.temiv1.dance.data.MoveTime
 import com.example.temiv1.dance.data.Song
 
-// ViewModel can be accessed across fragments allowing information to be passed across
+// ViewModel can be accessed across fragments allowing information to be passed on
 class DanceSessionViewModel : ViewModel() {
-    // live data can be updated at any point across fragments
+    // Live data can be updated at any point across fragments
     val currentLevel = MutableLiveData(DifficultyLevel.EASY)
     val selectedMoves = MutableLiveData<List<DanceMove>>()
     val movesPlaylist = MutableLiveData<List<MoveTime>>()

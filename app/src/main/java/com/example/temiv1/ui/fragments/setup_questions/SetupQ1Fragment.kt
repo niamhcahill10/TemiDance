@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up brightness preference.
+ *
+ * - Yes increases brightness one increment and navigates to brightness increase fragment
+ * - No moves to brightness decrease fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs brightness if chosen to increase from initial setting
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
@@ -52,21 +61,23 @@ class SetupQ1Fragment : BaseFragment() {
             191 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // max 255
+        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // Sets new level of brightness, 16 point increment each time yes selected
 
+        // Increases brightness on yes selected or recognised via speech
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
             newBrightness
         )
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
-        findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ2Fragment)
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness) // Exportable log of first brightness increase
+        findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ2Fragment) // Navigates to fragment that allows further increase in brightness on yes selected
     }
 
     private fun onNoSelected() {
-        findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ3Fragment)
+        findNavController().navigate(R.id.action_setupQ1Fragment_to_setupQ3Fragment) // Navigates to fragment that asks if the user would prefer the brightness reduced on no selected
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

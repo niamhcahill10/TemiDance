@@ -2,6 +2,7 @@
  * UI fragment for adjusting the robot distance before the dance.
  *
  * - Separate distances for Q&A vs seated dance
+ * - Researcher manually moves robot and measures distance when fragment displays
  * - Displays guidance text, plays prompts, and wires button listeners
  * - Logs user interactions (clicks)
  */
@@ -9,6 +10,7 @@
 package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +41,7 @@ class AdjustDistanceFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.textView)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -54,11 +56,11 @@ class AdjustDistanceFragment : BaseFragment() {
                 .setTitle("Begin Dance")
                 .setMessage("Are you sure you want to begin the dance?")
                 .setPositiveButton("Yes") { dialog, _ ->
-                    findNavController().navigate(R.id.action_adjustDistanceFragment_to_videoPlayingFragment)
+                    findNavController().navigate(R.id.action_adjustDistanceFragment_to_videoPlayingFragment) // Navigate to video playing fragment
                     dialog.dismiss()
                 }
                 .setNegativeButton("Cancel") { dialog, _ ->
-                    CsvLogger.logEvent("recovery", "dance_recovery_button", "clicked")
+                    CsvLogger.logEvent("recovery", "dance_recovery_button", "clicked") // Exportable log of recovery button
                     dialog.dismiss()
                 }
                 .show()

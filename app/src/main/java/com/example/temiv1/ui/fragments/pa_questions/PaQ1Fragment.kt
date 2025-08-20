@@ -1,11 +1,19 @@
+/**
+ * UI fragment for asking physical capabilities question.
+ *
+ * - Yes required for dance participation, no will end session
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs user interactions (clicks/Asr) and answer
+ */
+
 package com.example.temiv1.ui.fragments.pa_questions
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -32,7 +40,7 @@ class PaQ1Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.q1)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -49,23 +57,19 @@ class PaQ1Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
-        CsvLogger.logEvent("answers","pa_q1","yes")
-        findNavController().navigate(R.id.action_paQ1Fragment_to_paQ2Fragment)
+        CsvLogger.logEvent("answers","pa_q1","yes") // Exportable log of answer
+        findNavController().navigate(R.id.action_paQ1Fragment_to_paQ2Fragment) // Navigate to next question fragment on yes selected
     }
 
     private fun onNoSelected() {
         CsvLogger.logEvent("answers","pa_q1","no")
-        findNavController().navigate(R.id.action_paQ1Fragment_to_endSessionFragment)
+        findNavController().navigate(R.id.action_paQ1Fragment_to_endSessionFragment) // Navigate to end of session on no selected
     }
 
+    // Call yes or no functions if speech recognised
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

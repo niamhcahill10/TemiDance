@@ -1,6 +1,16 @@
+/**
+ * UI fragment for re-adjusting the robot distance after the dance for the user to answer feedback questions.
+ *
+ * - Separate distances for Q&A vs seated dance
+ * - Researcher manually moves robot and measures distance when fragment displays
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks)
+ */
+
 package com.example.temiv1.ui.fragments.feedback
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +40,7 @@ class ReadjustDistanceFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.textView)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -41,7 +51,7 @@ class ReadjustDistanceFragment : BaseFragment() {
         val continueButton: Button = view.findViewById(R.id.continueButton)
 
         continueButton.setOnClickListener {
-            findNavController().navigate(R.id.action_readjustDistanceFragment_to_feedbackQ1Fragment)
+            findNavController().navigate(R.id.action_readjustDistanceFragment_to_feedbackQ1Fragment) // Navigates to first feedback question fragment
         }
 
     }

@@ -1,11 +1,19 @@
+/**
+ * UI fragment for asking physical capabilities question.
+ *
+ * - Yes required for dance participation, no will end session
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs user interactions (clicks/Asr) and answer
+ */
+
 package com.example.temiv1.ui.fragments.pa_questions
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -32,7 +40,7 @@ class PaQ2Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.q2)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -49,21 +57,16 @@ class PaQ2Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
-        CsvLogger.logEvent("answers","pa_q2","yes")
-        findNavController().navigate(R.id.action_paQ2Fragment_to_paQ3Fragment)
+        CsvLogger.logEvent("answers","pa_q2","yes") // Exportable log of answer
+        findNavController().navigate(R.id.action_paQ2Fragment_to_paQ3Fragment) // Navigate to next question fragment on yes selected
     }
 
     private fun onNoSelected() {
         CsvLogger.logEvent("answers","pa_q2","no")
-        findNavController().navigate(R.id.action_paQ2Fragment_to_endSessionFragment)
+        findNavController().navigate(R.id.action_paQ2Fragment_to_endSessionFragment) // Navigate to end of session on no selected
     }
 
     override fun handleAsr(command: String) {

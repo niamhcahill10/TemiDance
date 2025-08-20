@@ -1,3 +1,12 @@
+/**
+ * UI fragment for setting up brightness preference.
+ *
+ * - Yes keeps brightness as is and navigates to volume preference fragment
+ * - No increases brightness incrementally on each click until max reached then navigates to volume preference fragment
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ * - Logs any adjustment to the brightness
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
@@ -6,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.R
@@ -42,15 +50,10 @@ class SetupQ2Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
-        findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment)
+        findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment) // Navigates to volume preferences fragment on yes selected
     }
 
     private fun onNoSelected() {
@@ -63,9 +66,10 @@ class SetupQ2Fragment : BaseFragment() {
             7 // fallback default if not set
         )
 
-        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // max 255
-        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness)
+        val newBrightness = (currentBrightness + 16).coerceAtMost(255) // Sets new level of brightness, 16 point increment each time no selected
+        CsvLogger.logEvent("settings", "brightness_adjust", newBrightness) // Exportable log of brightness level
 
+        // Increases brightness on no selected or recognised via speech
         Settings.System.putInt(
             contentResolver,
             Settings.System.SCREEN_BRIGHTNESS,
@@ -77,10 +81,11 @@ class SetupQ2Fragment : BaseFragment() {
             robot?.askQuestion(sq2)
         } else {
             Toast.makeText(requireContext(), "Maximum brightness reached", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment)
+            findNavController().navigate(R.id.action_setupQ2Fragment_to_setupQ5Fragment) // Navigates to volume preferences fragment once max brightness reached on no selected
         }
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

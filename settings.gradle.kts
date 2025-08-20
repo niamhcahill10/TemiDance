@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TemiV1"
+rootProject.name = "TemiDance"
 include(":app")

@@ -1,11 +1,18 @@
+/**
+ * UI fragment for ending setup preferences section and introducing upcoming sections.
+ *
+ * - Upcoming sections covered: physical capabilities questions, dance move selection, perform dance holding maracas, feedback questions
+ * - Displays guidance text, plays prompts, and wires button/Asr listeners
+ */
+
 package com.example.temiv1.ui.fragments.setup_questions
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,12 +38,12 @@ class SetupQ13Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView = view.findViewById(R.id.q14)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView = view.findViewById(R.id.q13)
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
-            val sq13 = TtsRequest.create("Great your preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song that will be used to generate a dance video for you to follow. You will be given maracas to hold for the dance to track your movements. Can you confirm you are happy to proceed?", false)
+            val sq13 = TtsRequest.create("Great your preferences have been set! The following questions will focus on your movement capabilities. Then you will be asked to select some dance moves and a song that will be used to generate a dance video for you to follow. You will be given maracas to hold for the dance to track your movements. After the dance you will be asked some feedback questions. Can you confirm you are happy to proceed?", false)
             robot?.askQuestion(sq13)
         }
 
@@ -49,23 +56,19 @@ class SetupQ13Fragment : BaseFragment() {
         noButton.setOnClickListener{
             onNoSelected()
         }
-
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     private fun onYesSelected() {
         CsvLogger.logEvent("answers","setup_q13","yes")
-        findNavController().navigate(R.id.action_setupQ13Fragment_to_paQ1Fragment)
+        findNavController().navigate(R.id.action_setupQ13Fragment_to_paQ1Fragment) // Navigate to first physical capability question on yes selected
     }
 
     private fun onNoSelected() {
         CsvLogger.logEvent("answers","setup_q13","no")
-        findNavController().navigate(R.id.action_setupQ13Fragment_to_endSessionFragment)
+        findNavController().navigate(R.id.action_setupQ13Fragment_to_endSessionFragment) // Navigate to end of session if user not happy to proceed on no selected
     }
 
+    // Speech recognition for yes / no answers
     override fun handleAsr(command: String) {
         if (!isTemiDevice) return
         when (command) {

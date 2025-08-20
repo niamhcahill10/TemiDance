@@ -1,6 +1,14 @@
+/**
+ * UI fragment for getting post dance feedback.
+ *
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks) and answer
+ */
+
 package com.example.temiv1.ui.fragments.feedback
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +42,7 @@ class FeedbackQ1Fragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.textView)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -48,7 +56,7 @@ class FeedbackQ1Fragment : BaseFragment() {
         for (i in 0 until radioGroup.childCount) {
             val child = radioGroup.getChildAt(i)
             if (child is RadioButton) {
-                child.textSize = sessionViewModel.textSizeSp
+                child.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp)
             }
         }
 
@@ -57,8 +65,8 @@ class FeedbackQ1Fragment : BaseFragment() {
             if (selectedId != -1) {
                 val selectedButton: RadioButton = view.findViewById(selectedId)
                 val answerText = selectedButton.text.toString()
-                CsvLogger.logEvent("answers", "feedback_q1", answerText)
-                findNavController().navigate(R.id.action_feedbackQ1Fragment_to_feedbackQ2Fragment)
+                CsvLogger.logEvent("answers", "feedback_q1", answerText) // Exportable log of selected answer
+                findNavController().navigate(R.id.action_feedbackQ1Fragment_to_feedbackQ2Fragment) // Navigate to next fragment
             } else {
                 Toast.makeText(requireContext(), "Please select an answer", Toast.LENGTH_SHORT).show()
             }
