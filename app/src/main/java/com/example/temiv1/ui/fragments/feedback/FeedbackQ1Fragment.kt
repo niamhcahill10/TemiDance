@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.RadioButton
 import androidx.navigation.fragment.findNavController
 import com.robotemi.sdk.TtsRequest
@@ -40,6 +41,10 @@ class FeedbackQ1Fragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Hide back button so dance does not play again
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.visibility = View.INVISIBLE
 
         textView = view.findViewById(R.id.textView)
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sessionViewModel.textSizeSp) // Keep user's specified text size preference
