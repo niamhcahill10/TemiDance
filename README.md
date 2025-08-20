@@ -2,7 +2,7 @@
 
 This is an Android prototype app that generates dance videos for a user to follow based on the 
 moves and song they select. It currently has a library of seated dance moves only as the focus is on 
-encouraging physical activity amongst older adults of those with accessibility needs.
+encouraging physical activity amongst older adults or those with accessibility needs.
 
 ## Main Features
 - **Setup Preferences**
