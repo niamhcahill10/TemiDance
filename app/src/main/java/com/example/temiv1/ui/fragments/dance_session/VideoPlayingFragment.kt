@@ -1,3 +1,11 @@
+/**
+ * UI fragment for playing the video of dance moves to follow with the selected song.
+ *
+ * - Uses ExoPlayer to play each move video in the playlist one after the other
+ * - Displays overlay text on rest moves to inform the user of the next upcoming move
+ * - Plays the selected song at the same time
+ */
+
 package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
@@ -15,7 +23,6 @@ import androidx.media3.common.Player
 import androidx.navigation.fragment.findNavController
 import com.example.temiv1.viewmodel.DanceSessionViewModel
 import com.example.temiv1.R
-import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 
 class VideoPlayingFragment : BaseFragment() {
@@ -39,7 +46,7 @@ class VideoPlayingFragment : BaseFragment() {
         val selectedSong = sessionViewModel.selectedSong.value
 
         Log.d("VideoPlaying", "Upcoming moves: ${movesPlaylist.map { it.move.name }}")
-        Log.d("VideoPlaying", "Selected song: ${selectedSong?.genre}}")
+        Log.d("VideoPlaying", "Selected song: ${selectedSong?.genre}}") // Debugging logs
 
         val playerView = view.findViewById<PlayerView>(R.id.playerView)
         val upNextTextOverlay = view.findViewById<TextView>(R.id.upNextTextOverlay)
@@ -47,16 +54,17 @@ class VideoPlayingFragment : BaseFragment() {
 
         // Video player
         videoPlayer = ExoPlayer.Builder(context).build().also { player ->
-            playerView.player = player // should appear in playerView
+            playerView.player = player
 
             val mediaItems = movesPlaylist.map { move ->
                 val uri = "android.resource://${context.packageName}/${move.move.videoResId}".toUri()
                 MediaItem.fromUri(uri)
             }
 
-            player.setMediaItems(mediaItems)
+            player.setMediaItems(mediaItems) // Player will play dance move videos in playlist order
             player.prepare()
 
+            // Listener for media item transitions to display the next upcoming dance move during the preceding rest move
             player.addListener(object : Player.Listener {
                 override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                     val currentIndex = player.currentMediaItemIndex
@@ -78,6 +86,7 @@ class VideoPlayingFragment : BaseFragment() {
                 }
             })
 
+            // Initial overlay setup to display next move at the start before any media transition has happened
             val nextMove = movesPlaylist
                 .drop(1)
                 .firstOrNull { !it.move.name.contains("rest", ignoreCase = true) }
@@ -104,7 +113,7 @@ class VideoPlayingFragment : BaseFragment() {
                 player.addListener(object : Player.Listener {
                     override fun onPlaybackStateChanged(playbackState: Int) {
                         if (playbackState == Player.STATE_ENDED) {
-                            findNavController().navigate(R.id.action_videoPlayingFragment_to_readjustDistanceFragment)
+                            findNavController().navigate(R.id.action_videoPlayingFragment_to_readjustDistanceFragment) // Navigate to next fragment once song ends (dance video length always within song duration)
                         }
                     }
                 })
@@ -117,6 +126,7 @@ class VideoPlayingFragment : BaseFragment() {
 
         }
 
+    // Release the video and audio players to prevent leakage across fragments, called in the base fragment onDestroyView
     override fun releasePlayer() {
         videoPlayer?.release()
         videoPlayer = null

@@ -1,3 +1,11 @@
+/**
+ * UI fragment for adjusting the robot distance before the dance.
+ *
+ * - Separate distances for Q&A vs seated dance
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks)
+ */
+
 package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle

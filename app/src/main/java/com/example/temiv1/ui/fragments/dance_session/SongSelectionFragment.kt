@@ -1,3 +1,13 @@
+/**
+ * UI fragment for song selection.
+ *
+ * - Filters selectable songs to the user's current level
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Once user continues generates the dance moves playlist for the video
+ * - Logs user interactions (clicks) and logs the start and end time of each move in the dance to
+*    aid labelling of user study test data from IMU sensors for move prediction
+ */
+
 package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
@@ -19,6 +29,7 @@ import com.example.temiv1.adapters.SongAdapter
 import com.example.temiv1.analytics.CsvLogger
 import com.example.temiv1.base.BaseFragment
 import com.example.temiv1.dance.data.DifficultyLevel
+import com.example.temiv1.dance.data.MoveType
 import com.example.temiv1.dance.data.Song
 import com.robotemi.sdk.TtsRequest
 import kotlinx.coroutines.delay
@@ -54,10 +65,10 @@ class SongSelectionFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textView = view.findViewById(R.id.songSelectionTitle)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.textSize = sessionViewModel.textSizeSp // Keep user's specified text size preference
 
         recyclerView = view.findViewById(R.id.recycler_songs)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // Populate the recycler view with 3 items per row
 
         fragmentScope.launch {
             delay(1000)
@@ -68,7 +79,7 @@ class SongSelectionFragment : BaseFragment() {
         val currentLevel = sessionViewModel.currentLevel.value
         val filteredSongs = allSongs.filter { it.level == currentLevel }
         adapter = SongAdapter(filteredSongs)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter // Display only the songs for the user's current level
 
         val continueButton: Button = view.findViewById(R.id.songContinueButton)
 
@@ -78,9 +89,9 @@ class SongSelectionFragment : BaseFragment() {
                 Toast.makeText(requireContext(), "Select a song to continue", Toast.LENGTH_SHORT).show()
             } else {
                 val songString = selectedSong.name
-                CsvLogger.logEvent("moves", "song_selection", songString)
+                CsvLogger.logEvent("moves", "song_selection", songString) // Exportable log of selected song
 
-                sessionViewModel.selectedSong.value = selectedSong
+                sessionViewModel.selectedSong.value = selectedSong // Store selected song in sessionViewModel for access in other fragments
 
                 val songDuration = DanceVideoGenerator.getAudioDurationFromRaw(
                     requireContext(), selectedSong.audioResId
@@ -93,15 +104,17 @@ class SongSelectionFragment : BaseFragment() {
                     requireContext(), selectedMoves
                 )
 
+                // Find the rest moves for the user's current level to build the dance video
                 val restMove4BeatsArms =
-                    allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_arms_x4 }!! // non-null assertion
+                    allMoves.find { it.level == currentLevel && it.name == "Rest Move x4" && it.type == MoveType.ARM }!! // non-null assertion
                 val restMove6BeatsArms =
-                    allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_arms_x6 }!!
+                    allMoves.find { it.level == currentLevel && it.name == "Rest Move x6" && it.type == MoveType.ARM }!!
                 val restMove4BeatsLegs =
-                    allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_legs_x4 }!!
+                    allMoves.find { it.level == currentLevel && it.name == "Rest Move x4" && it.type == MoveType.LEG }!!
                 val restMove6BeatsLegs =
-                    allMoves.find { it.videoResId == R.raw.easy100bpm_rest_move_legs_x6 }!!
+                    allMoves.find { it.level == currentLevel && it.name == "Rest Move x6" && it.type == MoveType.LEG }!!
 
+                // Build the playlist of dance moves for the video given the selected moves, duration of each move and the song, and the rest moves relevant to that level
                 val movesPlaylist = DanceVideoGenerator.buildDanceMovesPlaylist(
                     selectedMoves = selectedMoves,
                     moveDurations = moveDurations,
@@ -116,11 +129,12 @@ class SongSelectionFragment : BaseFragment() {
 
                 val movesPlaylistString = movesPlaylist.joinToString("|") { it.move.name }
                 val level = sessionViewModel.currentLevel.value?.name ?: "UNKNOWN"
-                val dsid = (sessionViewModel.currentDanceSessionId.value ?: 0) + 1
+                val dsid = (sessionViewModel.currentDanceSessionId.value ?: 0) + 1 // Keep track of dance session to assist with IMU data labelling
                 sessionViewModel.currentDanceSessionId.value = dsid
 
-                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString, songDurationMs = songDuration, currentLevel = level, danceSessionId = dsid)
+                CsvLogger.logEvent("moves", "moves_playlist", movesPlaylistString, songDurationMs = songDuration, currentLevel = level, danceSessionId = dsid) // Exportable log of moves playlist, song duration, level, and dance session
 
+                // Exportable log of the breakdown of each move and its start and end time, relevant for labelling the user study test data from IMU sensors to predict dance move
                 movesPlaylist.forEachIndexed { index, moveTime ->
                     CsvLogger.logEvent(
                         stream = "moves",
@@ -136,14 +150,14 @@ class SongSelectionFragment : BaseFragment() {
 
                 Log.d("Dance Video", "Generated playlist: ${movesPlaylist.map { it.move.name }}")
                 val counts = movesPlaylist.groupingBy { it.move.name }.eachCount()
-                Log.d("DanceVideo", "Move usage counts: $counts")
+                Log.d("DanceVideo", "Move usage counts: $counts") // Debugging logs
 
                 Toast.makeText(
                     context,
                     "Selected ${selectedSong.name} song",
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistanceFragment)
+                findNavController().navigate(R.id.action_songSelectionFragment_to_adjustDistanceFragment) // Navigate to next fragment
             }
             }
         }

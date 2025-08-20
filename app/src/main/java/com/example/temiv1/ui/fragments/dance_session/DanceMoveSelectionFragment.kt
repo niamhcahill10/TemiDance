@@ -1,3 +1,11 @@
+/**
+ * UI fragment for selecting dance moves.
+ *
+ * - Filters selectable dance moves to the user's current level
+ * - Displays guidance text, plays prompts, and wires button listeners
+ * - Logs user interactions (clicks)
+ */
+
 package com.example.temiv1.ui.fragments.dance_session
 
 import android.os.Bundle
@@ -188,13 +196,13 @@ class DanceMoveSelectionFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sessionViewModel.allMoves.value = allMoves
+        sessionViewModel.allMoves.value = allMoves // Make all dance moves accessible across fragments
 
         recyclerView = view.findViewById(R.id.recycler_moves)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // Populate the recycler view with 3 items per row
 
         textView = view.findViewById(R.id.titleSelection)
-        textView.textSize = sessionViewModel.textSizeSp
+        textView.textSize = sessionViewModel.textSizeSp // Keep user's specified text size preference
 
         fragmentScope.launch {
             delay(1000)
@@ -206,7 +214,7 @@ class DanceMoveSelectionFragment : BaseFragment() {
 
         val filteredMoves = allMoves.filter { it.level == currentLevel && it.name != "Rest Move x4" && it.name != "Rest Move x6"}
         adapter = DanceMoveAdapter(filteredMoves)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter // Display only the dance moves for the user's current level
 
 
         val continueButton: Button = view.findViewById(R.id.continueButton)
@@ -228,15 +236,15 @@ class DanceMoveSelectionFragment : BaseFragment() {
                 Toast.makeText(requireContext(), "Please select at least one move", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "Selected ${selectedMoves.size} moves", Toast.LENGTH_SHORT).show()
-                Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}")
+                Log.d("SelectedMoves", "Moves: ${selectedMoves.map { it.name }}") // Internal system log
 
                 val movesString = selectedMoves.joinToString("|") { it.name }
-                CsvLogger.logEvent("moves", "final_selection", movesString)
+                CsvLogger.logEvent("moves", "final_selection", movesString) // Exportable log of selected moves
 
-                findNavController().navigate(R.id.action_danceMoveSelectionFragment_to_songSelectionFragment)
+                findNavController().navigate(R.id.action_danceMoveSelectionFragment_to_songSelectionFragment) // Navigate to next fragment
             }
 
-            sessionViewModel.selectedMoves.value = selectedMoves
+            sessionViewModel.selectedMoves.value = selectedMoves // Store selected moves in sessionViewModel for access in other fragments
         }
 
     }
