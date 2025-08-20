@@ -38,15 +38,16 @@ encouraging physical activity amongst older adults of those with accessibility n
 - **Back-end**
 
 ![img.png](img.png)
-    - Navigate to app/src/main/java/com.example.temiv1 to see backend folders
-      - adapters: helpers to get dance moves and songs into recycler view for selection
-      - analytics: logs app usage for exportable csv
-      - base: base fragment for common fragment functionality inherited by all fragments
-      - dance: 
-        - data for moves, difficulty level, times of each move (for post study IMU sensor data labelling), and song
-        - dance playlist generator that builds a playlist of moves within song duration
-      - ui: all fragments that get shown to the user and main activity that hosts the fragments
-      - viewmodel: allows for relevant information to be accessible across fragments
+
+  - Navigate to app/src/main/java/com.example.temiv1 to see backend folders
+    - adapters: helpers to get dance moves and songs into recycler view for selection
+    - analytics: logs app usage for exportable csv
+    - base: base fragment for common fragment functionality inherited by all fragments
+    - dance: 
+      - data for moves, difficulty level, times of each move (for post study IMU sensor data labelling), and song
+      - dance playlist generator that builds a playlist of moves within song duration
+    - ui: all fragments that get shown to the user and main activity that hosts the fragments
+    - viewmodel: allows for relevant information to be accessible across fragments
 
 - **Front-end**
 
