@@ -38,7 +38,6 @@ encouraging physical activity amongst older adults of those with accessibility n
 - **Back-end**
 
 ![img.png](img.png)
-
     - Navigate to app/src/main/java/com.example.temiv1 to see backend folders
       - adapters: helpers to get dance moves and songs into recycler view for selection
       - analytics: logs app usage for exportable csv
